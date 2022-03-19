@@ -158,7 +158,7 @@ namespace LearningStarter.Controllers
             
             if (!isValidType)
             {
-                response.AddError("Primary Type", "Primary Type is not valid.");
+                response.AddError("Primary PType", "Primary PType is not valid.");
             }
             
             // isValidType = _dataContext
@@ -167,7 +167,7 @@ namespace LearningStarter.Controllers
             //
             // if (!isValidType && pokemonSpeciesCreateDto.SecondaryTypeId != null)
             // {
-            //     response.AddError("Secondary Type", "Secondary Type is not valid.");
+            //     response.AddError("Secondary PType", "Secondary PType is not valid.");
             // }
             
             var isValidAbility = _dataContext

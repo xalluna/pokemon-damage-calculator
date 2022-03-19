@@ -22,11 +22,11 @@ namespace LearningStarter.Entities
 
         public int PrimaryTypeId { get; set; }
         
-        public Type PrimaryType { get; set; }
+        public PType PrimaryPType { get; set; }
 
         // public int? SecondaryTypeId { get; set; }
         //
-        // public Type? SecondaryType { get; set; }
+        // public PType? SecondaryType { get; set; }
         //
         public int PrimaryAbilityId { get; set; }
         

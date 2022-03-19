@@ -284,34 +284,157 @@ namespace LearningStarter
                 dataContext.SaveChanges();
             }
 
-            // var numMoveCategories = dataContext.MoveCategories.Count();
-            //
-            // if(numMoveCategories == 0){
-            //     var seededMoveCategory = new MoveCategory
-            //     {
-            //         Name = "Physical"
-            //     };
-            //
-            //     dataContext.MoveCategories.Add(seededMoveCategory);
-            //     dataContext.SaveChanges();
-            //     
-            //     seededMoveCategory = new MoveCategory
-            //     {
-            //         Name = "Special"
-            //     };
-            //
-            //     dataContext.MoveCategories.Add(seededMoveCategory);
-            //     dataContext.SaveChanges();
-            //
-            //     seededMoveCategory = new MoveCategory
-            //     {
-            //         Name = "Status"
-            //     };
-            //
-            //     dataContext.MoveCategories.Add(seededMoveCategory);
-            //     dataContext.SaveChanges();
-            // }
-            
+            var numTypes = dataContext.Types.Count();
+
+            if (numTypes == 0)
+            {
+                var seededType = new PType
+                {
+                    Name = "Normal"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+                
+                seededType = new PType
+                {
+                    Name = "Fire"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Water"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Grass"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Electric"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Bug"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Flying"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Fighting"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Psychic"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Rock"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Ground"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Poison"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Ice"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Ghost"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Dragon"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Dark"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Steel"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+                seededType = new PType
+                {
+                    Name = "Fairy"
+                };
+
+                dataContext.Types.Add(seededType);
+                dataContext.SaveChanges();
+
+
+            }
+
         }
     }
 }
