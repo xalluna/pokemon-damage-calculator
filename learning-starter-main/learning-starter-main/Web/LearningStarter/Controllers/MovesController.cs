@@ -159,7 +159,7 @@ namespace LearningStarter.Controllers
             move.Name = move.Name.Trim();
             if (string.IsNullOrEmpty(move.Name))
             {
-                response.AddError("Name", "Name cannot be null or empty.");
+                response.AddError("Species", "Species cannot be null or empty.");
             }
 
             var hasNameInDatabase = _dataContext
@@ -168,7 +168,7 @@ namespace LearningStarter.Controllers
             
             if (hasNameInDatabase)
             {
-                response.AddError("Name", "Name already exists.");
+                response.AddError("Species", "Species already exists.");
             }
 
             var isValidType = _dataContext
