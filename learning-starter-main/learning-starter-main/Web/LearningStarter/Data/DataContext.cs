@@ -15,7 +15,7 @@ namespace LearningStarter.Data
         public DbSet<ExperienceCurve> ExperienceCurves { get; set; }
         public DbSet<Item> Items  { get; set; }
         public DbSet<Move> Moves  { get; set; }
-        public DbSet<MoveCategory> MoveCategories { get; set; }
+        // public DbSet<MoveCategory> MoveCategories { get; set; }
         public DbSet<PokemonSpecies> PokemonSpeciesList { get; set; }
         public DbSet<Type> Types { get; set; }
 

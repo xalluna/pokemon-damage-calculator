@@ -29,7 +29,7 @@ namespace LearningStarter.Controllers
                     Id = x.Id,
                     Name = x.Name,
                     TypeId = x.TypeId,
-                    MoveCategoryId = x.MoveCategoryId,
+                    MoveCategory = x.MoveCategory,
                     BasePower = x.BasePower,
                     PowerPoints = x.PowerPoints,
                     Accuracy = x.Accuracy,
@@ -74,7 +74,7 @@ namespace LearningStarter.Controllers
                 Id = moveFromDatabase.Id,
                 Name = moveFromDatabase.Name,
                 TypeId = moveFromDatabase.TypeId,
-                MoveCategoryId = moveFromDatabase.MoveCategoryId,
+                MoveCategory = moveFromDatabase.MoveCategory,
                 BasePower = moveFromDatabase.BasePower,
                 PowerPoints = moveFromDatabase.PowerPoints,
                 Accuracy = moveFromDatabase.Accuracy,
@@ -127,14 +127,14 @@ namespace LearningStarter.Controllers
                 response.AddError("Type", "Type is not valid.");
             }
             
-            var isValidMoveCategory = _dataContext
-                .MoveCategories
-                .Any(x => x.Id == moveCreateDto.MoveCategoryId);
-
-            if (!isValidMoveCategory)
-            {
-                response.AddError("Move Category", "Move Category is not valid.");
-            }
+            // var isValidMoveCategory = _dataContext
+            //     .MoveCategories
+            //     .Any(x => x.Id == moveCreateDto.MoveCategory);
+            //
+            // if (!isValidMoveCategory)
+            // {
+            //     response.AddError("Move Category", "Move Category is not valid.");
+            // }
 
             if (moveCreateDto.BasePower < 0)
             {
@@ -166,7 +166,7 @@ namespace LearningStarter.Controllers
             {
                 Name = moveCreateDto.Name,
                 TypeId = moveCreateDto.TypeId,
-                MoveCategoryId = moveCreateDto.MoveCategoryId,
+                MoveCategory = moveCreateDto.MoveCategory,
                 BasePower = moveCreateDto.BasePower,
                 PowerPoints = moveCreateDto.PowerPoints,
                 Accuracy = moveCreateDto.Accuracy,
@@ -187,7 +187,7 @@ namespace LearningStarter.Controllers
                 Id = moveToCreate.Id,
                 Name = moveToCreate.Name,
                 TypeId = moveToCreate.TypeId,
-                MoveCategoryId = moveToCreate.MoveCategoryId,
+                MoveCategory = moveToCreate.MoveCategory,
                 BasePower = moveToCreate.BasePower,
                 PowerPoints = moveToCreate.PowerPoints,
                 Accuracy = moveToCreate.Accuracy,

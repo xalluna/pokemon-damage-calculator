@@ -12,11 +12,11 @@ namespace LearningStarter.Entities
 
         public Type Type { get; set; }
 
-        public int MoveCategoryId { get; set; }
+        // public int MoveCategory { get; set; }
         
-        public MoveCategory MoveCategory { get; set; }
+        public bool? MoveCategory { get; set; }
 
-        public List<MoveCategory> MoveCategories { get; set; }
+        // public List<MoveCategory> MoveCategories { get; set; }
 
         public int BasePower { get; set; }
 
@@ -47,7 +47,7 @@ namespace LearningStarter.Entities
 
         public int TypeId { get; set; }
 
-        public int MoveCategoryId { get; set; }
+        public bool? MoveCategory { get; set; }
 
         public int BasePower { get; set; }
 
@@ -78,7 +78,7 @@ namespace LearningStarter.Entities
 
         public int TypeId { get; set; }
 
-        public int MoveCategoryId { get; set; }
+        public bool? MoveCategory { get; set; }
 
         public int BasePower { get; set; }
 
@@ -109,7 +109,7 @@ namespace LearningStarter.Entities
 
         public int TypeId { get; set; }
 
-        public int MoveCategoryId { get; set; }
+        public bool? MoveCategory { get; set; }
 
         public int BasePower { get; set; }
 
