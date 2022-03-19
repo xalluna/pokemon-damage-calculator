@@ -53,7 +53,7 @@ namespace LearningStarter.Controllers
 
             if (typeFromDatabase == null)
             {
-                response.AddError("Id", "Type not found");
+                response.AddError("Id", "PType not found");
                 return NotFound(response);
             }
 
@@ -98,7 +98,7 @@ namespace LearningStarter.Controllers
                 return BadRequest(response);
             }
 
-            var typeToCreate = new Type
+            var typeToCreate = new PType
             {
                 Name = typeCreateDto.Name
             };
@@ -114,7 +114,7 @@ namespace LearningStarter.Controllers
 
             response.Data = typeToGet;
 
-            return Created("Type created", response);
+            return Created("PType created", response);
         }
     }
 }
