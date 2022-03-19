@@ -17,7 +17,7 @@ namespace LearningStarter.Data
         public DbSet<Move> Moves  { get; set; }
         // public DbSet<MoveCategory> MoveCategories { get; set; }
         public DbSet<PokemonSpecies> PokemonSpeciesList { get; set; }
-        public DbSet<Type> Types { get; set; }
+        public DbSet<PType> Types { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

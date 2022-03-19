@@ -10,7 +10,7 @@ namespace LearningStarter.Entities
 
         public int TypeId { get; set; }
 
-        public Type Type { get; set; }
+        public PType PType { get; set; }
 
         // public int MoveCategory { get; set; }
         

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace LearningStarter.Entities
 {
-    public class Type
+    public class PType
     {
         public int Id { get; set; }
 
