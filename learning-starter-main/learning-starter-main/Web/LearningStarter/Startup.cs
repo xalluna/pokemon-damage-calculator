@@ -555,10 +555,73 @@ namespace LearningStarter
 
                 dataContext.Moves.Add(seededMove);
                 dataContext.SaveChanges();
-
-
             }
 
+            var numPokemonSpecies = dataContext.PokemonSpecies.Count();
+
+            if (numPokemonSpecies == 0)
+            {
+                var seededPokemon = new PokemonSpecies
+                {
+                    Species = "Bulbasaur",
+                    BaseHealth = 45,
+                    BaseAttack = 49,
+                    BaseDefense = 49,
+                    BaseSpecialAttack = 65,
+                    BaseSpecialDefense = 65,
+                    BaseSpeed = 45,
+                    PrimaryTypeId = 4,
+                    SecondaryTypeId = 12,
+                    PrimaryAbilityId = 1,
+                    SecondaryAbilityId = null,
+                    HiddenAbilityId = null,
+                    ExperienceCurveId = 3
+                };
+
+                dataContext.PokemonSpecies.Add(seededPokemon);
+                dataContext.SaveChanges();
+                
+                seededPokemon = new PokemonSpecies
+                {
+                    Species = "Charmander",
+                    BaseHealth = 39,
+                    BaseAttack = 52,
+                    BaseDefense = 43,
+                    BaseSpecialAttack = 60,
+                    BaseSpecialDefense = 50,
+                    BaseSpeed = 65,
+                    PrimaryTypeId = 2,
+                    SecondaryTypeId = null,
+                    PrimaryAbilityId = 3,
+                    SecondaryAbilityId = null,
+                    HiddenAbilityId = null,
+                    ExperienceCurveId = 3
+                };
+
+                dataContext.PokemonSpecies.Add(seededPokemon);
+                dataContext.SaveChanges();
+                
+                seededPokemon = new PokemonSpecies
+                {
+                    Species = "Squirtle",
+                    BaseHealth = 44,
+                    BaseAttack = 48,
+                    BaseDefense = 65,
+                    BaseSpecialAttack = 50,
+                    BaseSpecialDefense = 64,
+                    BaseSpeed = 43,
+                    PrimaryTypeId = 3,
+                    SecondaryTypeId = null,
+                    PrimaryAbilityId = 2,
+                    SecondaryAbilityId = null,
+                    HiddenAbilityId = null,
+                    ExperienceCurveId = 3
+                };
+
+                dataContext.PokemonSpecies.Add(seededPokemon);
+                dataContext.SaveChanges();
+
+            }
         }
     }
 }

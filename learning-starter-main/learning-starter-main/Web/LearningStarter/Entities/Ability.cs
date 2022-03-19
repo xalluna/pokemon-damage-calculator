@@ -9,7 +9,7 @@ namespace LearningStarter.Entities
 
         public string Name { get; set; }
 
-        //public List<PokemonSpecies> PokemonSpeciesList { get; set; }
+        public List<PokemonSpecies> PokemonSpecies { get; set; }
         
         //public List<Pokemon> PokemonList { get; set; }
 
