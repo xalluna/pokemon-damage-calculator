@@ -66,7 +66,7 @@ namespace LearningStarter
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Learning Starter Server",
+                    Title = "Pokemon Database",
                     Version = "v1",
                     Description = "Description for the API goes here.",
                 });

@@ -51,7 +51,7 @@ namespace LearningStarter.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{Id:int}")]
+        [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
             var response = new Response();
@@ -257,60 +257,60 @@ namespace LearningStarter.Controllers
 
         }
 
-        public List<MoveGetDto> moveToDto(List<Move> moves)
-        {
-            List<MoveGetDto> moveDtos = new List<MoveGetDto>();
-            
-            foreach (Move x in moves)
-            {
-                moveDtos.Add(new MoveGetDto
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    TypeId = x.TypeId,
-                    MoveCategoryId = x.MoveCategoryId,
-                    BasePower = x.BasePower,
-                    PowerPoints = x.PowerPoints,
-                    Accuracy = x.Accuracy,
-                    SpeedPriority = x.SpeedPriority,
-                    IsContactOnHit = x.IsContactOnHit,
-                    IsSoundBased = x.IsSoundBased,
-                    IsPunchBased = x.IsPunchBased,
-                    IsAffectedByGravity = x.IsAffectedByGravity,
-                    IsDefrostOnUse = x.IsDefrostOnUse,
-                    IsBlockedByProtect = x.IsBlockedByProtect
-                });
-            }
-
-            return moveDtos;
-        }
-        
-        public List<Move> dtoToMove(List<MoveGetDto> movesDtos)
-        {
-            List<Move> moves = new List<Move>();
-            
-            foreach (MoveGetDto x in movesDtos)
-            {
-                moves.Add(new Move
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    TypeId = x.TypeId,
-                    MoveCategoryId = x.MoveCategoryId,
-                    BasePower = x.BasePower,
-                    PowerPoints = x.PowerPoints,
-                    Accuracy = x.Accuracy,
-                    SpeedPriority = x.SpeedPriority,
-                    IsContactOnHit = x.IsContactOnHit,
-                    IsSoundBased = x.IsSoundBased,
-                    IsPunchBased = x.IsPunchBased,
-                    IsAffectedByGravity = x.IsAffectedByGravity,
-                    IsDefrostOnUse = x.IsDefrostOnUse,
-                    IsBlockedByProtect = x.IsBlockedByProtect
-                });
-            }
-
-            return moves;
-        }
+        // public List<MoveGetDto> moveToDto(List<Move> moves)
+        // {
+        //     List<MoveGetDto> moveDtos = new List<MoveGetDto>();
+        //     
+        //     foreach (Move x in moves)
+        //     {
+        //         moveDtos.Add(new MoveGetDto
+        //         {
+        //             Id = x.Id,
+        //             Name = x.Name,
+        //             TypeId = x.TypeId,
+        //             MoveCategoryId = x.MoveCategoryId,
+        //             BasePower = x.BasePower,
+        //             PowerPoints = x.PowerPoints,
+        //             Accuracy = x.Accuracy,
+        //             SpeedPriority = x.SpeedPriority,
+        //             IsContactOnHit = x.IsContactOnHit,
+        //             IsSoundBased = x.IsSoundBased,
+        //             IsPunchBased = x.IsPunchBased,
+        //             IsAffectedByGravity = x.IsAffectedByGravity,
+        //             IsDefrostOnUse = x.IsDefrostOnUse,
+        //             IsBlockedByProtect = x.IsBlockedByProtect
+        //         });
+        //     }
+        //
+        //     return moveDtos;
+        // }
+        //
+        // public List<Move> dtoToMove(List<MoveGetDto> movesDtos)
+        // {
+        //     List<Move> moves = new List<Move>();
+        //     
+        //     foreach (MoveGetDto x in movesDtos)
+        //     {
+        //         moves.Add(new Move
+        //         {
+        //             Id = x.Id,
+        //             Name = x.Name,
+        //             TypeId = x.TypeId,
+        //             MoveCategoryId = x.MoveCategoryId,
+        //             BasePower = x.BasePower,
+        //             PowerPoints = x.PowerPoints,
+        //             Accuracy = x.Accuracy,
+        //             SpeedPriority = x.SpeedPriority,
+        //             IsContactOnHit = x.IsContactOnHit,
+        //             IsSoundBased = x.IsSoundBased,
+        //             IsPunchBased = x.IsPunchBased,
+        //             IsAffectedByGravity = x.IsAffectedByGravity,
+        //             IsDefrostOnUse = x.IsDefrostOnUse,
+        //             IsBlockedByProtect = x.IsBlockedByProtect
+        //         });
+        //     }
+        //
+        //     return moves;
+        // }
     }
 }

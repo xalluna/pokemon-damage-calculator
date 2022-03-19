@@ -11,12 +11,6 @@ namespace LearningStarter.Data
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<ProductType> ProductTypes { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<PreparationStep> PreparationSteps { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<Ability> Abilities { get; set; }
         public DbSet<ExperienceCurve> ExperienceCurves { get; set; }
         public DbSet<Item> Items  { get; set; }
