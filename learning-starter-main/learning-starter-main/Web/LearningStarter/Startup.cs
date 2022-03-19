@@ -255,6 +255,35 @@ namespace LearningStarter
 
             }
 
+            var numItems = dataContext.Items.Count();
+
+            if (numItems == 0)
+            {
+                var seededItem = new Item
+                {
+                    Name = "Choice Scarf"
+                };
+
+                dataContext.Items.Add(seededItem);
+                dataContext.SaveChanges();
+                
+                seededItem = new Item
+                {
+                    Name = "Choice Band"
+                };
+
+                dataContext.Items.Add(seededItem);
+                dataContext.SaveChanges();
+
+                seededItem = new Item
+                {
+                    Name = "Choice Specs"
+                };
+
+                dataContext.Items.Add(seededItem);
+                dataContext.SaveChanges();
+            }
+
 
         }
     }
