@@ -82,7 +82,7 @@ namespace LearningStarter.Controllers
             
             if (string.IsNullOrEmpty(typeCreateDto.Name))
             {
-                response.AddError("Name", "Name cannot be null or empty");
+                response.AddError("Species", "Species cannot be null or empty");
             }
 
             var hasNameInDatabase = _dataContext
@@ -90,7 +90,7 @@ namespace LearningStarter.Controllers
                 .Any(x => x.Name == typeCreateDto.Name);
             if (hasNameInDatabase)
             {
-                response.AddError("Name", "Name already exists");
+                response.AddError("Species", "Species already exists");
             }
 
             if (response.HasErrors)

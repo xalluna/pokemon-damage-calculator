@@ -18,7 +18,7 @@ namespace LearningStarter.Entities
 
         // public List<MoveCategory> MoveCategories { get; set; }
 
-        public int BasePower { get; set; }
+        public int? BasePower { get; set; }
 
         public int Accuracy { get; set; }
         
@@ -49,7 +49,7 @@ namespace LearningStarter.Entities
 
         public bool? MoveCategory { get; set; }
 
-        public int BasePower { get; set; }
+        public int? BasePower { get; set; }
 
         public int Accuracy { get; set; }
         
@@ -80,7 +80,7 @@ namespace LearningStarter.Entities
 
         public bool? MoveCategory { get; set; }
 
-        public int BasePower { get; set; }
+        public int? BasePower { get; set; }
 
         public int Accuracy { get; set; }
         
@@ -111,7 +111,7 @@ namespace LearningStarter.Entities
 
         public bool? MoveCategory { get; set; }
 
-        public int BasePower { get; set; }
+        public int? BasePower { get; set; }
 
         public int Accuracy { get; set; }
         
