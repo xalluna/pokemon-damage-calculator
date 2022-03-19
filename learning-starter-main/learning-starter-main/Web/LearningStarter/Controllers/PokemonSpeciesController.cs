@@ -37,12 +37,12 @@ namespace LearningStarter.Controllers
                     BaseSpecialDefense = x.BaseSpecialDefense,
                     BaseSpeed = x.BaseSpeed,
                     PrimaryTypeId = x.PrimaryTypeId,
-                    //SecondaryTypeId = x.SecondaryTypeId,
+                    SecondaryTypeId = x.SecondaryTypeId,
                     PrimaryAbilityId = x.PrimaryAbilityId,
-                    //SecondaryAbilityId = x.SecondaryAbilityId,
-                    //HiddenAbilityId = x.HiddenAbilityId,
+                    SecondaryAbilityId = x.SecondaryAbilityId,
+                    HiddenAbilityId = x.HiddenAbilityId,
                     ExperienceCurveId = x.ExperienceCurveId,
-                    //MoveLearnSet = moveToDto(x.MoveLearnSet)
+                    // MoveLearnSet = moveToDto(x.MoveLearnSet)
                 })
                 .ToList();
 
@@ -83,10 +83,10 @@ namespace LearningStarter.Controllers
                 BaseSpecialDefense = pokemonSpeciesFromDatabase.BaseSpecialDefense,
                 BaseSpeed = pokemonSpeciesFromDatabase.BaseSpeed,
                 PrimaryTypeId = pokemonSpeciesFromDatabase.PrimaryTypeId,
-                //SecondaryTypeId = pokemonSpeciesFromDatabase.SecondaryTypeId,
+                SecondaryTypeId = pokemonSpeciesFromDatabase.SecondaryTypeId,
                 PrimaryAbilityId = pokemonSpeciesFromDatabase.PrimaryAbilityId,
-                //SecondaryAbilityId = pokemonSpeciesFromDatabase.SecondaryAbilityId,
-                //HiddenAbilityId = pokemonSpeciesFromDatabase.HiddenAbilityId,
+                SecondaryAbilityId = pokemonSpeciesFromDatabase.SecondaryAbilityId,
+                HiddenAbilityId = pokemonSpeciesFromDatabase.HiddenAbilityId,
                 ExperienceCurveId = pokemonSpeciesFromDatabase.ExperienceCurveId,
                 //MoveLearnSet = moveToDto(pokemonSpeciesFromDatabase.MoveLearnSet)
             };
@@ -158,17 +158,17 @@ namespace LearningStarter.Controllers
             
             if (!isValidType)
             {
-                response.AddError("Primary PType", "Primary PType is not valid.");
+                response.AddError("Primary Type", "Primary Type is not valid.");
             }
             
-            // isValidType = _dataContext
-            //     .Types
-            //     .Any(x => x.Id == pokemonSpeciesCreateDto.SecondaryTypeId);
-            //
-            // if (!isValidType && pokemonSpeciesCreateDto.SecondaryTypeId != null)
-            // {
-            //     response.AddError("Secondary PType", "Secondary PType is not valid.");
-            // }
+            isValidType = _dataContext
+                .Types
+                .Any(x => x.Id == pokemonSpeciesCreateDto.SecondaryTypeId);
+            
+            if (!isValidType && pokemonSpeciesCreateDto.SecondaryTypeId != null)
+            {
+                response.AddError("Secondary Type", "Secondary Type is not valid.");
+            }
             
             var isValidAbility = _dataContext
                 .Abilities
@@ -179,23 +179,23 @@ namespace LearningStarter.Controllers
                response.AddError("Primary Ability", "Primary Ability is not valid."); 
             }
             
-            // isValidAbility = _dataContext
-            //     .Abilities
-            //     .Any(x => x.Id == pokemonSpeciesCreateDto.SecondaryAbilityId);
-            //
-            // if (!isValidAbility)
-            // {
-            //     response.AddError("Secondary Ability", "Secondary Ability is not valid."); 
-            // }
+            isValidAbility = _dataContext
+                .Abilities
+                .Any(x => x.Id == pokemonSpeciesCreateDto.SecondaryAbilityId);
             
-            // isValidAbility = _dataContext
-            //     .Abilities
-            //     .Any(x => x.Id == pokemonSpeciesCreateDto.HiddenAbilityId);
-            //
-            // if (!isValidAbility)
-            // {
-            //     response.AddError("Hidden Ability", "Hidden Ability is not valid."); 
-            // }
+            if (!isValidAbility && pokemonSpeciesCreateDto.SecondaryAbilityId != null)
+            {
+                response.AddError("Secondary Ability", "Secondary Ability is not valid."); 
+            }
+            
+            isValidAbility = _dataContext
+                .Abilities
+                .Any(x => x.Id == pokemonSpeciesCreateDto.HiddenAbilityId);
+            
+            if (!isValidAbility && pokemonSpeciesCreateDto.HiddenAbilityId != null)
+            {
+                response.AddError("Hidden Ability", "Hidden Ability is not valid."); 
+            }
 
             var isValidExperienceCurve = _dataContext
                 .ExperienceCurves
@@ -221,10 +221,10 @@ namespace LearningStarter.Controllers
                 BaseSpecialDefense = pokemonSpeciesCreateDto.BaseSpecialDefense,
                 BaseSpeed = pokemonSpeciesCreateDto.BaseSpeed,
                 PrimaryTypeId = pokemonSpeciesCreateDto.PrimaryTypeId,
-                //SecondaryTypeId = pokemonSpeciesCreateDto.SecondaryTypeId,
+                SecondaryTypeId = pokemonSpeciesCreateDto.SecondaryTypeId,
                 PrimaryAbilityId = pokemonSpeciesCreateDto.PrimaryAbilityId,
-                //SecondaryAbilityId = pokemonSpeciesCreateDto.SecondaryAbilityId,
-                //HiddenAbilityId = pokemonSpeciesCreateDto.HiddenAbilityId,
+                SecondaryAbilityId = pokemonSpeciesCreateDto.SecondaryAbilityId,
+                HiddenAbilityId = pokemonSpeciesCreateDto.HiddenAbilityId,
                 ExperienceCurveId = pokemonSpeciesCreateDto.ExperienceCurveId,
                 //MoveLearnSet = dtoToMove(pokemonSpeciesCreateDto.MoveLearnSet)
             };
@@ -243,10 +243,10 @@ namespace LearningStarter.Controllers
                 BaseSpecialDefense = pokemonSpeciesToCreate.BaseSpecialDefense,
                 BaseSpeed = pokemonSpeciesToCreate.BaseSpeed,
                 PrimaryTypeId = pokemonSpeciesToCreate.PrimaryTypeId,
-                //SecondaryTypeId = pokemonSpeciesToCreate.SecondaryTypeId,
+                SecondaryTypeId = pokemonSpeciesToCreate.SecondaryTypeId,
                 PrimaryAbilityId = pokemonSpeciesToCreate.PrimaryAbilityId,
-                //SecondaryAbilityId = pokemonSpeciesToCreate.SecondaryAbilityId,
-                //HiddenAbilityId = pokemonSpeciesToCreate.HiddenAbilityId,
+                SecondaryAbilityId = pokemonSpeciesToCreate.SecondaryAbilityId,
+                HiddenAbilityId = pokemonSpeciesToCreate.HiddenAbilityId,
                 ExperienceCurveId = pokemonSpeciesToCreate.ExperienceCurveId,
                 //MoveLearnSet = moveToDto(pokemonSpeciesToCreate.MoveLearnSet)
             };
