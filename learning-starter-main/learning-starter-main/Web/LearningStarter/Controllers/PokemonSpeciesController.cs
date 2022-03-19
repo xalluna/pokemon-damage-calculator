@@ -42,7 +42,25 @@ namespace LearningStarter.Controllers
                     SecondaryAbilityId = x.SecondaryAbilityId,
                     HiddenAbilityId = x.HiddenAbilityId,
                     ExperienceCurveId = x.ExperienceCurveId,
-                    // MoveLearnSet = moveToDto(x.MoveLearnSet)
+                    MoveLearnSet = x.MoveLearnSet
+                        .Select(y => new MoveGetDto
+                        {
+                            Id = y.Id,
+                            Name = y.Name,
+                            TypeId = y.TypeId,
+                            MoveCategory = y.MoveCategory,
+                            BasePower = y.BasePower,
+                            PowerPoints = y.PowerPoints,
+                            Accuracy = y.Accuracy,
+                            SpeedPriority = y.SpeedPriority,
+                            IsContactOnHit = y.IsContactOnHit,
+                            IsSoundBased = y.IsSoundBased,
+                            IsPunchBased = y.IsPunchBased,
+                            IsAffectedByGravity = y.IsAffectedByGravity,
+                            IsDefrostOnUse = y.IsDefrostOnUse,
+                            IsBlockedByProtect = y.IsBlockedByProtect
+                        })
+                        .ToList()
                 })
                 .ToList();
 
@@ -88,7 +106,25 @@ namespace LearningStarter.Controllers
                 SecondaryAbilityId = pokemonSpeciesFromDatabase.SecondaryAbilityId,
                 HiddenAbilityId = pokemonSpeciesFromDatabase.HiddenAbilityId,
                 ExperienceCurveId = pokemonSpeciesFromDatabase.ExperienceCurveId,
-                //MoveLearnSet = moveToDto(pokemonSpeciesFromDatabase.MoveLearnSet)
+                MoveLearnSet = pokemonSpeciesFromDatabase.MoveLearnSet
+                    .Select(y => new MoveGetDto
+                    {
+                        Id = y.Id,
+                        Name = y.Name,
+                        TypeId = y.TypeId,
+                        MoveCategory = y.MoveCategory,
+                        BasePower = y.BasePower,
+                        PowerPoints = y.PowerPoints,
+                        Accuracy = y.Accuracy,
+                        SpeedPriority = y.SpeedPriority,
+                        IsContactOnHit = y.IsContactOnHit,
+                        IsSoundBased = y.IsSoundBased,
+                        IsPunchBased = y.IsPunchBased,
+                        IsAffectedByGravity = y.IsAffectedByGravity,
+                        IsDefrostOnUse = y.IsDefrostOnUse,
+                        IsBlockedByProtect = y.IsBlockedByProtect
+                    })
+                    .ToList()
             };
 
             response.Data = pokemonSpeciesToReturn;
@@ -226,7 +262,25 @@ namespace LearningStarter.Controllers
                 SecondaryAbilityId = pokemonSpeciesCreateDto.SecondaryAbilityId,
                 HiddenAbilityId = pokemonSpeciesCreateDto.HiddenAbilityId,
                 ExperienceCurveId = pokemonSpeciesCreateDto.ExperienceCurveId,
-                //MoveLearnSet = dtoToMove(pokemonSpeciesCreateDto.MoveLearnSet)
+                MoveLearnSet = pokemonSpeciesCreateDto.MoveLearnSet
+                    .Select(y => new Move
+                    {
+                        Id = y.Id,
+                        Name = y.Name,
+                        TypeId = y.TypeId,
+                        MoveCategory = y.MoveCategory,
+                        BasePower = y.BasePower,
+                        PowerPoints = y.PowerPoints,
+                        Accuracy = y.Accuracy,
+                        SpeedPriority = y.SpeedPriority,
+                        IsContactOnHit = y.IsContactOnHit,
+                        IsSoundBased = y.IsSoundBased,
+                        IsPunchBased = y.IsPunchBased,
+                        IsAffectedByGravity = y.IsAffectedByGravity,
+                        IsDefrostOnUse = y.IsDefrostOnUse,
+                        IsBlockedByProtect = y.IsBlockedByProtect
+                    })
+                    .ToList()
             };
 
             _dataContext.Add(pokemonSpeciesToCreate);
@@ -248,7 +302,25 @@ namespace LearningStarter.Controllers
                 SecondaryAbilityId = pokemonSpeciesToCreate.SecondaryAbilityId,
                 HiddenAbilityId = pokemonSpeciesToCreate.HiddenAbilityId,
                 ExperienceCurveId = pokemonSpeciesToCreate.ExperienceCurveId,
-                //MoveLearnSet = moveToDto(pokemonSpeciesToCreate.MoveLearnSet)
+                MoveLearnSet = pokemonSpeciesCreateDto.MoveLearnSet
+                    .Select(y => new MoveGetDto
+                    {
+                        Id = y.Id,
+                        Name = y.Name,
+                        TypeId = y.TypeId,
+                        MoveCategory = y.MoveCategory,
+                        BasePower = y.BasePower,
+                        PowerPoints = y.PowerPoints,
+                        Accuracy = y.Accuracy,
+                        SpeedPriority = y.SpeedPriority,
+                        IsContactOnHit = y.IsContactOnHit,
+                        IsSoundBased = y.IsSoundBased,
+                        IsPunchBased = y.IsPunchBased,
+                        IsAffectedByGravity = y.IsAffectedByGravity,
+                        IsDefrostOnUse = y.IsDefrostOnUse,
+                        IsBlockedByProtect = y.IsBlockedByProtect
+                    })
+                    .ToList()
             };
 
             response.Data = pokemonSpeciesToGet;

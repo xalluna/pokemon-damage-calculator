@@ -14,8 +14,6 @@ namespace LearningStarter.Entities
     
     public class ExperienceCurveCreateDto
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
     }

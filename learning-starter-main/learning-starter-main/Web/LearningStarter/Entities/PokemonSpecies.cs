@@ -37,14 +37,13 @@ namespace LearningStarter.Entities
 
         public ExperienceCurve ExperienceCurve { get; set; }
 
-        // public List<Move> MoveLearnSet { get; set; }
+        // public List<int> MoveLearnsetIds { get; set; }
+        public List<Move> MoveLearnSet { get; set; }
 
     }
     
     public class PokemonSpeciesCreateDto
     {
-        public int Id { get; set; }
-
         public string Species { get; set; }
 
         public int BaseHealth { get; set; }
@@ -68,7 +67,7 @@ namespace LearningStarter.Entities
         
         public int? HiddenAbilityId { get; set; }
         public int ExperienceCurveId { get; set; }
-        // public List<MoveGetDto> MoveLearnSet { get; set; }
+        public List<MoveGetDto> MoveLearnSet { get; set; }
 
     }
     
@@ -102,7 +101,7 @@ namespace LearningStarter.Entities
         
         public int ExperienceCurveId { get; set; }
 
-        // public List<MoveGetDto> MoveLearnSet { get; set; }
+        public List<MoveGetDto> MoveLearnSet { get; set; }
 
     }
     
@@ -136,7 +135,7 @@ namespace LearningStarter.Entities
         
         public int ExperienceCurveId { get; set; }
 
-        // public List<MoveGetDto> MoveLearnSet { get; set; }
+        public List<MoveGetDto> MoveLearnSet { get; set; }
 
     }
 }
