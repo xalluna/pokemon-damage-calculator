@@ -148,7 +148,59 @@ namespace LearningStarter
                 
                 dataContext.Users.Add(seededUser);
                 dataContext.SaveChanges();
+                
+                seededUser = new User
+                {
+                    FirstName = "Ash",
+                    LastName = "Katchum",
+                    Username = "PikaPal10",
+                    Password = "ILoveYouPikaChu"
+                };
+                
+                dataContext.Users.Add(seededUser);
+                dataContext.SaveChanges();
+                
+                seededUser = new User
+                {
+                    FirstName = "Samson",
+                    LastName = "Oak",
+                    Username = "ThickOaks",
+                    Password = "AshsMomHasGotItGoingOn"
+                };
+                
+                dataContext.Users.Add(seededUser);
+                dataContext.SaveChanges();
             }
+
+            var numAbilities = dataContext.Abilities.Count();
+
+            if (numAbilities == 0)
+            {
+                var seededAbility = new Ability
+                {
+                    Name = "Overgrow"
+                };
+
+                dataContext.Abilities.Add(seededAbility);
+                dataContext.SaveChanges();
+                
+                seededAbility = new Ability
+                {
+                    Name = "Torrent"
+                };
+
+                dataContext.Abilities.Add(seededAbility);
+                dataContext.SaveChanges();
+                
+                seededAbility = new Ability
+                {
+                    Name = "Blaze"
+                };
+
+                dataContext.Abilities.Add(seededAbility);
+                dataContext.SaveChanges();
+            }
+            
         }
     }
 }
