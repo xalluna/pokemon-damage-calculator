@@ -200,7 +200,62 @@ namespace LearningStarter
                 dataContext.Abilities.Add(seededAbility);
                 dataContext.SaveChanges();
             }
-            
+
+            var numExperienceCureves = dataContext.ExperienceCurves.Count();
+
+            if (numExperienceCureves == 0 )
+            {
+                var seededExpCurve = new ExperienceCurve
+                {
+                    Name = "Erratic"
+                };
+                
+                dataContext.ExperienceCurves.Add(seededExpCurve);
+                dataContext.SaveChanges();
+                
+                seededExpCurve = new ExperienceCurve
+                {
+                    Name = "Fast"
+                };
+                
+                dataContext.ExperienceCurves.Add(seededExpCurve);
+                dataContext.SaveChanges();
+                
+                seededExpCurve = new ExperienceCurve
+                {
+                    Name = "Medium Fast"
+                };
+                
+                dataContext.ExperienceCurves.Add(seededExpCurve);
+                dataContext.SaveChanges();
+                
+                seededExpCurve = new ExperienceCurve
+                {
+                    Name = "Medium Slow"
+                };
+                
+                dataContext.ExperienceCurves.Add(seededExpCurve);
+                dataContext.SaveChanges();
+                
+                seededExpCurve = new ExperienceCurve
+                {
+                    Name = "Slow"
+                };
+                
+                dataContext.ExperienceCurves.Add(seededExpCurve);
+                dataContext.SaveChanges();
+                
+                seededExpCurve = new ExperienceCurve
+                {
+                    Name = "Fluctuating"
+                };
+                
+                dataContext.ExperienceCurves.Add(seededExpCurve);
+                dataContext.SaveChanges();
+
+            }
+
+
         }
     }
 }
