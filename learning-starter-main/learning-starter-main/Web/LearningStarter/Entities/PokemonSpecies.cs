@@ -22,23 +22,16 @@ namespace LearningStarter.Entities
 
         public int PrimaryTypeId { get; set; }
         
-        public PType PrimaryPType { get; set; }
+        public int? SecondaryTypeId { get; set; }
 
-        // public int? SecondaryTypeId { get; set; }
-        //
-        // public PType? SecondaryType { get; set; }
-        //
+        public List<PType> Types { get; set; }
         public int PrimaryAbilityId { get; set; }
         
-        public Ability PrimaryAbility { get; set; }
-        //
-        // public int? SecondaryAbilityId { get; set; }
-        //
-        // public Ability? SecondaryAbility { get; set; }
-        //
-        // public int? HiddenAbilityId { get; set; }
-        //
-        // public Ability? HiddenAbility { get; set; }
+        public int? SecondaryAbilityId { get; set; }
+
+        public int? HiddenAbilityId { get; set; }
+        
+        public List<Ability> Abilities { get; set; }
 
         public int ExperienceCurveId { get; set; }
 
@@ -67,13 +60,13 @@ namespace LearningStarter.Entities
         public int BaseSpeed { get; set; }
 
         public int PrimaryTypeId { get; set; }
-        // public int? SecondaryTypeId { get; set; }
+        public int? SecondaryTypeId { get; set; }
   
         public int PrimaryAbilityId { get; set; }
 
-        // public int? SecondaryAbilityId { get; set; }
-        //
-        // public int? HiddenAbilityId { get; set; }
+        public int? SecondaryAbilityId { get; set; }
+        
+        public int? HiddenAbilityId { get; set; }
         public int ExperienceCurveId { get; set; }
         // public List<MoveGetDto> MoveLearnSet { get; set; }
 
@@ -99,13 +92,13 @@ namespace LearningStarter.Entities
 
         public int PrimaryTypeId { get; set; }
         
-        //public int? SecondaryTypeId { get; set; }
+        public int? SecondaryTypeId { get; set; }
   
         public int PrimaryAbilityId { get; set; }
 
-        // public int? SecondaryAbilityId { get; set; }
-        //
-        // public int? HiddenAbilityId { get; set; }
+        public int? SecondaryAbilityId { get; set; }
+        
+        public int? HiddenAbilityId { get; set; }
         
         public int ExperienceCurveId { get; set; }
 
@@ -133,13 +126,13 @@ namespace LearningStarter.Entities
 
         public int PrimaryTypeId { get; set; }
         
-        //public int? SecondaryTypeId { get; set; }
+        public int? SecondaryTypeId { get; set; }
   
         public int PrimaryAbilityId { get; set; }
 
-        // public int? SecondaryAbilityId { get; set; }
-        //
-        // public int? HiddenAbilityId { get; set; }
+        public int? SecondaryAbilityId { get; set; }
+        
+        public int? HiddenAbilityId { get; set; }
         
         public int ExperienceCurveId { get; set; }
 
