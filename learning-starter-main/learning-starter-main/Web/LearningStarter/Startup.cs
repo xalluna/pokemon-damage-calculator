@@ -284,7 +284,34 @@ namespace LearningStarter
                 dataContext.SaveChanges();
             }
 
-
+            // var numMoveCategories = dataContext.MoveCategories.Count();
+            //
+            // if(numMoveCategories == 0){
+            //     var seededMoveCategory = new MoveCategory
+            //     {
+            //         Name = "Physical"
+            //     };
+            //
+            //     dataContext.MoveCategories.Add(seededMoveCategory);
+            //     dataContext.SaveChanges();
+            //     
+            //     seededMoveCategory = new MoveCategory
+            //     {
+            //         Name = "Special"
+            //     };
+            //
+            //     dataContext.MoveCategories.Add(seededMoveCategory);
+            //     dataContext.SaveChanges();
+            //
+            //     seededMoveCategory = new MoveCategory
+            //     {
+            //         Name = "Status"
+            //     };
+            //
+            //     dataContext.MoveCategories.Add(seededMoveCategory);
+            //     dataContext.SaveChanges();
+            // }
+            
         }
     }
 }
