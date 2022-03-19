@@ -17,8 +17,6 @@ namespace LearningStarter.Entities
     
     public class AbilityCreateDto
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
     }
