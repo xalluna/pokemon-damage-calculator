@@ -37,7 +37,7 @@ namespace LearningStarter.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{Id:int}")]
+        [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
             var response = new Response();
