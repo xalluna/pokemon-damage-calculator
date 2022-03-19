@@ -25,7 +25,7 @@ namespace LearningStarter.Controllers
             var response = new Response();
 
             var pokemonSpeciesToReturn = _dataContext
-                .PokemonSpeciesList
+                .PokemonSpecies
                 .Select(x => new PokemonSpeciesGetDto()
                 {
                     Id = x.Id,
@@ -63,7 +63,7 @@ namespace LearningStarter.Controllers
             }
 
             var pokemonSpeciesFromDatabase = _dataContext
-                .PokemonSpeciesList
+                .PokemonSpecies
                 .FirstOrDefault(x => x.Id == id);
 
             if (pokemonSpeciesFromDatabase == null)
@@ -114,7 +114,7 @@ namespace LearningStarter.Controllers
             }
 
             var hasNameInDatabase = _dataContext
-                .PokemonSpeciesList
+                .PokemonSpecies
                 .Any(x => x.Species == pokemonSpeciesCreateDto.Species);
             
             if (hasNameInDatabase)
