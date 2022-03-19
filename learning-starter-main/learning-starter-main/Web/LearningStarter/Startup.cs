@@ -431,6 +431,130 @@ namespace LearningStarter
 
                 dataContext.Types.Add(seededType);
                 dataContext.SaveChanges();
+            }
+
+            var numMoves = dataContext.Moves.Count();
+
+            if (numMoves == 0)
+            {
+                var seededMove = new Move
+                {
+                    Name = "Tackle",
+                    Accuracy = 100,
+                    BasePower = 20,
+                    SpeedPriority = 1,
+                    MoveCategory = true,
+                    PowerPoints = 40,
+                    TypeId = 1,
+                    IsContactOnHit = true,
+                    IsBlockedByProtect = true
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
+                
+                seededMove = new Move
+                {
+                    Name = "Scratch",
+                    Accuracy = 100,
+                    BasePower = 20,
+                    SpeedPriority = 1,
+                    MoveCategory = true,
+                    PowerPoints = 35,
+                    TypeId = 1,
+                    IsContactOnHit = true,
+                    IsBlockedByProtect = true
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
+
+                seededMove = new Move
+                {
+                    Name = "Screech",
+                    Accuracy = 100,
+                    SpeedPriority = 1,
+                    PowerPoints = 40,
+                    TypeId = 1,
+                    IsBlockedByProtect = true,
+                    IsSoundBased = true
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
+
+                seededMove = new Move
+                {
+                    Name = "Growl",
+                    Accuracy = 100,
+                    SpeedPriority = 1,
+                    PowerPoints = 40,
+                    TypeId = 1,
+                    IsBlockedByProtect = true
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
+
+                seededMove = new Move
+                {
+                    Name = "Ember",
+                    Accuracy = 100,
+                    BasePower = 20,
+                    SpeedPriority = 1,
+                    MoveCategory = false,
+                    PowerPoints = 35,
+                    TypeId = 2,
+                    IsContactOnHit = false,
+                    IsBlockedByProtect = true,
+                    IsPunchBased = false,
+                    IsSoundBased = false,
+                    IsAffectedByGravity = false,
+                    IsDefrostOnUse = false,
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
+
+                seededMove = new Move
+                {
+                    Name = "Water Gun",
+                    Accuracy = 100,
+                    BasePower = 20,
+                    SpeedPriority = 1,
+                    MoveCategory = false,
+                    PowerPoints = 35,
+                    TypeId = 3,
+                    IsContactOnHit = false,
+                    IsBlockedByProtect = true,
+                    IsPunchBased = false,
+                    IsSoundBased = false,
+                    IsAffectedByGravity = false,
+                    IsDefrostOnUse = false,
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
+
+                seededMove = new Move
+                {
+                    Name = "Vine Whip",
+                    Accuracy = 100,
+                    BasePower = 20,
+                    SpeedPriority = 1,
+                    MoveCategory = true,
+                    PowerPoints = 35,
+                    TypeId = 4,
+                    IsContactOnHit = false,
+                    IsBlockedByProtect = true,
+                    IsPunchBased = false,
+                    IsSoundBased = false,
+                    IsAffectedByGravity = false,
+                    IsDefrostOnUse = false,
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
 
 
             }

@@ -29,7 +29,7 @@ namespace LearningStarter.Controllers
                 .Select(x => new PokemonSpeciesGetDto()
                 {
                     Id = x.Id,
-                    Name = x.Name,
+                    Species = x.Species,
                     BaseHealth = x.BaseHealth,
                     BaseAttack = x.BaseAttack,
                     BaseDefense = x.BaseDefense,
@@ -75,7 +75,7 @@ namespace LearningStarter.Controllers
             var pokemonSpeciesToReturn = new PokemonSpeciesGetDto
             {
                 Id = pokemonSpeciesFromDatabase.Id,
-                Name = pokemonSpeciesFromDatabase.Name,
+                Species = pokemonSpeciesFromDatabase.Species,
                 BaseHealth = pokemonSpeciesFromDatabase.BaseHealth,
                 BaseAttack = pokemonSpeciesFromDatabase.BaseAttack,
                 BaseDefense = pokemonSpeciesFromDatabase.BaseDefense,
@@ -108,18 +108,18 @@ namespace LearningStarter.Controllers
                 return BadRequest(response);
             }
 
-            if (string.IsNullOrEmpty(pokemonSpeciesCreateDto.Name))
+            if (string.IsNullOrEmpty(pokemonSpeciesCreateDto.Species))
             {
-                response.AddError("Name", "Name cannot be null or empty.");
+                response.AddError("Species", "Species cannot be null or empty.");
             }
 
             var hasNameInDatabase = _dataContext
                 .PokemonSpeciesList
-                .Any(x => x.Name == pokemonSpeciesCreateDto.Name);
+                .Any(x => x.Species == pokemonSpeciesCreateDto.Species);
             
             if (hasNameInDatabase)
             {
-                response.AddError("Name", "Name already exists.");
+                response.AddError("Species", "Species already exists.");
             }
 
             if (pokemonSpeciesCreateDto.BaseHealth < 0 || pokemonSpeciesCreateDto.BaseHealth > 255)
@@ -213,7 +213,7 @@ namespace LearningStarter.Controllers
             
             var pokemonSpeciesToCreate = new PokemonSpecies
             {
-                Name = pokemonSpeciesCreateDto.Name,
+                Species = pokemonSpeciesCreateDto.Species,
                 BaseHealth = pokemonSpeciesCreateDto.BaseHealth,
                 BaseAttack = pokemonSpeciesCreateDto.BaseAttack,
                 BaseDefense = pokemonSpeciesCreateDto.BaseDefense,
@@ -235,7 +235,7 @@ namespace LearningStarter.Controllers
             var pokemonSpeciesToGet = new PokemonSpeciesGetDto
             {
                 Id = pokemonSpeciesToCreate.Id,
-                Name = pokemonSpeciesToCreate.Name,
+                Species = pokemonSpeciesToCreate.Species,
                 BaseHealth = pokemonSpeciesToCreate.BaseHealth,
                 BaseAttack = pokemonSpeciesToCreate.BaseAttack,
                 BaseDefense = pokemonSpeciesToCreate.BaseDefense,
@@ -266,7 +266,7 @@ namespace LearningStarter.Controllers
         //         moveDtos.Add(new MoveGetDto
         //         {
         //             Id = x.Id,
-        //             Name = x.Name,
+        //             Species = x.Species,
         //             TypeId = x.TypeId,
         //             MoveCategory = x.MoveCategory,
         //             BasePower = x.BasePower,
@@ -294,7 +294,7 @@ namespace LearningStarter.Controllers
         //         moves.Add(new Move
         //         {
         //             Id = x.Id,
-        //             Name = x.Name,
+        //             Species = x.Species,
         //             TypeId = x.TypeId,
         //             MoveCategory = x.MoveCategory,
         //             BasePower = x.BasePower,

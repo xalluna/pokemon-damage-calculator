@@ -6,7 +6,7 @@ namespace LearningStarter.Entities
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Species { get; set; }
 
         public int BaseHealth { get; set; }
         
@@ -45,7 +45,7 @@ namespace LearningStarter.Entities
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Species { get; set; }
 
         public int BaseHealth { get; set; }
         
@@ -76,7 +76,7 @@ namespace LearningStarter.Entities
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Species { get; set; }
 
         public int BaseHealth { get; set; }
         
@@ -110,7 +110,7 @@ namespace LearningStarter.Entities
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Species { get; set; }
 
         public int BaseHealth { get; set; }
         
