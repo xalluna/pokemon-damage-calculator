@@ -148,6 +148,7 @@ namespace LearningStarter
                 
                 dataContext.Users.Add(seededUser);
                 dataContext.SaveChanges();
+                
             }
         }
     }
