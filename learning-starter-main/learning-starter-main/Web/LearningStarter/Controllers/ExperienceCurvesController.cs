@@ -83,7 +83,7 @@ namespace LearningStarter.Controllers
             
             if (string.IsNullOrEmpty(experienceCurveCreateDto.Name))
             {
-                response.AddError("Species", "Species cannot be null or empty");
+                response.AddError("Name", "Name cannot be null or empty");
             }
 
             var hasNameInDatabase = _dataContext
@@ -91,7 +91,7 @@ namespace LearningStarter.Controllers
                 .Any(x => x.Name == experienceCurveCreateDto.Name);
             if (hasNameInDatabase)
             {
-                response.AddError("Species", "Species already exists");
+                response.AddError("Name", "Name already exists");
             }
 
             if (response.HasErrors)
@@ -116,6 +116,73 @@ namespace LearningStarter.Controllers
             response.Data = experienceCurveToGet;
 
             return Created("Experience Curve created", response);
+        }
+        
+        [HttpPut("{id:int}")]
+        public IActionResult Edit([FromRoute] int id,
+            [FromBody] ExperienceCurveUpdateDto experienceCurve)
+        {
+            var response = new Response();
+
+            if (experienceCurve == null)
+            {
+                response.AddError("", "Cannot pass a null entity.");
+                return BadRequest(response);
+            }
+
+            experienceCurve.Name = experienceCurve.Name.Trim();
+            if (string.IsNullOrEmpty(experienceCurve.Name))
+            {
+                response.AddError("Name", "Name cannot be null or empty");
+            }
+
+            var hasNameInDatabase = _dataContext
+                .ExperienceCurves
+                .Any(x => x.Name.ToLower() == experienceCurve.Name.ToLower() && x.Id != id);
+            if (hasNameInDatabase)
+            {
+                response.AddError("Name", "Name already exists");
+            }
+
+            if (response.HasErrors)
+            {
+                return BadRequest(response);
+            }
+
+            var experienceCurveToUpdate = _dataContext
+                .ExperienceCurves
+                .FirstOrDefault(x => x.Id == id);
+
+            experienceCurveToUpdate.Name = experienceCurve.Name;
+            _dataContext.SaveChanges();
+
+            var experienceCurveGet = new ExperienceCurveGetDto
+            {
+                Name = experienceCurve.Name
+            };
+
+            response.Data = experienceCurveGet;
+
+            return Ok(response);
+        }
+
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            var response = new Response();
+
+            var experienceCurve = _dataContext.ExperienceCurves.FirstOrDefault(x => x.Id == id);
+
+            if (experienceCurve == null)
+            {
+                response.AddError("id", "Experience Curve not found.");
+                return NotFound(response);
+            }
+
+            _dataContext.ExperienceCurves.Remove(experienceCurve);
+            _dataContext.SaveChanges();
+
+            return Ok(response);
         }
     }
 }

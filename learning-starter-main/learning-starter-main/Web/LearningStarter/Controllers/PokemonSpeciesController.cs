@@ -41,26 +41,7 @@ namespace LearningStarter.Controllers
                     PrimaryAbilityId = x.PrimaryAbilityId,
                     SecondaryAbilityId = x.SecondaryAbilityId,
                     HiddenAbilityId = x.HiddenAbilityId,
-                    ExperienceCurveId = x.ExperienceCurveId,
-                    MoveLearnSet = x.MoveLearnSet
-                        .Select(y => new MoveGetDto
-                        {
-                            Id = y.Id,
-                            Name = y.Name,
-                            TypeId = y.TypeId,
-                            MoveCategory = y.MoveCategory,
-                            BasePower = y.BasePower,
-                            PowerPoints = y.PowerPoints,
-                            Accuracy = y.Accuracy,
-                            SpeedPriority = y.SpeedPriority,
-                            IsContactOnHit = y.IsContactOnHit,
-                            IsSoundBased = y.IsSoundBased,
-                            IsPunchBased = y.IsPunchBased,
-                            IsAffectedByGravity = y.IsAffectedByGravity,
-                            IsDefrostOnUse = y.IsDefrostOnUse,
-                            IsBlockedByProtect = y.IsBlockedByProtect
-                        })
-                        .ToList()
+                    ExperienceCurveId = x.ExperienceCurveId
                 })
                 .ToList();
 
@@ -105,26 +86,7 @@ namespace LearningStarter.Controllers
                 PrimaryAbilityId = pokemonSpeciesFromDatabase.PrimaryAbilityId,
                 SecondaryAbilityId = pokemonSpeciesFromDatabase.SecondaryAbilityId,
                 HiddenAbilityId = pokemonSpeciesFromDatabase.HiddenAbilityId,
-                ExperienceCurveId = pokemonSpeciesFromDatabase.ExperienceCurveId,
-                MoveLearnSet = pokemonSpeciesFromDatabase.MoveLearnSet
-                    .Select(y => new MoveGetDto
-                    {
-                        Id = y.Id,
-                        Name = y.Name,
-                        TypeId = y.TypeId,
-                        MoveCategory = y.MoveCategory,
-                        BasePower = y.BasePower,
-                        PowerPoints = y.PowerPoints,
-                        Accuracy = y.Accuracy,
-                        SpeedPriority = y.SpeedPriority,
-                        IsContactOnHit = y.IsContactOnHit,
-                        IsSoundBased = y.IsSoundBased,
-                        IsPunchBased = y.IsPunchBased,
-                        IsAffectedByGravity = y.IsAffectedByGravity,
-                        IsDefrostOnUse = y.IsDefrostOnUse,
-                        IsBlockedByProtect = y.IsBlockedByProtect
-                    })
-                    .ToList()
+                ExperienceCurveId = pokemonSpeciesFromDatabase.ExperienceCurveId
             };
 
             response.Data = pokemonSpeciesToReturn;
@@ -261,26 +223,7 @@ namespace LearningStarter.Controllers
                 PrimaryAbilityId = pokemonSpeciesCreateDto.PrimaryAbilityId,
                 SecondaryAbilityId = pokemonSpeciesCreateDto.SecondaryAbilityId,
                 HiddenAbilityId = pokemonSpeciesCreateDto.HiddenAbilityId,
-                ExperienceCurveId = pokemonSpeciesCreateDto.ExperienceCurveId,
-                MoveLearnSet = pokemonSpeciesCreateDto.MoveLearnSet
-                    .Select(y => new Move
-                    {
-                        Id = y.Id,
-                        Name = y.Name,
-                        TypeId = y.TypeId,
-                        MoveCategory = y.MoveCategory,
-                        BasePower = y.BasePower,
-                        PowerPoints = y.PowerPoints,
-                        Accuracy = y.Accuracy,
-                        SpeedPriority = y.SpeedPriority,
-                        IsContactOnHit = y.IsContactOnHit,
-                        IsSoundBased = y.IsSoundBased,
-                        IsPunchBased = y.IsPunchBased,
-                        IsAffectedByGravity = y.IsAffectedByGravity,
-                        IsDefrostOnUse = y.IsDefrostOnUse,
-                        IsBlockedByProtect = y.IsBlockedByProtect
-                    })
-                    .ToList()
+                ExperienceCurveId = pokemonSpeciesCreateDto.ExperienceCurveId
             };
 
             _dataContext.Add(pokemonSpeciesToCreate);
@@ -301,26 +244,7 @@ namespace LearningStarter.Controllers
                 PrimaryAbilityId = pokemonSpeciesToCreate.PrimaryAbilityId,
                 SecondaryAbilityId = pokemonSpeciesToCreate.SecondaryAbilityId,
                 HiddenAbilityId = pokemonSpeciesToCreate.HiddenAbilityId,
-                ExperienceCurveId = pokemonSpeciesToCreate.ExperienceCurveId,
-                MoveLearnSet = pokemonSpeciesCreateDto.MoveLearnSet
-                    .Select(y => new MoveGetDto
-                    {
-                        Id = y.Id,
-                        Name = y.Name,
-                        TypeId = y.TypeId,
-                        MoveCategory = y.MoveCategory,
-                        BasePower = y.BasePower,
-                        PowerPoints = y.PowerPoints,
-                        Accuracy = y.Accuracy,
-                        SpeedPriority = y.SpeedPriority,
-                        IsContactOnHit = y.IsContactOnHit,
-                        IsSoundBased = y.IsSoundBased,
-                        IsPunchBased = y.IsPunchBased,
-                        IsAffectedByGravity = y.IsAffectedByGravity,
-                        IsDefrostOnUse = y.IsDefrostOnUse,
-                        IsBlockedByProtect = y.IsBlockedByProtect
-                    })
-                    .ToList()
+                ExperienceCurveId = pokemonSpeciesToCreate.ExperienceCurveId
             };
 
             response.Data = pokemonSpeciesToGet;
@@ -328,61 +252,5 @@ namespace LearningStarter.Controllers
             return Created("Pokemon Species created", response);
 
         }
-
-        // public List<MoveGetDto> moveToDto(List<Move> moves)
-        // {
-        //     List<MoveGetDto> moveDtos = new List<MoveGetDto>();
-        //     
-        //     foreach (Move x in moves)
-        //     {
-        //         moveDtos.Add(new MoveGetDto
-        //         {
-        //             Id = x.Id,
-        //             Species = x.Species,
-        //             TypeId = x.TypeId,
-        //             MoveCategory = x.MoveCategory,
-        //             BasePower = x.BasePower,
-        //             PowerPoints = x.PowerPoints,
-        //             Accuracy = x.Accuracy,
-        //             SpeedPriority = x.SpeedPriority,
-        //             IsContactOnHit = x.IsContactOnHit,
-        //             IsSoundBased = x.IsSoundBased,
-        //             IsPunchBased = x.IsPunchBased,
-        //             IsAffectedByGravity = x.IsAffectedByGravity,
-        //             IsDefrostOnUse = x.IsDefrostOnUse,
-        //             IsBlockedByProtect = x.IsBlockedByProtect
-        //         });
-        //     }
-        //
-        //     return moveDtos;
-        // }
-        //
-        // public List<Move> dtoToMove(List<MoveGetDto> movesDtos)
-        // {
-        //     List<Move> moves = new List<Move>();
-        //     
-        //     foreach (MoveGetDto x in movesDtos)
-        //     {
-        //         moves.Add(new Move
-        //         {
-        //             Id = x.Id,
-        //             Species = x.Species,
-        //             TypeId = x.TypeId,
-        //             MoveCategory = x.MoveCategory,
-        //             BasePower = x.BasePower,
-        //             PowerPoints = x.PowerPoints,
-        //             Accuracy = x.Accuracy,
-        //             SpeedPriority = x.SpeedPriority,
-        //             IsContactOnHit = x.IsContactOnHit,
-        //             IsSoundBased = x.IsSoundBased,
-        //             IsPunchBased = x.IsPunchBased,
-        //             IsAffectedByGravity = x.IsAffectedByGravity,
-        //             IsDefrostOnUse = x.IsDefrostOnUse,
-        //             IsBlockedByProtect = x.IsBlockedByProtect
-        //         });
-        //     }
-        //
-        //     return moves;
-        // }
     }
 }

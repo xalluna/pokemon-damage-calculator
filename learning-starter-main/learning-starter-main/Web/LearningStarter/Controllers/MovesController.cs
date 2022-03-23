@@ -106,7 +106,7 @@ namespace LearningStarter.Controllers
 
             if (string.IsNullOrEmpty(moveCreateDto.Name))
             {
-                response.AddError("Species", "Species cannot be null or empty.");
+                response.AddError("Name", "Name cannot be null or empty.");
             }
 
             var hasNameInDatabase = _dataContext
@@ -115,7 +115,7 @@ namespace LearningStarter.Controllers
             
             if (hasNameInDatabase)
             {
-                response.AddError("Species", "Species already exists.");
+                response.AddError("Name", "Name already exists.");
             }
 
             var isValidType = _dataContext

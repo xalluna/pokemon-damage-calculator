@@ -24,15 +24,12 @@ namespace LearningStarter.Entities
     public class AbilityGetDto
     {
         public int Id { get; set; }
-
         public string Name { get; set; }
 
     }
     
     public class AbilityUpdateDto
-    {
-        public int Id { get; set; }
-
+    { 
         public string Name { get; set; }
 
     }

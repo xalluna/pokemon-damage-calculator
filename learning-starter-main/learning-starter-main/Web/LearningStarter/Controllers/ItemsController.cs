@@ -82,7 +82,7 @@ namespace LearningStarter.Controllers
             
             if (string.IsNullOrEmpty(itemCreateDto.Name))
             {
-                response.AddError("Species", "Species cannot be null or empty");
+                response.AddError("Name", "Name cannot be null or empty");
             }
 
             var hasNameInDatabase = _dataContext
@@ -90,7 +90,7 @@ namespace LearningStarter.Controllers
                 .Any(x => x.Name == itemCreateDto.Name);
             if (hasNameInDatabase)
             {
-                response.AddError("Species", "Species already exists");
+                response.AddError("Name", "Name already exists");
             }
 
             if (response.HasErrors)
@@ -115,6 +115,73 @@ namespace LearningStarter.Controllers
             response.Data = itemToGet;
 
             return Created("Item created", response);
+        }
+        
+        [HttpPut("{id:int}")]
+        public IActionResult Edit([FromRoute] int id,
+            [FromBody] ItemUpdateDto item)
+        {
+            var response = new Response();
+
+            if (item == null)
+            {
+                response.AddError("", "Cannot pass a null entity.");
+                return BadRequest(response);
+            }
+
+            item.Name = item.Name.Trim();
+            if (string.IsNullOrEmpty(item.Name))
+            {
+                response.AddError("Name", "Name cannot be null or empty");
+            }
+
+            var hasNameInDatabase = _dataContext
+                .Items
+                .Any(x => x.Name.ToLower() == item.Name.ToLower() && x.Id != id);
+            if (hasNameInDatabase)
+            {
+                response.AddError("Name", "Name already exists");
+            }
+
+            if (response.HasErrors)
+            {
+                return BadRequest(response);
+            }
+
+            var itemToUpdate = _dataContext
+                .Items
+                .FirstOrDefault(x => x.Id == id);
+
+            itemToUpdate.Name = item.Name;
+            _dataContext.SaveChanges();
+
+            var itemGet = new ItemGetDto
+            {
+                Name = item.Name
+            };
+
+            response.Data = itemGet;
+
+            return Ok(response);
+        }
+
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            var response = new Response();
+
+            var item = _dataContext.Items.FirstOrDefault(x => x.Id == id);
+
+            if (item == null)
+            {
+                response.AddError("id", "Item not found.");
+                return NotFound(response);
+            }
+
+            _dataContext.Items.Remove(item);
+            _dataContext.SaveChanges();
+
+            return Ok(response);
         }
     }
 }

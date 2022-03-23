@@ -23,14 +23,10 @@ namespace LearningStarter.Entities
         public int Id { get; set; }
 
         public string Name { get; set; }
-
     }
     
     public class ExperienceCurveUpdateDto
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
-
     }
 }

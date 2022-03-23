@@ -82,7 +82,7 @@ namespace LearningStarter.Controllers
             
             if (string.IsNullOrEmpty(typeCreateDto.Name))
             {
-                response.AddError("Species", "Species cannot be null or empty");
+                response.AddError("Name", "Name cannot be null or empty");
             }
 
             var hasNameInDatabase = _dataContext
@@ -90,7 +90,7 @@ namespace LearningStarter.Controllers
                 .Any(x => x.Name == typeCreateDto.Name);
             if (hasNameInDatabase)
             {
-                response.AddError("Species", "Species already exists");
+                response.AddError("Name", "Name already exists");
             }
 
             if (response.HasErrors)
@@ -114,7 +114,74 @@ namespace LearningStarter.Controllers
 
             response.Data = typeToGet;
 
-            return Created("PType created", response);
+            return Created("Type created", response);
+        }
+        
+        [HttpPut("{id:int}")]
+        public IActionResult Edit([FromRoute] int id,
+            [FromBody] TypeUpdateDto type)
+        {
+            var response = new Response();
+
+            if (type == null)
+            {
+                response.AddError("", "Cannot pass a null entity.");
+                return BadRequest(response);
+            }
+
+            type.Name = type.Name.Trim();
+            if (string.IsNullOrEmpty(type.Name))
+            {
+                response.AddError("Name", "Name cannot be null or empty");
+            }
+
+            var hasNameInDatabase = _dataContext
+                .Types
+                .Any(x => x.Name.ToLower() == type.Name.ToLower() && x.Id != id);
+            if (hasNameInDatabase)
+            {
+                response.AddError("Name", "Name already exists");
+            }
+
+            if (response.HasErrors)
+            {
+                return BadRequest(response);
+            }
+
+            var typeToUpdate = _dataContext
+                .Types
+                .FirstOrDefault(x => x.Id == id);
+
+            typeToUpdate.Name = type.Name;
+            _dataContext.SaveChanges();
+
+            var typeGet = new TypeGetDto
+            {
+                Name = type.Name
+            };
+
+            response.Data = typeGet;
+
+            return Ok(response);
+        }
+
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            var response = new Response();
+
+            var type = _dataContext.Types.FirstOrDefault(x => x.Id == id);
+
+            if (type == null)
+            {
+                response.AddError("id", "Ability not found.");
+                return NotFound(response);
+            }
+
+            _dataContext.Types.Remove(type);
+            _dataContext.SaveChanges();
+
+            return Ok(response);
         }
     }
 }

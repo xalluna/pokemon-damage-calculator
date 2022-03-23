@@ -12,11 +12,7 @@ namespace LearningStarter.Entities
 
         public PType PType { get; set; }
 
-        // public int MoveCategory { get; set; }
-        
         public bool? MoveCategory { get; set; }
-
-        // public List<MoveCategory> MoveCategories { get; set; }
 
         public int? BasePower { get; set; }
 
@@ -101,8 +97,6 @@ namespace LearningStarter.Entities
     
     public class MoveUpdateDto
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public int TypeId { get; set; }
