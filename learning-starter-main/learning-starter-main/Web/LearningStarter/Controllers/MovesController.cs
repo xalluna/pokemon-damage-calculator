@@ -217,7 +217,7 @@ namespace LearningStarter.Controllers
 
             var hasNameInDatabase = _dataContext
                 .Moves
-                .Any(x => x.Name == move.Name);
+                .Any(x => x.Name == move.Name && x.Id != id);
             
             if (hasNameInDatabase)
             {
