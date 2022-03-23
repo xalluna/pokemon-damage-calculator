@@ -94,24 +94,25 @@ namespace LearningStarter.Controllers
 
         [HttpPost]
         public IActionResult Create(
-            [FromBody] MoveCreateDto moveCreateDto)
+            [FromBody] MoveCreateDto move)
         {
             var response = new Response();
 
-            if(moveCreateDto == null)
+            if(move == null)
             {
                 response.AddError("","Cannot pass a null entity.");
                 return BadRequest(response);
             }
 
-            if (string.IsNullOrEmpty(moveCreateDto.Name))
+            move.Name = move.Name.Trim();
+            if (string.IsNullOrEmpty(move.Name))
             {
                 response.AddError("Name", "Name cannot be null or empty.");
             }
 
             var hasNameInDatabase = _dataContext
                 .Moves
-                .Any(x => x.Name == moveCreateDto.Name);
+                .Any(x => x.Name == move.Name);
             
             if (hasNameInDatabase)
             {
@@ -120,38 +121,29 @@ namespace LearningStarter.Controllers
 
             var isValidType = _dataContext
                 .Types
-                .Any(x => x.Id == moveCreateDto.TypeId);
+                .Any(x => x.Id == move.TypeId);
 
             if (!isValidType)
             {
                 response.AddError("Type", "Type is not valid.");
             }
             
-            // var isValidMoveCategory = _dataContext
-            //     .MoveCategories
-            //     .Any(x => x.Id == moveCreateDto.MoveCategory);
-            //
-            // if (!isValidMoveCategory)
-            // {
-            //     response.AddError("Move Category", "Move Category is not valid.");
-            // }
-
-            if (moveCreateDto.BasePower < 0)
+            if (move.BasePower < 0)
             {
                 response.AddError("Base Power", "Base Power cannot be negative");
             }
 
-            if (moveCreateDto.Accuracy <= 0 || moveCreateDto.Accuracy > 101)
+            if (move.Accuracy <= 0 || move.Accuracy > 101)
             {
                 response.AddError("Accuracy", "Accuracy must be between 1 and 101");
             }
 
-            if (moveCreateDto.PowerPoints < 5)
+            if (move.PowerPoints < 5)
             {
                 response.AddError("Power Points", "Power Points must be greater than 5");
             }
 
-            if (moveCreateDto.SpeedPriority < -7 || moveCreateDto.SpeedPriority > 5)
+            if (move.SpeedPriority < -7 || move.SpeedPriority > 5)
             {
                 response.AddError("Speed Priority", 
                     "Priority cannot be less than -7 or greater than+ 5");
@@ -164,19 +156,19 @@ namespace LearningStarter.Controllers
 
             var moveToCreate = new Move
             {
-                Name = moveCreateDto.Name,
-                TypeId = moveCreateDto.TypeId,
-                MoveCategory = moveCreateDto.MoveCategory,
-                BasePower = moveCreateDto.BasePower,
-                PowerPoints = moveCreateDto.PowerPoints,
-                Accuracy = moveCreateDto.Accuracy,
-                SpeedPriority = moveCreateDto.SpeedPriority,
-                IsContactOnHit = moveCreateDto.IsContactOnHit,
-                IsSoundBased = moveCreateDto.IsSoundBased,
-                IsPunchBased = moveCreateDto.IsPunchBased,
-                IsAffectedByGravity = moveCreateDto.IsAffectedByGravity,
-                IsDefrostOnUse = moveCreateDto.IsDefrostOnUse,
-                IsBlockedByProtect = moveCreateDto.IsBlockedByProtect
+                Name = move.Name,
+                TypeId = move.TypeId,
+                MoveCategory = move.MoveCategory,
+                BasePower = move.BasePower,
+                PowerPoints = move.PowerPoints,
+                Accuracy = move.Accuracy,
+                SpeedPriority = move.SpeedPriority,
+                IsContactOnHit = move.IsContactOnHit,
+                IsSoundBased = move.IsSoundBased,
+                IsPunchBased = move.IsPunchBased,
+                IsAffectedByGravity = move.IsAffectedByGravity,
+                IsDefrostOnUse = move.IsDefrostOnUse,
+                IsBlockedByProtect = move.IsBlockedByProtect
             };
 
             _dataContext.Add(moveToCreate);
@@ -203,6 +195,160 @@ namespace LearningStarter.Controllers
             response.Data = moveToGet;
 
             return Created("Move Created", response);
+        }
+
+        [HttpPut("{id:int}")]
+        public IActionResult Edit([FromRoute] int id,
+            [FromBody] MoveUpdateDto move)
+        {
+            var response = new Response();
+
+            if(move == null)
+            {
+                response.AddError("","Cannot pass a null entity.");
+                return BadRequest(response);
+            }
+
+            move.Name = move.Name.Trim();
+            if (string.IsNullOrEmpty(move.Name))
+            {
+                response.AddError("Name", "Name cannot be null or empty.");
+            }
+
+            var hasNameInDatabase = _dataContext
+                .Moves
+                .Any(x => x.Name == move.Name);
+            
+            if (hasNameInDatabase)
+            {
+                response.AddError("Name", "Name already exists.");
+            }
+
+            var isValidType = _dataContext
+                .Types
+                .Any(x => x.Id == move.TypeId);
+
+            if (!isValidType)
+            {
+                response.AddError("Type", "Type is not valid.");
+            }
+            
+            if (move.BasePower < 0)
+            {
+                response.AddError("Base Power", "Base Power cannot be negative");
+            }
+
+            if (move.Accuracy <= 0 || move.Accuracy > 101)
+            {
+                response.AddError("Accuracy", "Accuracy must be between 1 and 101");
+            }
+
+            if (move.PowerPoints < 5)
+            {
+                response.AddError("Power Points", "Power Points must be greater than 5");
+            }
+
+            if (move.SpeedPriority < -7 || move.SpeedPriority > 5)
+            {
+                response.AddError("Speed Priority", 
+                    "Priority cannot be less than -7 or greater than+ 5");
+            }
+
+            if (response.HasErrors)
+            {
+                return BadRequest(response);
+            }
+
+            if (move.IsPunchBased == null)
+            {
+                move.IsPunchBased = false;
+            }
+            
+            if (move.IsSoundBased == null)
+            {
+                move.IsSoundBased = false;
+            }
+            
+            if (move.IsAffectedByGravity == null)
+            {
+                move.IsAffectedByGravity = false;
+            }
+            
+            if (move.IsBlockedByProtect == null)
+            {
+                move.IsBlockedByProtect = false;
+            }
+            
+            if (move.IsContactOnHit == null)
+            {
+                move.IsContactOnHit = false;
+            }
+            
+            if (move.IsDefrostOnUse == null)
+            {
+                move.IsDefrostOnUse = false;
+            }
+
+            var moveToUpdate = _dataContext
+                .Moves
+                .FirstOrDefault(x => x.Id == id);
+            
+            moveToUpdate.Name = move.Name;
+            moveToUpdate.TypeId = move.TypeId;
+            moveToUpdate.MoveCategory = move.MoveCategory;
+            moveToUpdate.BasePower = move.BasePower;
+            moveToUpdate.PowerPoints = move.PowerPoints;
+            moveToUpdate.Accuracy = move.Accuracy;
+            moveToUpdate.SpeedPriority = move.SpeedPriority;
+            moveToUpdate.IsContactOnHit = move.IsContactOnHit;
+            moveToUpdate.IsSoundBased = move.IsSoundBased;
+            moveToUpdate.IsPunchBased = move.IsPunchBased;
+            moveToUpdate.IsAffectedByGravity = move.IsAffectedByGravity;
+            moveToUpdate.IsDefrostOnUse = move.IsDefrostOnUse;
+            moveToUpdate.IsBlockedByProtect = move.IsBlockedByProtect;
+
+            _dataContext.SaveChanges();
+
+            var moveGet = new MoveGetDto
+            {
+                Id = moveToUpdate.Id,
+                Name = moveToUpdate.Name,
+                TypeId = moveToUpdate.TypeId,
+                MoveCategory = moveToUpdate.MoveCategory,
+                BasePower = moveToUpdate.BasePower,
+                PowerPoints = moveToUpdate.PowerPoints,
+                Accuracy = moveToUpdate.Accuracy,
+                SpeedPriority = moveToUpdate.SpeedPriority,
+                IsContactOnHit = moveToUpdate.IsContactOnHit,
+                IsSoundBased = moveToUpdate.IsSoundBased,
+                IsPunchBased = moveToUpdate.IsPunchBased,
+                IsAffectedByGravity = moveToUpdate.IsAffectedByGravity,
+                IsDefrostOnUse = moveToUpdate.IsDefrostOnUse,
+                IsBlockedByProtect = moveToUpdate.IsBlockedByProtect
+            };
+
+            response.Data = moveGet;
+
+            return Ok(response);
+        }
+        
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            var response = new Response();
+
+            var move = _dataContext.Moves.FirstOrDefault(x => x.Id == id);
+
+            if (move == null)
+            {
+                response.AddError("id", "Move not found.");
+                return NotFound(response);
+            }
+
+            _dataContext.Moves.Remove(move);
+            _dataContext.SaveChanges();
+
+            return Ok(response);
         }
     }
 }
