@@ -64,7 +64,7 @@ namespace LearningStarter.Entities
         
         public int Gender { get; set; }
         
-        public bool IsShiny { get; set; }
+        public bool? IsShiny { get; set; }
     }
     
     public class PokemonCreateDto
@@ -83,7 +83,7 @@ namespace LearningStarter.Entities
 
         public int SpecialDefenseEv {get; set; }
 
-        public int SpeedEv{get; set; }
+        public int SpeedEv {get; set; }
 
         public int HealthIv {get; set; }
 
@@ -117,7 +117,7 @@ namespace LearningStarter.Entities
         
         public int Gender { get; set; }
         
-        public bool IsShiny { get; set; }
+        public bool? IsShiny { get; set; }
     }
     
     public class PokemonGetDto
@@ -172,7 +172,7 @@ namespace LearningStarter.Entities
         
         public int Gender { get; set; }
         
-        public bool IsShiny { get; set; }
+        public bool? IsShiny { get; set; }
     }
     
     public class PokemonUpdateDto
@@ -225,6 +225,6 @@ namespace LearningStarter.Entities
         
         public int Gender { get; set; }
         
-        public bool IsShiny { get; set; }
+        public bool? IsShiny { get; set; }
     }
 }
