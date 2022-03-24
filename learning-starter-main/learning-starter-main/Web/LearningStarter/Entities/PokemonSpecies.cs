@@ -36,6 +36,8 @@ namespace LearningStarter.Entities
         public int ExperienceCurveId { get; set; }
 
         public ExperienceCurve ExperienceCurve { get; set; }
+        
+        public List<Pokemon> Pokemon { get; set; }
     }
     
     public class PokemonSpeciesCreateDto

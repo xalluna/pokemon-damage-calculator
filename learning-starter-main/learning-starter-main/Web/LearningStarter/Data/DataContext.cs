@@ -15,9 +15,10 @@ namespace LearningStarter.Data
         public DbSet<ExperienceCurve> ExperienceCurves { get; set; }
         public DbSet<Item> Items  { get; set; }
         public DbSet<Move> Moves  { get; set; }
-        // public DbSet<MoveCategory> MoveCategories { get; set; }
         public DbSet<PokemonSpecies> PokemonSpecies { get; set; }
         public DbSet<PType> Types { get; set; }
+        public DbSet<Pokemon> Pokemon { get; set; }
+        public DbSet<Nature> Natures { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

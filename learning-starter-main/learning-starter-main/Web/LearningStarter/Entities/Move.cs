@@ -33,6 +33,8 @@ namespace LearningStarter.Entities
         public bool? IsDefrostOnUse { get; set; }
 
         public bool? IsBlockedByProtect { get; set; }
+        
+        public List<Pokemon> Pokemon { get; set; }
     }
     
     public class MoveCreateDto

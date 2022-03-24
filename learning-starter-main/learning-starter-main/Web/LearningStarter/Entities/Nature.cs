@@ -2,29 +2,32 @@ using System.Collections.Generic;
 
 namespace LearningStarter.Entities
 {
-    public class Item
+    public class Nature
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
-        
-        public List<Pokemon> Pokemon { get; set; }
+
+        public List<Pokemon> PokemonList { get; set; }
+
     }
     
-    public class ItemCreateDto
+    public class NatureCreateDto
     {
         public string Name { get; set; }
+
     }
     
-    public class ItemGetDto
+    public class NatureGetDto
     {
         public int Id { get; set; }
-
         public string Name { get; set; }
+
     }
     
-    public class ItemUpdateDto
-    {
+    public class NatureUpdateDto
+    { 
         public string Name { get; set; }
+
     }
 }

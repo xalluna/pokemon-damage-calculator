@@ -11,7 +11,7 @@ namespace LearningStarter.Entities
 
         public List<PokemonSpecies> PokemonSpecies { get; set; }
         
-        //public List<Pokemon> PokemonList { get; set; }
+        public List<Pokemon> Pokemon { get; set; }
 
     }
     
