@@ -621,6 +621,313 @@ namespace LearningStarter
                 dataContext.PokemonSpecies.Add(seededPokemon);
                 dataContext.SaveChanges();
 
+
+            }
+            
+            var numNatures = dataContext.Natures.Count();
+
+            if (numNatures == 0)
+            {
+                var seededNature = new Nature
+                {
+                    Name = "Adamant"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+                
+                seededNature = new Nature
+                {
+                    Name = "Bashful"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Bold"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Brave"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Calm"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Careful"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Docile"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Gentle"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Hardy"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Hasty"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Impish"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Jolly"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Lax"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Lonely"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Mild"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Modest"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Naive"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Naughty"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Quiet"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Quirky"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Rash"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Relaxed"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Sassy"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Serious"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+
+                seededNature = new Nature
+                {
+                    Name = "Timid"
+                };
+
+                dataContext.Add(seededNature);
+                dataContext.SaveChanges();
+            }
+
+            var numPokemon = dataContext.Pokemon.Count();
+
+            if (numPokemon == 0)
+            {
+                var seededPokemon = new Pokemon
+                {
+                    Name = "Bulbs",
+                    PokemonSpeciesId = 1,
+                    HealthEv = 45,
+                    AttackEv = 45,
+                    DefenseEv = 45,
+                    SpecialAttackEv = 45,
+                    SpecialDefenseEv = 45,
+                    SpeedEv = 45,
+                    HealthIv = 31,
+                    AttackIv = 13,
+                    DefenseIv = 31,
+                    SpecialAttackIv = 31,
+                    SpecialDefenseIv = 13,
+                    SpeedIv = 31,
+                    AbilityId = 1,
+                    ItemId = 1,
+                    MoveOneId = 1,
+                    MoveTwoId = 2,
+                    MoveThreeId = 3,
+                    MoveFourId = 7,
+                    Level = 50,
+                    Experience = 0,
+                    NatureId = 1,
+                    Gender = 1,
+                    IsShiny = false
+                };
+
+                dataContext.Add(seededPokemon);
+                dataContext.SaveChanges();
+                
+                seededPokemon = new Pokemon
+                {
+                    Name = "Charizard",
+                    PokemonSpeciesId = 2,
+                    HealthEv = 45,
+                    AttackEv = 45,
+                    DefenseEv = 45,
+                    SpecialAttackEv = 45,
+                    SpecialDefenseEv = 45,
+                    SpeedEv = 45,
+                    HealthIv = 31,
+                    AttackIv = 13,
+                    DefenseIv = 13,
+                    SpecialAttackIv = 31,
+                    SpecialDefenseIv = 31,
+                    SpeedIv = 31,
+                    AbilityId = 2,
+                    ItemId = 2,
+                    MoveOneId = 1,
+                    MoveTwoId = 2,
+                    MoveThreeId = 5,
+                    MoveFourId = 3,
+                    Level = 50,
+                    Experience = 0,
+                    NatureId = 2,
+                    Gender = 1,
+                    IsShiny = false
+                };
+
+                dataContext.Add(seededPokemon);
+                dataContext.SaveChanges();
+
+                seededPokemon = new Pokemon
+                {
+                    Name = "Bubs",
+                    PokemonSpeciesId = 3,
+                    HealthEv = 45,
+                    AttackEv = 45,
+                    DefenseEv = 45,
+                    SpecialAttackEv = 45,
+                    SpecialDefenseEv = 45,
+                    SpeedEv = 45,
+                    HealthIv = 31,
+                    AttackIv = 13,
+                    DefenseIv = 31,
+                    SpecialAttackIv = 31,
+                    SpecialDefenseIv = 31,
+                    SpeedIv = 31,
+                    AbilityId = 3,
+                    ItemId = 3,
+                    MoveOneId = 1,
+                    MoveTwoId = 2,
+                    MoveThreeId = 3,
+                    MoveFourId = 6,
+                    Level = 50,
+                    Experience = 0,
+                    NatureId = 3,
+                    Gender = 2,
+                    IsShiny = false
+                };
+
+                dataContext.Add(seededPokemon);
+                dataContext.SaveChanges();
             }
         }
     }
