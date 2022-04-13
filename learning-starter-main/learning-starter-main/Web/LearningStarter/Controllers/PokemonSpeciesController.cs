@@ -93,6 +93,67 @@ namespace LearningStarter.Controllers
 
             return Ok(response);
         }
+        
+        [HttpGet("type/{id:int}")]
+
+        public IActionResult GetByType(int id)
+        {
+            var response = new Response();
+
+            var isValidType = _dataContext
+                .Types
+                .Any(x => x.Id == id);
+
+            if (!isValidType)
+            {
+                response.AddError("type id","Type Id not found");
+            }
+
+            if (response.HasErrors)
+            {
+                return BadRequest(response);
+            }
+
+            var pokemonFromDatabase = new List<PokemonSpecies>();
+
+            for (int i = 0; i < _dataContext.PokemonSpecies.Count(); i++)
+            {
+                PokemonSpecies pokemon = _dataContext
+                    .PokemonSpecies
+                    .ElementAt(i);
+                
+                if (pokemon.PrimaryTypeId == id || pokemon.SecondaryAbilityId == id)
+                {
+                    pokemonFromDatabase.Add(pokemon);
+                }
+            }
+
+
+            var pokemonToGet = pokemonFromDatabase
+                .Select(x => new PokemonSpeciesGetDto
+                {
+                    Id = x.Id,
+                    Species = x.Species,
+                    BaseHealth = x.BaseHealth,
+                    BaseAttack = x.BaseAttack,
+                    BaseDefense = x.BaseDefense,
+                    BaseSpecialAttack = x.BaseSpecialAttack,
+                    BaseSpecialDefense = x.BaseSpecialDefense,
+                    BaseSpeed = x.BaseSpeed,
+                    PrimaryTypeId = x.PrimaryTypeId,
+                    SecondaryTypeId = x.SecondaryTypeId,
+                    PrimaryAbilityId = x.PrimaryAbilityId,
+                    SecondaryAbilityId = x.SecondaryAbilityId,
+                    HiddenAbilityId = x.HiddenAbilityId,
+                    ExperienceCurveId = x.ExperienceCurveId
+                })
+                .ToList();
+            
+            response.Data = pokemonToGet;
+
+            return Ok(response);
+
+        }
 
         [HttpPost]
         public IActionResult Create(
