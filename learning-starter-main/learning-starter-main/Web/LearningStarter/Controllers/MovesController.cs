@@ -91,6 +91,58 @@ namespace LearningStarter.Controllers
 
             return Ok(response);
         }
+        
+        [HttpGet("type/{id:int}")]
+
+        public IActionResult GetByType(int id)
+        {
+            var response = new Response();
+
+            var isValidType = _dataContext
+                .Types
+                .Any(x => x.Id == id);
+
+            if (!isValidType)
+            {
+                response.AddError("type id","Type Id not found");
+                return BadRequest(response);
+            }
+
+            var moveFromDatabase = _dataContext
+                .Moves
+                .Where(x => x.TypeId == id)
+                .ToList();
+            
+            if (!moveFromDatabase.Any())
+            {
+                response.AddError("Move", "No moves found");
+                return BadRequest(response);
+            }
+
+            var moveToGet = moveFromDatabase
+                .Select(x => new MoveGetDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    TypeId = x.TypeId,
+                    MoveCategory = x.MoveCategory,
+                    BasePower = x.BasePower,
+                    PowerPoints = x.PowerPoints,
+                    Accuracy = x.Accuracy,
+                    SpeedPriority = x.SpeedPriority,
+                    IsContactOnHit = x.IsContactOnHit,
+                    IsSoundBased = x.IsSoundBased,
+                    IsPunchBased = x.IsPunchBased,
+                    IsAffectedByGravity = x.IsAffectedByGravity,
+                    IsDefrostOnUse = x.IsDefrostOnUse,
+                    IsBlockedByProtect = x.IsBlockedByProtect
+                })
+                .ToList();
+            
+            response.Data = moveToGet;
+            
+            return Ok(response);
+        }
 
         [HttpPost]
         public IActionResult Create(
