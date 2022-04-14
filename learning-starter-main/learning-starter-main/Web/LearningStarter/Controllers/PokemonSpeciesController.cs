@@ -145,6 +145,58 @@ namespace LearningStarter.Controllers
             
             return Ok(response);
         }
+        
+        [HttpGet("ability/{id:int}")]
+
+        public IActionResult GetByAbility(int id)
+        {
+            var response = new Response();
+
+            var isValidType = _dataContext
+                .Abilities
+                .Any(x => x.Id == id);
+
+            if (!isValidType)
+            {
+                response.AddError("ability","Ability not found");
+                return BadRequest(response);
+            }
+
+            var pokemonFromDatabase = _dataContext
+                .PokemonSpecies
+                .Where(x => x.PrimaryAbilityId == id || x.SecondaryAbilityId == id || x.HiddenAbilityId == id)
+                .ToList();
+            
+            if (!pokemonFromDatabase.Any())
+            {
+                response.AddError("Pokemon", "No pokemon species found");
+                return BadRequest(response);
+            }
+
+            var pokemonToGet = pokemonFromDatabase
+                .Select(x => new PokemonSpeciesGetDto
+                {
+                    Id = x.Id,
+                    Species = x.Species,
+                    BaseHealth = x.BaseHealth,
+                    BaseAttack = x.BaseAttack,
+                    BaseDefense = x.BaseDefense,
+                    BaseSpecialAttack = x.BaseSpecialAttack,
+                    BaseSpecialDefense = x.BaseSpecialDefense,
+                    BaseSpeed = x.BaseSpeed,
+                    PrimaryTypeId = x.PrimaryTypeId,
+                    SecondaryTypeId = x.SecondaryTypeId,
+                    PrimaryAbilityId = x.PrimaryAbilityId,
+                    SecondaryAbilityId = x.SecondaryAbilityId,
+                    HiddenAbilityId = x.HiddenAbilityId,
+                    ExperienceCurveId = x.ExperienceCurveId
+                })
+                .ToList();
+            
+            response.Data = pokemonToGet;
+            
+            return Ok(response);
+        }
 
         [HttpPost]
         public IActionResult Create(
