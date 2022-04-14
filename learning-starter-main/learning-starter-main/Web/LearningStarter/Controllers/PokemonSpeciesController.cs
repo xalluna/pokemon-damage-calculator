@@ -107,27 +107,19 @@ namespace LearningStarter.Controllers
             if (!isValidType)
             {
                 response.AddError("type id","Type Id not found");
-            }
-
-            if (response.HasErrors)
-            {
                 return BadRequest(response);
             }
 
-            var pokemonFromDatabase = new List<PokemonSpecies>();
-
-            for (int i = 0; i < _dataContext.PokemonSpecies.Count(); i++)
+            var pokemonFromDatabase = _dataContext
+                .PokemonSpecies
+                .Where(x => x.PrimaryTypeId == id || x.SecondaryTypeId == id)
+                .ToList();
+            
+            if (!pokemonFromDatabase.Any())
             {
-                PokemonSpecies pokemon = _dataContext
-                    .PokemonSpecies
-                    .ElementAt(i);
-                
-                if (pokemon.PrimaryTypeId == id || pokemon.SecondaryAbilityId == id)
-                {
-                    pokemonFromDatabase.Add(pokemon);
-                }
+                response.AddError("Pokemon", "No pokemon species found");
+                return BadRequest(response);
             }
-
 
             var pokemonToGet = pokemonFromDatabase
                 .Select(x => new PokemonSpeciesGetDto
@@ -150,9 +142,8 @@ namespace LearningStarter.Controllers
                 .ToList();
             
             response.Data = pokemonToGet;
-
+            
             return Ok(response);
-
         }
 
         [HttpPost]
