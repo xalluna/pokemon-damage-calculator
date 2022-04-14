@@ -116,6 +116,70 @@ namespace LearningStarter.Controllers
 
             return Ok(response);
         }
+        
+        [HttpGet("species/{id:int}")]
+
+        public IActionResult GetByAbility(int id)
+        {
+            var response = new Response();
+
+            var isValidSpecies = _dataContext
+                .PokemonSpecies
+                .Any(x => x.Id == id);
+
+            if (!isValidSpecies)
+            {
+                response.AddError("Species","Species not found");
+                return BadRequest(response);
+            }
+
+            var pokemonFromDatabase = _dataContext
+                .Pokemon
+                .Where(x => x.PokemonSpeciesId == id)
+                .ToList();
+            
+            if (!pokemonFromDatabase.Any())
+            {
+                response.AddError("Pokemon", "No pokemon species found");
+                return BadRequest(response);
+            }
+
+            var pokemonToGet = pokemonFromDatabase
+                .Select(x => new PokemonGetDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    PokemonSpeciesId = x.PokemonSpeciesId,
+                    HealthEv = x.HealthEv,
+                    AttackEv = x.AttackEv,
+                    DefenseEv = x.DefenseEv,
+                    SpecialAttackEv = x.SpecialAttackEv,
+                    SpecialDefenseEv = x.SpecialDefenseEv,
+                    SpeedEv = x.SpeedEv,
+                    HealthIv = x.HealthIv,
+                    AttackIv = x.AttackIv,
+                    DefenseIv = x.DefenseIv,
+                    SpecialAttackIv = x.SpecialAttackIv,
+                    SpecialDefenseIv = x.SpecialDefenseIv,
+                    SpeedIv = x.SpeedIv,
+                    AbilityId = x.AbilityId,
+                    ItemId = x.ItemId,
+                    MoveOneId = x.MoveOneId,
+                    MoveTwoId = x.MoveTwoId,
+                    MoveThreeId = x.MoveThreeId,
+                    MoveFourId = x.MoveFourId,
+                    Level = x.Level,
+                    Experience = x.Experience,
+                    NatureId = x.NatureId,
+                    Gender = x.Gender,
+                    IsShiny = x.IsShiny
+                })
+                .ToList();
+            
+            response.Data = pokemonToGet;
+            
+            return Ok(response);
+        }
 
         [HttpPost]
         public IActionResult Create([FromBody] PokemonCreateDto pokemon)
