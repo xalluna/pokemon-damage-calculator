@@ -46,6 +46,19 @@ const DesktopNavigation = () => {
           to: routes.user,
         },
       },
+      {
+        text: "Abilities",
+        children: [
+          {
+            text: "Create",
+            icon: "plus",
+            hide: false,
+            nav: {
+              to: routes.abilities.create,
+            },
+          },
+        ],
+      },
     ];
   }, []);
 
@@ -112,9 +125,7 @@ export const PrimaryNavigation: React.FC<PrimaryNavigationProps> = ({
         as={user ? NavLink : ""}
         to={routes.home}
         className="logo-menu-item"
-      >
-        <Image size="mini" src={logo} alt="logo" className="logo" />
-      </Menu.Item>
+      ></Menu.Item>
       {user && (
         <>
           <DesktopNavigation />

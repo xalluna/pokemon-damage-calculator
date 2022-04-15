@@ -15,9 +15,62 @@ export type AnyObject = {
   [index: string]: any;
 };
 
+export type User = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
+};
+
 export type UserDto = {
   id: number;
   firstName: string;
   lastName: string;
-  userName: string;
+  username: string;
+};
+
+export type AbilityGetDto = {
+  id: number;
+  name: string;
+};
+
+export type AbilityCreateDto = {
+  name: string;
+};
+
+export type ItemGetDto = {
+  id: number;
+  name: string;
+};
+
+export type ItemCreateDto = {
+  name: string;
+};
+
+export type ExperienceCurveGetDto = {
+  id: number;
+  name: string;
+};
+
+export type ExperienceCurveCreateDto = {
+  name: string;
+};
+
+export type TypeGetDto = {
+  id: number;
+  name: string;
+};
+
+export type TypeCreateDto = {
+  name: string;
+};
+
+export type NatureGetDto = {
+  id: number;
+  name: string;
+};
+
+export type NatureCreateDto = {
+  name: string;
 };

@@ -8,12 +8,9 @@ export const UserPage = () => {
   return (
     <div className="user-page-container">
       <div>
-        <Header>User Information</Header>
         <Container textAlign="left">
-          <Header size="small">First Name</Header>
           <p>{user.firstName}</p>
           <Divider />
-          <Header size="small">Last Name</Header>
           <p>{user.lastName}</p>
         </Container>
       </div>

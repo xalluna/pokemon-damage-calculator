@@ -3,5 +3,5 @@ import { Header } from "semantic-ui-react";
 
 //It's another page!
 export const NotFoundPage = () => {
-  return <Header>Page Not Found</Header>;
+  return <div>Page Not Found</div>;
 };

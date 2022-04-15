@@ -5,12 +5,16 @@ import { NotFoundPage } from "../pages/not-found";
 import { useUser } from "../authentication/use-auth";
 import { UserPage } from "../pages/user-page/user-page";
 import { PageWrapper } from "../components/page-wrapper/page-wrapper";
+import { AbilityCreatePage } from "../pages/ability-create-page/ability-create-page";
 
 //This is where you will declare all of your routes (the ones that show up in the search bar)
 export const routes = {
   root: `/`,
   home: `/home`,
   user: `/user`,
+  abilities: {
+    create: "/abilities/create",
+  },
 };
 
 //This is where you will tell React Router what to render when the path matches the route specified.
@@ -18,7 +22,7 @@ export const Routes = () => {
   //Calling the useUser() from the use-auth.tsx in order to get user information
   const user = useUser();
   return (
-    <>
+    <div>
       {/* The page wrapper is what shows the NavBar at the top, it is around all pages inside of here. */}
       <PageWrapper user={user}>
         <Switch>
@@ -34,6 +38,10 @@ export const Routes = () => {
           <Route path={routes.root} exact>
             <Redirect to={routes.home} />
           </Route>
+
+          <Route path={routes.abilities.create} exact>
+            <AbilityCreatePage />
+          </Route>
           {/* This should always come last.  
             If the path has no match, show page not found */}
           <Route path="*" exact>
@@ -41,6 +49,6 @@ export const Routes = () => {
           </Route>
         </Switch>
       </PageWrapper>
-    </>
+    </div>
   );
 };
