@@ -46,6 +46,19 @@ const DesktopNavigation = () => {
           to: routes.user,
         },
       },
+      {
+        text: "Abilities",
+        children: [
+          {
+            text: "Create",
+            icon: "plus",
+            hide: false,
+            nav: {
+              to: routes.abilities.create,
+            }
+          }
+        ],
+      },
     ];
   }, []);
 

@@ -11,7 +11,7 @@ import { loginUser } from "../../authentication/authentication-services";
 const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
 type LoginRequest = {
-  userName: string;
+  username: string;
   password: string;
 };
 
@@ -25,7 +25,7 @@ type FormValues = LoginRequest;
 export const LoginPage = () => {
   const initialValues = useMemo<FormValues>(
     () => ({
-      userName: "",
+      username: "",
       password: "",
     }),
     []

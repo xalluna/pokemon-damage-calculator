@@ -5,12 +5,16 @@ import { NotFoundPage } from "../pages/not-found";
 import { useUser } from "../authentication/use-auth";
 import { UserPage } from "../pages/user-page/user-page";
 import { PageWrapper } from "../components/page-wrapper/page-wrapper";
+import { AbilityCreatePage } from "../pages/abilities/ability-create-page/ability-create-page";
 
 //This is where you will declare all of your routes (the ones that show up in the search bar)
 export const routes = {
   root: `/`,
   home: `/home`,
   user: `/user`,
+  abilities: {
+    create: "/abilities/create",
+  },
 };
 
 //This is where you will tell React Router what to render when the path matches the route specified.
@@ -33,6 +37,10 @@ export const Routes = () => {
           {/* Going to route "localhost:5001/" will go to homepage */}
           <Route path={routes.root} exact>
             <Redirect to={routes.home} />
+          </Route>
+
+          <Route path={routes.abilities.create} exact>
+            <AbilityCreatePage />
           </Route>
           {/* This should always come last.  
             If the path has no match, show page not found */}
