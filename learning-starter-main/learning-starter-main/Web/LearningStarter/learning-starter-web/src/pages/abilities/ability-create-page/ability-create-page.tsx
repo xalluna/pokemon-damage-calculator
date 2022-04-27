@@ -35,7 +35,7 @@ export const AbilityCreatePage = () => {
 
   return (
     <>
-      <Formik initialValues={initialValues} onSubmit={() => {}}>
+      <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <Form>
           <div>
             <label>Name</label>
