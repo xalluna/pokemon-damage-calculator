@@ -50,13 +50,20 @@ const DesktopNavigation = () => {
         text: "Abilities",
         children: [
           {
+            text: "Abilities",
+            hide: false,
+            nav: {
+              to: routes.abilities.listing,
+            }
+          },
+          {
             text: "Create",
             icon: "plus",
             hide: false,
             nav: {
               to: routes.abilities.create,
             }
-          }
+          },
         ],
       },
     ];

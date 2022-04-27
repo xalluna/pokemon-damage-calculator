@@ -6,6 +6,7 @@ import { useUser } from "../authentication/use-auth";
 import { UserPage } from "../pages/user-page/user-page";
 import { PageWrapper } from "../components/page-wrapper/page-wrapper";
 import { AbilityCreatePage } from "../pages/abilities/ability-create-page/ability-create-page";
+import { AbilityListingPage } from "../pages/abilities/ability-listing-page/ability-listing-page";
 
 //This is where you will declare all of your routes (the ones that show up in the search bar)
 export const routes = {
@@ -14,6 +15,7 @@ export const routes = {
   user: `/user`,
   abilities: {
     create: "/abilities/create",
+    listing: "/abilities",
   },
 };
 
@@ -37,6 +39,10 @@ export const Routes = () => {
           {/* Going to route "localhost:5001/" will go to homepage */}
           <Route path={routes.root} exact>
             <Redirect to={routes.home} />
+          </Route>
+
+          <Route path={routes.abilities.listing} exact>
+            <AbilityListingPage />
           </Route>
 
           <Route path={routes.abilities.create} exact>
