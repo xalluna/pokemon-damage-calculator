@@ -29,7 +29,7 @@ namespace LearningStarter.Controllers
                     Id = x.Id,
                     Name = x.Name,
                     TypeId = x.TypeId,
-                    MoveCategory = x.MoveCategory,
+                    MoveCategoryId = x.MoveCategoryId,
                     BasePower = x.BasePower,
                     PowerPoints = x.PowerPoints,
                     Accuracy = x.Accuracy,
@@ -74,7 +74,7 @@ namespace LearningStarter.Controllers
                 Id = moveFromDatabase.Id,
                 Name = moveFromDatabase.Name,
                 TypeId = moveFromDatabase.TypeId,
-                MoveCategory = moveFromDatabase.MoveCategory,
+                MoveCategoryId = moveFromDatabase.MoveCategoryId,
                 BasePower = moveFromDatabase.BasePower,
                 PowerPoints = moveFromDatabase.PowerPoints,
                 Accuracy = moveFromDatabase.Accuracy,
@@ -125,7 +125,7 @@ namespace LearningStarter.Controllers
                     Id = x.Id,
                     Name = x.Name,
                     TypeId = x.TypeId,
-                    MoveCategory = x.MoveCategory,
+                    MoveCategoryId = x.MoveCategoryId,
                     BasePower = x.BasePower,
                     PowerPoints = x.PowerPoints,
                     Accuracy = x.Accuracy,
@@ -210,7 +210,7 @@ namespace LearningStarter.Controllers
             {
                 Name = move.Name,
                 TypeId = move.TypeId,
-                MoveCategory = move.MoveCategory,
+                MoveCategoryId = move.MoveCategoryId,
                 BasePower = move.BasePower,
                 PowerPoints = move.PowerPoints,
                 Accuracy = move.Accuracy,
@@ -231,7 +231,7 @@ namespace LearningStarter.Controllers
                 Id = moveToCreate.Id,
                 Name = moveToCreate.Name,
                 TypeId = moveToCreate.TypeId,
-                MoveCategory = moveToCreate.MoveCategory,
+                MoveCategoryId = moveToCreate.MoveCategoryId,
                 BasePower = moveToCreate.BasePower,
                 PowerPoints = moveToCreate.PowerPoints,
                 Accuracy = moveToCreate.Accuracy,
@@ -347,7 +347,7 @@ namespace LearningStarter.Controllers
             
             moveToUpdate.Name = move.Name;
             moveToUpdate.TypeId = move.TypeId;
-            moveToUpdate.MoveCategory = move.MoveCategory;
+            moveToUpdate.MoveCategoryId = move.MoveCategoryId;
             moveToUpdate.BasePower = move.BasePower;
             moveToUpdate.PowerPoints = move.PowerPoints;
             moveToUpdate.Accuracy = move.Accuracy;
@@ -366,7 +366,7 @@ namespace LearningStarter.Controllers
                 Id = moveToUpdate.Id,
                 Name = moveToUpdate.Name,
                 TypeId = moveToUpdate.TypeId,
-                MoveCategory = moveToUpdate.MoveCategory,
+                MoveCategoryId = moveToUpdate.MoveCategoryId,
                 BasePower = moveToUpdate.BasePower,
                 PowerPoints = moveToUpdate.PowerPoints,
                 Accuracy = moveToUpdate.Accuracy,

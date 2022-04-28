@@ -443,7 +443,7 @@ namespace LearningStarter
                     Accuracy = 100,
                     BasePower = 20,
                     SpeedPriority = 1,
-                    MoveCategory = true,
+                    MoveCategoryId = 1,
                     PowerPoints = 40,
                     TypeId = 1,
                     IsContactOnHit = true,
@@ -459,11 +459,15 @@ namespace LearningStarter
                     Accuracy = 100,
                     BasePower = 20,
                     SpeedPriority = 1,
-                    MoveCategory = true,
+                    MoveCategoryId = 1,
                     PowerPoints = 35,
                     TypeId = 1,
                     IsContactOnHit = true,
-                    IsBlockedByProtect = true
+                    IsBlockedByProtect = true,
+                    IsPunchBased = false,
+                    IsSoundBased = false,
+                    IsAffectedByGravity = false,
+                    IsDefrostOnUse = false,
                 };
 
                 dataContext.Moves.Add(seededMove);
@@ -474,10 +478,15 @@ namespace LearningStarter
                     Name = "Screech",
                     Accuracy = 100,
                     SpeedPriority = 1,
+                    MoveCategoryId = 3,
                     PowerPoints = 40,
                     TypeId = 1,
                     IsBlockedByProtect = true,
-                    IsSoundBased = true
+                    IsSoundBased = true,
+                    IsPunchBased = false,
+                    IsContactOnHit = false,
+                    IsAffectedByGravity = false,
+                    IsDefrostOnUse = false,
                 };
 
                 dataContext.Moves.Add(seededMove);
@@ -488,9 +497,15 @@ namespace LearningStarter
                     Name = "Growl",
                     Accuracy = 100,
                     SpeedPriority = 1,
+                    MoveCategoryId = 3,
                     PowerPoints = 40,
                     TypeId = 1,
-                    IsBlockedByProtect = true
+                    IsBlockedByProtect = true,
+                    IsPunchBased = false,
+                    IsSoundBased = false,
+                    IsAffectedByGravity = false,
+                    IsDefrostOnUse = false,
+                    IsContactOnHit = false
                 };
 
                 dataContext.Moves.Add(seededMove);
@@ -502,7 +517,7 @@ namespace LearningStarter
                     Accuracy = 100,
                     BasePower = 20,
                     SpeedPriority = 1,
-                    MoveCategory = false,
+                    MoveCategoryId = 2,
                     PowerPoints = 35,
                     TypeId = 2,
                     IsContactOnHit = false,
@@ -522,7 +537,7 @@ namespace LearningStarter
                     Accuracy = 100,
                     BasePower = 20,
                     SpeedPriority = 1,
-                    MoveCategory = false,
+                    MoveCategoryId = 2,
                     PowerPoints = 35,
                     TypeId = 3,
                     IsContactOnHit = false,
@@ -542,7 +557,7 @@ namespace LearningStarter
                     Accuracy = 100,
                     BasePower = 20,
                     SpeedPriority = 1,
-                    MoveCategory = true,
+                    MoveCategoryId = 1,
                     PowerPoints = 35,
                     TypeId = 4,
                     IsContactOnHit = false,
@@ -563,7 +578,7 @@ namespace LearningStarter
             {
                 var seededPokemon = new PokemonSpecies
                 {
-                    Species = "Bulbasaur",
+                    Name = "Bulbasaur",
                     BaseHealth = 45,
                     BaseAttack = 49,
                     BaseDefense = 49,
@@ -583,7 +598,7 @@ namespace LearningStarter
                 
                 seededPokemon = new PokemonSpecies
                 {
-                    Species = "Charmander",
+                    Name = "Charmander",
                     BaseHealth = 39,
                     BaseAttack = 52,
                     BaseDefense = 43,
@@ -603,7 +618,7 @@ namespace LearningStarter
                 
                 seededPokemon = new PokemonSpecies
                 {
-                    Species = "Squirtle",
+                    Name = "Squirtle",
                     BaseHealth = 44,
                     BaseAttack = 48,
                     BaseDefense = 65,

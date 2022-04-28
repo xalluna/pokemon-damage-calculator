@@ -1,5 +1,7 @@
 //This type uses a generic (<T>).  For more information on generics see: https://www.typescriptlang.org/docs/handbook/2/generics.html
 //You probably wont need this for the scope of this class :)
+export type Nullable<T> = T | null;
+
 export type ApiResponse<T> = {
   data: T;
   errors: Error[];
@@ -74,4 +76,108 @@ export type NatureGetDto = {
 
 export type NatureCreateDto = {
   name: string;
+};
+
+export type MoveGetDto = {
+  id: number;
+  name: string;
+  typeId: number;
+  moveCategoryId: number;
+  basePower: number;
+  accuracy: number;
+  powerPoints: number;
+  speedPriority: number;
+  isContactOnHit: boolean;
+  isSoundBased: boolean;
+  isPunchBased: boolean;
+  isAffectedByGravity: boolean;
+  isDefrostOnUse: boolean;
+  isBlockedByProtect: boolean;
+};
+
+export type MoveCreateDto = {
+
+};
+
+export type PokemonSpeciesGetDto = {
+  id: number;
+  name: string;
+  baseHealth: number; 
+  baseAttack: number;
+  baseDefense: number;
+  baseSpecialAttack: number;
+  baseSpecialDefense: number;
+  baseSpeed: number;
+  primaryTypeId: number;
+  secondaryTypeId: Nullable<number>;
+  primaryAbilityId: number;
+  secondaryAbilityId: Nullable<number>;
+  hiddenAbilityId: Nullable<number>;
+  experiencecurveId: number;
+};
+
+export type PokemonSpeciesCreateDto = {
+  
+};
+
+export type PokemonGetDto = {
+  id: number;
+  name: string;
+  pokemonSpeciesId: number;
+  healthEv: number;
+  attackEv: number;
+  defenseEv: number;
+  specialAttackEv: number;
+  specialDefenseEv: number;
+  speedEv: number;
+  healthIv: number;
+  attackIv: number;
+  defenseIv: number;
+  specialAttackIv: number;
+  specialDefenseIv: number;
+  speedIv: number;
+  abilityId: number;
+  ItemId: number;
+  moveOneId: number;
+  moveTwoId: number;
+  moveThreeId: number;
+  moveFourId: number;
+  level: number;
+  experience: number;
+  natureId: number;
+  gender: number;
+  isShiny: Nullable<boolean>;
+};
+
+export type PokemonListDto = {
+  id: number;
+  name: string;
+  pokemonSpecies: string;
+  healthEv: number;
+  attackEv: number;
+  defenseEv: number;
+  specialAttackEv: number;
+  specialDefenseEv: number;
+  speedEv: number;
+  healthIv: number;
+  attackIv: number;
+  defenseIv: number;
+  specialAttackIv: number;
+  specialDefenseIv: number;
+  speedIv: number;
+  ability: string;
+  Item: string;
+  moveOne: string;
+  moveTwo: string;
+  moveThree: string;
+  moveFour: string;
+  level: number;
+  experience: number;
+  nature: string;
+  gender: string;
+  isShiny: Nullable<boolean>;
+};
+
+export type PokemonCreateDto = {
+
 };

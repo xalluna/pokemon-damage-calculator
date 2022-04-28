@@ -29,7 +29,7 @@ namespace LearningStarter.Controllers
                 .Select(x => new PokemonSpeciesGetDto()
                 {
                     Id = x.Id,
-                    Species = x.Species,
+                    Name = x.Name,
                     BaseHealth = x.BaseHealth,
                     BaseAttack = x.BaseAttack,
                     BaseDefense = x.BaseDefense,
@@ -74,7 +74,7 @@ namespace LearningStarter.Controllers
             var pokemonSpeciesToReturn = new PokemonSpeciesGetDto
             {
                 Id = pokemonSpeciesFromDatabase.Id,
-                Species = pokemonSpeciesFromDatabase.Species,
+                Name = pokemonSpeciesFromDatabase.Name,
                 BaseHealth = pokemonSpeciesFromDatabase.BaseHealth,
                 BaseAttack = pokemonSpeciesFromDatabase.BaseAttack,
                 BaseDefense = pokemonSpeciesFromDatabase.BaseDefense,
@@ -125,7 +125,7 @@ namespace LearningStarter.Controllers
                 .Select(x => new PokemonSpeciesGetDto
                 {
                     Id = x.Id,
-                    Species = x.Species,
+                    Name = x.Name,
                     BaseHealth = x.BaseHealth,
                     BaseAttack = x.BaseAttack,
                     BaseDefense = x.BaseDefense,
@@ -177,7 +177,7 @@ namespace LearningStarter.Controllers
                 .Select(x => new PokemonSpeciesGetDto
                 {
                     Id = x.Id,
-                    Species = x.Species,
+                    Name = x.Name,
                     BaseHealth = x.BaseHealth,
                     BaseAttack = x.BaseAttack,
                     BaseDefense = x.BaseDefense,
@@ -210,15 +210,15 @@ namespace LearningStarter.Controllers
                 return BadRequest(response);
             }
 
-            pokemon.Species = pokemon.Species.Trim();
-            if (string.IsNullOrEmpty(pokemon.Species))
+            pokemon.Name = pokemon.Name.Trim();
+            if (string.IsNullOrEmpty(pokemon.Name))
             {
                 response.AddError("Species", "Species cannot be null or empty.");
             }
 
             var hasNameInDatabase = _dataContext
                 .PokemonSpecies
-                .Any(x => x.Species == pokemon.Species);
+                .Any(x => x.Name == pokemon.Name);
             
             if (hasNameInDatabase)
             {
@@ -316,7 +316,7 @@ namespace LearningStarter.Controllers
             
             var pokemonSpeciesToCreate = new PokemonSpecies
             {
-                Species = pokemon.Species,
+                Name = pokemon.Name,
                 BaseHealth = pokemon.BaseHealth,
                 BaseAttack = pokemon.BaseAttack,
                 BaseDefense = pokemon.BaseDefense,
@@ -337,7 +337,7 @@ namespace LearningStarter.Controllers
             var pokemonSpeciesToGet = new PokemonSpeciesGetDto
             {
                 Id = pokemonSpeciesToCreate.Id,
-                Species = pokemonSpeciesToCreate.Species,
+                Name = pokemonSpeciesToCreate.Name,
                 BaseHealth = pokemonSpeciesToCreate.BaseHealth,
                 BaseAttack = pokemonSpeciesToCreate.BaseAttack,
                 BaseDefense = pokemonSpeciesToCreate.BaseDefense,
@@ -369,15 +369,15 @@ namespace LearningStarter.Controllers
                 return BadRequest(response);
             }
 
-            pokemon.Species = pokemon.Species.Trim();
-            if (string.IsNullOrEmpty(pokemon.Species))
+            pokemon.Name = pokemon.Name.Trim();
+            if (string.IsNullOrEmpty(pokemon.Name))
             {
                 response.AddError("Species", "Species cannot be null or empty.");
             }
 
             var hasNameInDatabase = _dataContext
                 .PokemonSpecies
-                .Any(x => x.Species == pokemon.Species && x.Id != id);
+                .Any(x => x.Name == pokemon.Name && x.Id != id);
             
             if (hasNameInDatabase)
             {
@@ -477,7 +477,7 @@ namespace LearningStarter.Controllers
                 .PokemonSpecies
                 .FirstOrDefault(x => x.Id == id);
 
-            pokemonToUpdate.Species = pokemon.Species;
+            pokemonToUpdate.Name = pokemon.Name;
             pokemonToUpdate.BaseHealth = pokemon.BaseHealth;
             pokemonToUpdate.BaseAttack = pokemon.BaseAttack;
             pokemonToUpdate.BaseDefense = pokemon.BaseDefense;
@@ -496,7 +496,7 @@ namespace LearningStarter.Controllers
             var pokemonGet = new PokemonSpeciesGetDto
             {
                 Id = id,
-                Species = pokemon.Species,
+                Name = pokemon.Name,
                 BaseHealth = pokemon.BaseHealth,
                 BaseAttack = pokemon.BaseAttack,
                 BaseDefense = pokemon.BaseDefense,
