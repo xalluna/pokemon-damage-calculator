@@ -55,6 +55,96 @@ namespace LearningStarter.Controllers
                     IsShiny = x.IsShiny
                 })
                 .ToList();
+            
+            
+
+            response.Data = pokemonToGet;
+            
+            return Ok(response);
+        }
+
+        [HttpGet("list")]
+        public IActionResult GetAsList()
+        {
+            var response = new Response();
+
+            var pokemonToGet = _dataContext
+                .Pokemon
+                .Select(x => new PokemonListDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    PokemonSpecies = x.PokemonSpecies.Name,
+                    HealthEv = x.HealthEv,
+                    AttackEv = x.AttackEv,
+                    DefenseEv = x.DefenseEv,
+                    SpecialAttackEv = x.SpecialAttackEv,
+                    SpecialDefenseEv = x.SpecialDefenseEv,
+                    SpeedEv = x.SpeedEv,
+                    HealthIv = x.HealthIv,
+                    AttackIv = x.AttackIv,
+                    DefenseIv = x.DefenseIv,
+                    SpecialAttackIv = x.SpecialAttackIv,
+                    SpecialDefenseIv = x.SpecialDefenseIv,
+                    SpeedIv = x.SpeedIv,
+                    Ability = x.Ability.Name,
+                    Item = x.Item.Name,
+                    MoveOne = _dataContext
+                        .Moves
+                        .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                        .Name,
+                    MoveTwo = _dataContext
+                        .Moves
+                        .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                        .Name,
+                    MoveThree = _dataContext
+                        .Moves
+                        .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                        .Name,
+                    MoveFour = _dataContext
+                        .Moves
+                        .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                        .Name,
+                    Level = x.Level,
+                    Experience = x.Experience,
+                    Gender = (x.Gender == 0) ? "Male" : (x.Gender == 1) ? "Female" : "Undefined",
+                    Nature = x.Nature.Name,
+                    IsShiny = x.IsShiny
+                })
+                .ToList();
+            
+            // var pokemonToGet = _dataContext
+            //     .Pokemon
+            //     .Select(x => new PokemonGetDto
+            //     {
+            //         Id = x.Id,
+            //         Name = x.Name,
+            //         PokemonSpeciesId = x.PokemonSpeciesId,
+            //         HealthEv = x.HealthEv,
+            //         AttackEv = x.AttackEv,
+            //         DefenseEv = x.DefenseEv,
+            //         SpecialAttackEv = x.SpecialAttackEv,
+            //         SpecialDefenseEv = x.SpecialDefenseEv,
+            //         SpeedEv = x.SpeedEv,
+            //         HealthIv = x.HealthIv,
+            //         AttackIv = x.AttackIv,
+            //         DefenseIv = x.DefenseIv,
+            //         SpecialAttackIv = x.SpecialAttackIv,
+            //         SpecialDefenseIv = x.SpecialDefenseIv,
+            //         SpeedIv = x.SpeedIv,
+            //         AbilityId = x.AbilityId,
+            //         ItemId = x.ItemId,
+            //         MoveOneId = x.MoveOneId,
+            //         MoveTwoId = x.MoveTwoId,
+            //         MoveThreeId = x.MoveThreeId,
+            //         MoveFourId = x.MoveFourId,
+            //         Level = x.Level,
+            //         Experience = x.Experience,
+            //         NatureId = x.NatureId,
+            //         Gender = x.Gender,
+            //         IsShiny = x.IsShiny
+            //     })
+            //     .ToList();
 
             response.Data = pokemonToGet;
             
@@ -119,7 +209,7 @@ namespace LearningStarter.Controllers
         
         [HttpGet("species/{id:int}")]
 
-        public IActionResult GetByAbility(int id)
+        public IActionResult GetBySpecies(int id)
         {
             var response = new Response();
 

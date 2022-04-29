@@ -95,14 +95,12 @@ export type MoveGetDto = {
   isBlockedByProtect: boolean;
 };
 
-export type MoveCreateDto = {
-
-};
+export type MoveCreateDto = {};
 
 export type PokemonSpeciesGetDto = {
   id: number;
   name: string;
-  baseHealth: number; 
+  baseHealth: number;
   baseAttack: number;
   baseDefense: number;
   baseSpecialAttack: number;
@@ -116,9 +114,7 @@ export type PokemonSpeciesGetDto = {
   experiencecurveId: number;
 };
 
-export type PokemonSpeciesCreateDto = {
-  
-};
+export type PokemonSpeciesCreateDto = {};
 
 export type PokemonGetDto = {
   id: number;
@@ -166,7 +162,7 @@ export type PokemonListDto = {
   specialDefenseIv: number;
   speedIv: number;
   ability: string;
-  Item: string;
+  item: string;
   moveOne: string;
   moveTwo: string;
   moveThree: string;
@@ -178,6 +174,4 @@ export type PokemonListDto = {
   isShiny: Nullable<boolean>;
 };
 
-export type PokemonCreateDto = {
-
-};
+export type PokemonCreateDto = {};

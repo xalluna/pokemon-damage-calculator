@@ -34,7 +34,7 @@ namespace LearningStarter.Entities
 
         public bool? IsBlockedByProtect { get; set; }
         
-        public List<Pokemon> Pokemon { get; set; }
+        public virtual List<Pokemon> Pokemon { get; set; }
     }
     
     public class MoveCreateDto

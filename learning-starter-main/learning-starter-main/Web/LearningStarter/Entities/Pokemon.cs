@@ -227,4 +227,59 @@ namespace LearningStarter.Entities
         
         public bool? IsShiny { get; set; }
     }
+    
+    public class PokemonListDto
+    {
+        public int Id { get; set; }
+        
+        public string Name { get; set; }
+        
+        public string PokemonSpecies { get; set; }
+        
+        public int HealthEv {get; set; }
+        
+        public int AttackEv {get; set; }
+
+        public int DefenseEv {get; set; }
+
+        public int SpecialAttackEv {get; set; }
+
+        public int SpecialDefenseEv {get; set; }
+
+        public int SpeedEv{get; set; }
+
+        public int HealthIv {get; set; }
+
+        public int AttackIv {get; set; }
+
+        public int DefenseIv {get; set; }
+
+        public int SpecialAttackIv {get; set; }
+
+        public int SpecialDefenseIv {get; set; }
+
+        public int SpeedIv {get; set; }
+        
+        public string Ability { get; set; }
+
+        public string Item { get; set; }
+
+        public string? MoveOne {get; set; }
+        
+        public string? MoveTwo {get; set; }
+        
+        public string? MoveThree {get; set; }
+        
+        public string? MoveFour {get; set; }
+        
+        public int Level { get; set; }
+        
+        public int Experience { get; set; }
+        
+        public string Nature { get; set; }
+        
+        public string Gender { get; set; }
+        
+        public bool? IsShiny { get; set; }
+    }
 }

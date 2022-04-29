@@ -38,6 +38,24 @@ namespace LearningStarter.Data
                 .Property(x => x.Password)
                 .IsRequired();
 
+            modelBuilder.Entity<Pokemon>().HasMany(moves => moves.Moves);
+            
+            // modelBuilder.Entity<Move>().HasMany(move => move.Pokemon)
+            //     .WithMany(pokemon => pokemon.MoveOne)
+            //     .HasForeignKey(pokemon => pokemon.MoveOneId);
+            //
+            // modelBuilder.Entity<Move>().HasMany(move => move.Pokemon)
+            //     .WithOne(pokemon => pokemon.MoveTwo)
+            //     .HasForeignKey(pokemon => pokemon.MoveTwoId);
+            //
+            // modelBuilder.Entity<Move>().HasMany(move => move.Pokemon)
+            //     .WithOne(pokemon => pokemon.MoveThree)
+            //     .HasForeignKey(pokemon => pokemon.MoveThreeId);
+            //
+            // modelBuilder.Entity<Move>().HasMany(move => move.Pokemon)
+            //     .WithOne(pokemon => pokemon.MoveFour)
+            //     .HasForeignKey(pokemon => pokemon.MoveFourId);
+
         }
     }
 }
