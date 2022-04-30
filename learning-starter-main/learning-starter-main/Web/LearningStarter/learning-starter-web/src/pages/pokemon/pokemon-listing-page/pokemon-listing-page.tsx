@@ -60,7 +60,7 @@ export const PokemonListingPage = () => {
                   <p>
                     [{pokemon.moveThree}] [{pokemon.moveFour}]
                   </p>
-                  <Header>Stats</Header>
+                  <Header size="small">Stats</Header>
                   <p>
                     HP:{"\t"}[{pokemon.healthIv}] [{pokemon.healthEv}]
                   </p>

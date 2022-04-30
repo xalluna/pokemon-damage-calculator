@@ -45,9 +45,9 @@ const initialValues: PokemonCreateDto = {
   isShiny: false,
 };
 
-const moveList: DropdownProps[] = () => {
-  return ["Undefined"];
-};
+// const moveList: DropdownProps[] = () => {
+//   return ["Undefined"];
+// };
 
 export const PokemonCreatePage = () => {
   const history = useHistory();
@@ -81,7 +81,7 @@ export const PokemonCreatePage = () => {
 
             <div>
               <label>Species</label>
-              <Dropdown selection options={moveList} />
+              <Dropdown selection />
               {/* <Field id="species" name="species">
                 {({ field }) => <Input {...field} />}
               </Field> */}
