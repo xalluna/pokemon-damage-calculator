@@ -8,7 +8,7 @@ import {
   ApiResponse,
 } from "../../../constants/types";
 import axios from "axios";
-import { BaseUrl } from "../../../constants/env-vars";
+import { baseUrl } from "../../../constants/env-vars";
 import { useHistory } from "react-router-dom";
 import { routes } from "../../../routes/config";
 import { useState } from "react";
@@ -75,11 +75,11 @@ export const PokemonCreatePage = () => {
       experience: parseInt(formValues.experience),
       natureId: parseInt(formValues.nature),
       gender: parseInt(formValues.gender),
-      isShiny: formValues.isShiny.toLowerCase() == "true",
+      isShiny: formValues.isShiny.toLowerCase() === "true",
     };
 
     const response = await axios.post<ApiResponse<PokemonGetDto>>(
-      `${BaseUrl}/api/pokemon`,
+      `${baseUrl}/api/pokemon`,
       values
     );
 

@@ -7,7 +7,7 @@ import {
   ApiResponse,
 } from "../../../constants/types";
 import axios from "axios";
-import { BaseUrl } from "../../../constants/env-vars";
+import { baseUrl } from "../../../constants/env-vars";
 import { useHistory } from "react-router-dom";
 import { routes } from "../../../routes/config";
 
@@ -22,7 +22,7 @@ export const AbilityCreatePage = () => {
   const onSubmit = async (values: AbilityCreateDto) => {
     setOpen(false);
     const response = await axios.post<ApiResponse<AbilityGetDto>>(
-      `${BaseUrl}/api/abilities`,
+      `${baseUrl}/api/abilities`,
       values
     );
 

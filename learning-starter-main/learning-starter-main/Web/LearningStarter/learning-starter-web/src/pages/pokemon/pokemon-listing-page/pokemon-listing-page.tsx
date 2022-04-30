@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Header, Container, Divider, Button, Modal } from "semantic-ui-react";
 import React, { useEffect, useState } from "react";
-import { BaseUrl } from "../../../constants/env-vars";
+import { baseUrl } from "../../../constants/env-vars";
 import { PokemonListDto, ApiResponse } from "../../../constants/types";
 import { PokemonCreatePage } from "../pokemon-create-page/pokemon-create-page";
 
@@ -10,7 +10,7 @@ export const PokemonListingPage = () => {
   const [open, setOpen] = useState(false);
   const fetchPokemon = async () => {
     const response = await axios.get<ApiResponse<PokemonListDto[]>>(
-      `${BaseUrl}/api/pokemon/list`
+      `${baseUrl}/api/pokemon/list`
     );
     if (response.data.hasErrors) {
       response.data.errors.forEach((err) => {

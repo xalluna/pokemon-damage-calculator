@@ -9,6 +9,7 @@ import { AbilityCreatePage } from "../pages/abilities/ability-create-page/abilit
 import { AbilityListingPage } from "../pages/abilities/ability-listing-page/ability-listing-page";
 import { PokemonListingPage } from "../pages/pokemon/pokemon-listing-page/pokemon-listing-page";
 import { PokemonCreatePage } from "../pages/pokemon/pokemon-create-page/pokemon-create-page";
+import { PokemonUpdatePage } from "../pages/pokemon/pokemon-update-page/pokemon-update-page";
 
 //This is where you will declare all of your routes (the ones that show up in the search bar)
 export const routes = {
@@ -21,6 +22,7 @@ export const routes = {
   },
   pokemon: {
     create: "/pokemon/create",
+    update: "/pokemon/:id",
     listing: "/pokemon",
   },
 };
@@ -61,6 +63,9 @@ export const Routes = () => {
 
           <Route path={routes.pokemon.create} exact>
             <PokemonCreatePage />
+          </Route>
+          <Route path={routes.pokemon.update} exact>
+            <PokemonUpdatePage />
           </Route>
 
           {/* This should always come last.  

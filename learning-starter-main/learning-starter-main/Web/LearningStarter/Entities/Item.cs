@@ -30,7 +30,8 @@ namespace LearningStarter.Entities
     
     public class ItemOptionsDto
     {
-        public string Name { get; set; }
+        public string Text { get; set; }
         public int Value { get; set; }
+        public int Key { get; set; }
     }
 }
