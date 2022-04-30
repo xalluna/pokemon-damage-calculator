@@ -82,7 +82,7 @@ export const PokemonListingPage = () => {
                   </p>
 
                   <p>Gender: {pokemon.gender}</p>
-                  <p>Shiny: {pokemon.isShiny ? "true" : "false"}</p>
+                  <p>Shiny: {pokemon.isShiny ? "Yes" : "No"}</p>
                 </Container>
                 <Divider />
               </div>

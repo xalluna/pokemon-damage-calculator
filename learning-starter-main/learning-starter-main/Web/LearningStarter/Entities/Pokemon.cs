@@ -282,4 +282,13 @@ namespace LearningStarter.Entities
         
         public bool? IsShiny { get; set; }
     }
+
+    class PokemonOptionsDto
+    {
+        public List<SpeciesOptionsDto> Species{ get; set; }
+        public List<AbilityOptionsDto> Abilities{ get; set; }
+        public List<ItemOptionsDto> Items{ get; set; }
+        public List<MoveOptionsDto> Moves{ get; set; }
+        public List<NatureOptionsDto> Natures{ get; set; }
+    }
 }

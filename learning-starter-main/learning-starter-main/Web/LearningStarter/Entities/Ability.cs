@@ -33,4 +33,10 @@ namespace LearningStarter.Entities
         public string Name { get; set; }
 
     }
+    
+    public class AbilityOptionsDto
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
+    }
 }

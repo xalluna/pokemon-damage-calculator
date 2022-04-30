@@ -126,4 +126,10 @@ namespace LearningStarter.Entities
         
         public int ExperienceCurveId { get; set; }
     }
+    
+    public class SpeciesOptionsDto
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
+    }
 }

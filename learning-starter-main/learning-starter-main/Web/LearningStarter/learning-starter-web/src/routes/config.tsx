@@ -8,6 +8,7 @@ import { PageWrapper } from "../components/page-wrapper/page-wrapper";
 import { AbilityCreatePage } from "../pages/abilities/ability-create-page/ability-create-page";
 import { AbilityListingPage } from "../pages/abilities/ability-listing-page/ability-listing-page";
 import { PokemonListingPage } from "../pages/pokemon/pokemon-listing-page/pokemon-listing-page";
+import { PokemonCreatePage } from "../pages/pokemon/pokemon-create-page/pokemon-create-page";
 
 //This is where you will declare all of your routes (the ones that show up in the search bar)
 export const routes = {
@@ -56,6 +57,10 @@ export const Routes = () => {
 
           <Route path={routes.pokemon.listing} exact>
             <PokemonListingPage />
+          </Route>
+
+          <Route path={routes.pokemon.create} exact>
+            <PokemonCreatePage />
           </Route>
 
           {/* This should always come last.  

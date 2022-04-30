@@ -30,4 +30,10 @@ namespace LearningStarter.Entities
         public string Name { get; set; }
 
     }
+    
+    public class NatureOptionsDto
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
+    }
 }

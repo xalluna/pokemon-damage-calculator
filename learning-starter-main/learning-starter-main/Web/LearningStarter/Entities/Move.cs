@@ -125,4 +125,10 @@ namespace LearningStarter.Entities
 
         public bool? IsBlockedByProtect { get; set; }
     }
+    
+    public class MoveOptionsDto
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
+    }
 }

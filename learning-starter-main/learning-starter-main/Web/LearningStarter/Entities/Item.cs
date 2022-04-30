@@ -27,4 +27,10 @@ namespace LearningStarter.Entities
     {
         public string Name { get; set; }
     }
+    
+    public class ItemOptionsDto
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
+    }
 }
