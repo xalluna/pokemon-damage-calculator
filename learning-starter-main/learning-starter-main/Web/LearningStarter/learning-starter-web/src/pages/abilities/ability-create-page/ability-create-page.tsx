@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Field, Form, Formik } from "formik";
-import { Input, Button } from "semantic-ui-react";
+import { Input, Button, Modal, Header } from "semantic-ui-react";
 import {
   AbilityCreateDto,
   AbilityGetDto,
@@ -16,9 +16,11 @@ const initialValues: AbilityCreateDto = {
 };
 
 export const AbilityCreatePage = () => {
+  const [open, setOpen] = useState(false);
   const history = useHistory();
 
   const onSubmit = async (values: AbilityCreateDto) => {
+    setOpen(false);
     const response = await axios.post<ApiResponse<AbilityGetDto>>(
       `${BaseUrl}/api/abilities`,
       values
@@ -26,7 +28,7 @@ export const AbilityCreatePage = () => {
 
     if (response.data.hasErrors) {
       response.data.errors.forEach((err) => {
-        console.log(err.message);
+        console.log(err);
       });
     } else {
       history.push(routes.abilities.listing);
@@ -35,19 +37,52 @@ export const AbilityCreatePage = () => {
 
   return (
     <>
+      <div>
+        <Modal
+          className="modal"
+          onOpen={() => setOpen(true)}
+          onClose={() => setOpen(false)}
+          open={open}
+          closeIcon
+          dimmer="blurring"
+        >
+          <div className="modal-content">
+            <div>
+              <Header size="huge" textAlign="center">
+                You are about to create an Ability. Would you like submit this
+                form?
+              </Header>
+              <div className="buttons">
+                <Button
+                  color="grey"
+                  size="huge"
+                  onClick={(open) => setOpen(false)}
+                >
+                  No
+                </Button>
+                <Button color="teal" size="huge" type="submit" form="form">
+                  Yes
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      </div>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        <Form>
+        <Form id="form">
           <div>
             <label>Name</label>
             <Field id="name" name="name">
               {({ field }) => <Input {...field} />}
             </Field>
-            <div>
-              <Button type="submit">Create</Button>
-            </div>
           </div>
         </Form>
       </Formik>
+      <div>
+        <Button onClick={(open) => setOpen(true)} color="teal">
+          Create
+        </Button>
+      </div>
     </>
   );
 };

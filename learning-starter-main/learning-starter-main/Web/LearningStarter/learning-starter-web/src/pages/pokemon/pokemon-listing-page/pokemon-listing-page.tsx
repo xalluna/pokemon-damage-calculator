@@ -1,17 +1,13 @@
 import axios from "axios";
-import { Header, Container, Divider } from "semantic-ui-react";
+import { Header, Container, Divider, Button, Modal } from "semantic-ui-react";
 import React, { useEffect, useState } from "react";
 import { BaseUrl } from "../../../constants/env-vars";
-import {
-  PokemonListDto,
-  AbilityGetDto,
-  ItemGetDto,
-  ApiResponse,
-  PokemonSpeciesGetDto,
-} from "../../../constants/types";
+import { PokemonListDto, ApiResponse } from "../../../constants/types";
+import { PokemonCreatePage } from "../pokemon-create-page/pokemon-create-page";
 
 export const PokemonListingPage = () => {
   const [pokemon, setPokemon] = useState<PokemonListDto[]>();
+  const [open, setOpen] = useState(false);
   const fetchPokemon = async () => {
     const response = await axios.get<ApiResponse<PokemonListDto[]>>(
       `${BaseUrl}/api/pokemon/list`
@@ -40,6 +36,12 @@ export const PokemonListingPage = () => {
   return (
     <div className="pokemon-page-container">
       <div>
+        <div className="pokemon-listinsg-page-create-button">
+          <Button size="large" color="teal" onClick={(open) => setOpen(true)}>
+            Create
+          </Button>
+        </div>
+        <Divider></Divider>
         <Header textAlign="center">Pokemon</Header>
         <Divider></Divider>
         {pokemon ? (
@@ -92,6 +94,15 @@ export const PokemonListingPage = () => {
           <div>No Abilities</div>
         )}
       </div>
+      <Modal
+        onOpen={() => setOpen(true)}
+        onClose={() => setOpen(false)}
+        open={open}
+        closeIcon
+        dimmer="blurring"
+      >
+        <PokemonCreatePage />
+      </Modal>
     </div>
   );
 };

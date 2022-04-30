@@ -174,6 +174,34 @@ export type PokemonListDto = {
   isShiny: Nullable<boolean>;
 };
 
+export type PokemonFormDto = {
+  name: string;
+  pokemonSpecies: string;
+  healthEv: string;
+  attackEv: string;
+  defenseEv: string;
+  specialAttackEv: string;
+  specialDefenseEv: string;
+  speedEv: string;
+  healthIv: string;
+  attackIv: string;
+  defenseIv: string;
+  specialAttackIv: string;
+  specialDefenseIv: string;
+  speedIv: string;
+  ability: string;
+  item: string;
+  moveOne: string;
+  moveTwo: string;
+  moveThree: string;
+  moveFour: string;
+  level: string;
+  experience: string;
+  nature: string;
+  gender: string;
+  isShiny: string;
+};
+
 export type PokemonCreateDto = {
   name: string;
   pokemonSpeciesId: number;
@@ -190,7 +218,7 @@ export type PokemonCreateDto = {
   specialDefenseIv: number;
   speedIv: number;
   abilityId: number;
-  ItemId: number;
+  itemId: number;
   moveOneId: number;
   moveTwoId: number;
   moveThreeId: number;

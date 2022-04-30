@@ -2,7 +2,6 @@ import React from "react";
 import { Header, Button, Modal } from "semantic-ui-react";
 import "./landing-page.css";
 import { useState } from "react";
-import { routes } from "../../routes/config";
 
 export const LandingPage = () => {
   const [open, setOpen] = useState(false);
