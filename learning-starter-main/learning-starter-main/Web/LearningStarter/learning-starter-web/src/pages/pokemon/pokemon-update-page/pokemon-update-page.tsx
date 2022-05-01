@@ -28,7 +28,6 @@ export const PokemonUpdatePage = () => {
           console.log(err);
           return;
         });
-      } else {
       }
 
       setPokemon(response.data.data);

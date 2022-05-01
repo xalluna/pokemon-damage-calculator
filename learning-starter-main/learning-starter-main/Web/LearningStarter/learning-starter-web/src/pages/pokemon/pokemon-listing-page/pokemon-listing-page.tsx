@@ -31,14 +31,6 @@ export const PokemonListingPage = () => {
     }
   };
 
-  // const fetchPokemonSpecies = (id: number) => {
-  //   const name = axios.get<ApiResponse<PokemonSpeciesGetDto>>(
-  //     `${BaseUrl}/api/pokemon-species/${id}`
-  //   );
-
-  //   return name;
-  // };
-
   useEffect(() => {
     fetchPokemon();
   }, []);
@@ -144,7 +136,7 @@ export const PokemonListingPage = () => {
               );
             })
           ) : (
-            <div>No Abilities</div>
+            <div>No Pokemon</div>
           )}
         </Card.Group>
       </div>
