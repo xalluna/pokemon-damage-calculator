@@ -21,6 +21,7 @@ export const routes = {
     listing: "/abilities",
   },
   pokemon: {
+    root: "/pokemon",
     create: "/pokemon/create",
     update: "/pokemon/:id",
     listing: "/pokemon",
