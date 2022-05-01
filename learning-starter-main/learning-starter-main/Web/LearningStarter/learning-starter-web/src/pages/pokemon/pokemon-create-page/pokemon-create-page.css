@@ -16,3 +16,8 @@
   display: flex;
   justify-content: left;
 }
+
+.pokemon-create-page {
+  display: flex;
+  justify-content: center;
+}

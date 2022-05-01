@@ -1,17 +1,25 @@
 import React from "react";
 import { Field, Form, Formik } from "formik";
-import { Input, Button, Modal, Header } from "semantic-ui-react";
+import {
+  Input,
+  Button,
+  Modal,
+  Header,
+  Card,
+  Dropdown,
+} from "semantic-ui-react";
 import {
   PokemonGetDto,
   PokemonFormDto,
   PokemonCreateDto,
   ApiResponse,
+  PokemonOptionsDto,
 } from "../../../constants/types";
 import axios from "axios";
 import { baseUrl } from "../../../constants/env-vars";
 import { useHistory } from "react-router-dom";
 import { routes } from "../../../routes/config";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const initialValues: PokemonFormDto = {
   name: "",
@@ -47,7 +55,27 @@ const initialValues: PokemonFormDto = {
 
 export const PokemonCreatePage = () => {
   const [open, setOpen] = useState(false);
+  const [options, setOptions] = useState<PokemonOptionsDto>();
   const history = useHistory();
+
+  useEffect(() => {
+    const fetchPokemonOptions = async () => {
+      const response = await axios.get<ApiResponse<PokemonOptionsDto>>(
+        `/api/pokemon/options`
+      );
+
+      if (response.data.hasErrors) {
+        response.data.errors.forEach((err) => {
+          console.log(err);
+          return;
+        });
+      }
+
+      setOptions(response.data.data);
+    };
+
+    fetchPokemonOptions();
+  }, []);
 
   const onSubmit = async (formValues: PokemonFormDto) => {
     const values: PokemonCreateDto = {
@@ -94,7 +122,9 @@ export const PokemonCreatePage = () => {
 
   return (
     <>
-      <div>
+      {options && (
+        <div className="pokemon-create-page">
+          {/* <div>
         <Modal
           className="modal"
           onOpen={() => setOpen(true)}
@@ -124,167 +154,194 @@ export const PokemonCreatePage = () => {
             </div>
           </div>
         </Modal>
-      </div>
-      <Header textAlign="center">Create Pokemon</Header>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
-        <Form id="form">
+      </div> */}
+          <Card>
+            <Header textAlign="center">Create Pokemon</Header>
+            <Formik initialValues={initialValues} onSubmit={onSubmit}>
+              <Form id="form">
+                <div>
+                  <div>
+                    <label>Name</label>
+                    <Field id="name" name="name">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>Species</label>
+                    {/* <Field id="pokemonSpecies" name="pokemonSpecies">
+                  {({ field }) => <Input {...field} />}
+                </Field> */}
+                    <Dropdown
+                      selection
+                      clearable
+                      placeholder="Pokemon"
+                      options={options?.species}
+                    />
+                  </div>
+
+                  <div>
+                    <label>Ability</label>
+                    <Field id="ability" name="ability">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>Item</label>
+                    <Field id="item" name="item">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>Level</label>
+                    <Field id="level" name="level">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>Move 1</label>
+                    <Field id="moveOne" name="moveOne">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+                  <div>
+                    <label>Move 2</label>
+                    <Field id="moveTwo" name="moveTwo">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>Move 3</label>
+                    <Field id="moveThree" name="moveThree">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+                  <div>
+                    <label>Move 4</label>
+                    <Field id="moveFour" name="moveFour">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>HP EVs</label>
+                    <Field id="healthEv" name="healthEv">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+                  <div>
+                    <label>HP IVs</label>
+                    <Field id="healthIv" name="healthIv">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>Atk EVs</label>
+                    <Field id="attackEv" name="attackEv">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+                  <div>
+                    <label>Atk IVs</label>
+                    <Field id="attackIv" name="attackIv">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>Def EVs</label>
+                    <Field id="defenseEv" name="defenseEv">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+                  <div>
+                    <label>Def IVs</label>
+                    <Field id="defenseIv" name="defenseIv">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>SpA EVs</label>
+                    <Field id="specialAttackEv" name="specialAttackEv">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+                  <div>
+                    <label>SpA IVs</label>
+                    <Field id="specialAttackIv" name="specialAttackIv">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>SpD EVs</label>
+                    <Field id="specialDefenseEv" name="specialDefenseEv">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+                  <div>
+                    <label>SpD IVs</label>
+                    <Field id="specialDefenseIv" name="specialDefenseIv">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>Spe EVs</label>
+                    <Field id="speedEv" name="speedEv">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+                  <div>
+                    <label>Spe IVs</label>
+                    <Field id="speedIv" name="speedIv">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>Nature</label>
+                    <Field id="nature" name="nature">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>Gender</label>
+                    <Field id="gender" name="gender">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+
+                  <div>
+                    <label>Shiny</label>
+                    <Field id="isShiny" name="isShiny">
+                      {({ field }) => <Input {...field} />}
+                    </Field>
+                  </div>
+                </div>
+              </Form>
+            </Formik>
+          </Card>
           <div>
-            <div>
-              <label>Name</label>
-              <Field id="name" name="name">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>Species</label>
-              <Field id="pokemonSpecies" name="pokemonSpecies">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>Ability</label>
-              <Field id="ability" name="ability">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>Item</label>
-              <Field id="item" name="item">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>Level</label>
-              <Field id="level" name="level">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>Move 1</label>
-              <Field id="moveOne" name="moveOne">
-                {({ field }) => <Input {...field} />}
-              </Field>
-              <label>Move 2</label>
-              <Field id="moveTwo" name="moveTwo">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>Move 3</label>
-              <Field id="moveThree" name="moveThree">
-                {({ field }) => <Input {...field} />}
-              </Field>
-              <label>Move 4</label>
-              <Field id="moveFour" name="moveFour">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>HP EVs</label>
-              <Field id="healthEv" name="healthEv">
-                {({ field }) => <Input {...field} />}
-              </Field>
-              <label>HP IVs</label>
-              <Field id="healthIv" name="healthIv">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>Atk EVs</label>
-              <Field id="attackEv" name="attackEv">
-                {({ field }) => <Input {...field} />}
-              </Field>
-              <label>Atk IVs</label>
-              <Field id="attackIv" name="attackIv">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>Def EVs</label>
-              <Field id="defenseEv" name="defenseEv">
-                {({ field }) => <Input {...field} />}
-              </Field>
-              <label>Def IVs</label>
-              <Field id="defenseIv" name="defenseIv">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>SpA EVs</label>
-              <Field id="specialAttackEv" name="specialAttackEv">
-                {({ field }) => <Input {...field} />}
-              </Field>
-              <label>SpA IVs</label>
-              <Field id="specialAttackIv" name="specialAttackIv">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>SpD EVs</label>
-              <Field id="specialDefenseEv" name="specialDefenseEv">
-                {({ field }) => <Input {...field} />}
-              </Field>
-              <label>SpD IVs</label>
-              <Field id="specialDefenseIv" name="specialDefenseIv">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>Spe EVs</label>
-              <Field id="speedEv" name="speedEv">
-                {({ field }) => <Input {...field} />}
-              </Field>
-              <label>Spe IVs</label>
-              <Field id="speedIv" name="speedIv">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>Nature</label>
-              <Field id="nature" name="nature">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>Gender</label>
-              <Field id="gender" name="gender">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
-
-            <div>
-              <label>Shiny</label>
-              <Field id="isShiny" name="isShiny">
-                {({ field }) => <Input {...field} />}
-              </Field>
-            </div>
+            <Button
+              className="submit-button"
+              color="teal"
+              size="large"
+              type="submit"
+              form="form"
+            >
+              Create Pokemon
+            </Button>
           </div>
-        </Form>
-      </Formik>
-      <div>
-        <Button
-          className="submit-button"
-          color="teal"
-          size="large"
-          onClick={(open) => setOpen(true)}
-        >
-          Create Pokemon
-        </Button>
-      </div>
+        </div>
+      )}
     </>
   );
 };
