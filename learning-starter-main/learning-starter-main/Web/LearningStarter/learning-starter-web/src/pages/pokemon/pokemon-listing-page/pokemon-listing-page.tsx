@@ -1,9 +1,18 @@
 import axios from "axios";
-import { Header, Container, Divider, Button, Modal } from "semantic-ui-react";
+import {
+  Header,
+  Container,
+  Divider,
+  Button,
+  Modal,
+  Card,
+  Image,
+} from "semantic-ui-react";
 import React, { useEffect, useState } from "react";
 import { baseUrl } from "../../../constants/env-vars";
 import { PokemonListDto, ApiResponse } from "../../../constants/types";
 import { PokemonCreatePage } from "../pokemon-create-page/pokemon-create-page";
+import pikachu from "../../../assets/pikachu.png";
 
 export const PokemonListingPage = () => {
   const [pokemon, setPokemon] = useState<PokemonListDto[]>();
@@ -44,55 +53,77 @@ export const PokemonListingPage = () => {
         <Divider></Divider>
         <Header textAlign="center">Pokemon</Header>
         <Divider></Divider>
-        {pokemon ? (
-          pokemon.map((pokemon) => {
-            return (
-              <div>
-                <Container textAlign="left">
-                  <Header>{pokemon.name}</Header>
-                  <p>Pokemon: {pokemon.pokemonSpecies}</p>
-                  <p>Ability: {pokemon.ability}</p>
-                  <p>Item: {pokemon.item}</p>
-                  <Header size="small" textAlign="left">
-                    Moves
-                  </Header>
-                  <p>
-                    [{pokemon.moveOne}] [{pokemon.moveTwo}]
-                  </p>
-                  <p>
-                    [{pokemon.moveThree}] [{pokemon.moveFour}]
-                  </p>
-                  <Header size="small">Stats</Header>
-                  <p>
-                    HP:{"\t"}[{pokemon.healthIv}] [{pokemon.healthEv}]
-                  </p>
-                  <p>
-                    ATK: [{pokemon.attackIv}] [{pokemon.attackEv}]
-                  </p>
-                  <p>
-                    DEF: [{pokemon.defenseIv}] [{pokemon.defenseEv}]
-                  </p>
-                  <p>
-                    SPA: [{pokemon.specialAttackIv}] [{pokemon.specialAttackEv}]
-                  </p>
-                  <p>
-                    SPD: [{pokemon.specialDefenseIv}] [
-                    {pokemon.specialDefenseEv}]
-                  </p>
-                  <p>
-                    SPE: [{pokemon.speedIv}] [{pokemon.speedEv}]
-                  </p>
-
-                  <p>Gender: {pokemon.gender}</p>
-                  <p>Shiny: {pokemon.isShiny ? "Yes" : "No"}</p>
-                </Container>
-                <Divider />
-              </div>
-            );
-          })
-        ) : (
-          <div>No Abilities</div>
-        )}
+        <div className="container">
+          {pokemon ? (
+            pokemon.map((pokemon) => {
+              return (
+                <div className="item">
+                  <Card>
+                    <Image src={pikachu} />
+                    <Card.Content>
+                      <Header>{pokemon.name}</Header>
+                      <span>
+                        <div>Pokemon:</div>
+                        <div>{pokemon.pokemonSpecies}</div>
+                      </span>
+                      <span>
+                        <div>Ability:</div>
+                        <div>{pokemon.ability}</div>
+                      </span>
+                      <span>
+                        <div>Item:</div>
+                        <div>{pokemon.item}</div>
+                      </span>
+                      <span>
+                        <div>Gender:</div>
+                        <div>{pokemon.gender}</div>
+                      </span>
+                      <span>
+                        <div>Shiny:</div>
+                        <div>{pokemon.isShiny ? "Yes" : "No"}</div>
+                      </span>
+                      <Divider />
+                      <Header>Moves</Header>
+                      <span>
+                        <div>[{pokemon.moveOne}]</div>
+                        <div>[{pokemon.moveTwo}]</div>
+                      </span>
+                      <span>
+                        <div>[{pokemon.moveThree}]</div>
+                        <div>[{pokemon.moveFour}]</div>
+                      </span>
+                      <Divider />
+                      <Header>Stats</Header>
+                      <div>
+                        Hp:[{pokemon.healthIv}] [{pokemon.healthEv}]
+                      </div>
+                      <div>
+                        Atk: [{pokemon.attackIv}] [{pokemon.attackEv}]
+                      </div>
+                      <div>
+                        Def: [{pokemon.defenseIv}] [{pokemon.defenseEv}]
+                      </div>
+                      <div>
+                        SpA: [{pokemon.specialAttackIv}] [
+                        {pokemon.specialAttackEv}]
+                      </div>
+                      <div>
+                        SpD: [{pokemon.specialDefenseIv}] [
+                        {pokemon.specialDefenseEv}]
+                      </div>
+                      <div>
+                        Spe: [{pokemon.speedIv}] [{pokemon.speedEv}]
+                      </div>
+                    </Card.Content>
+                  </Card>
+                  <Divider />
+                </div>
+              );
+            })
+          ) : (
+            <div>No Abilities</div>
+          )}
+        </div>
       </div>
       <Modal
         onOpen={() => setOpen(true)}

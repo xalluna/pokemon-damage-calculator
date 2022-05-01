@@ -1,4 +1,15 @@
 .pokemon-listinsg-page-create-button {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
 }
