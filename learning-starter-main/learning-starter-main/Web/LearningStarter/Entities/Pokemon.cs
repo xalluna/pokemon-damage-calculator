@@ -207,6 +207,7 @@ namespace LearningStarter.Entities
     public class PokemonListDto
     {
         public int Id { get; set; }
+        public PokemonGetDto Pokemon { get; set; }
         public string Name { get; set; }
         public string PokemonSpecies { get; set; }
         public int HealthEv {get; set; }

@@ -88,6 +88,7 @@ export const PokemonCreatePage = () => {
         console.log(err.message);
       });
     } else {
+      history.push(routes.home);
       history.push(routes.pokemon.listing);
     }
   };
