@@ -46,6 +46,46 @@ const DesktopNavigation = () => {
           to: routes.user,
         },
       },
+      {
+        text: "Abilities",
+        children: [
+          {
+            text: "Abilities",
+            hide: false,
+            nav: {
+              to: routes.abilities.listing,
+            },
+          },
+          {
+            text: "Create",
+            icon: "plus",
+            hide: false,
+            nav: {
+              to: routes.abilities.create,
+            },
+          },
+        ],
+      },
+      {
+        text: "Pokemon",
+        children: [
+          {
+            text: "Pokemon",
+            hide: false,
+            nav: {
+              to: routes.pokemon.listing,
+            },
+          },
+          {
+            text: "Create",
+            icon: "plus",
+            hide: false,
+            nav: {
+              to: routes.pokemon.create,
+            },
+          },
+        ],
+      },
     ];
   }, []);
 

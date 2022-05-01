@@ -36,7 +36,7 @@ namespace LearningStarter.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{Id:int}")]
+        [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
             var response = new Response();
@@ -70,24 +70,25 @@ namespace LearningStarter.Controllers
 
         [HttpPost]
         public IActionResult Create(
-            [FromBody] AbilityCreateDto abilityCreateDto)
+            [FromBody] AbilityCreateDto ability)
         {
             var response = new Response();
 
-            if (abilityCreateDto == null)
+            if (ability == null)
             {
                 response.AddError("", "Cannot pass a null entity.");
                 return BadRequest(response);
             }
-            
-            if (string.IsNullOrEmpty(abilityCreateDto.Name))
+
+            ability.Name = ability.Name.Trim();
+            if (string.IsNullOrEmpty(ability.Name))
             {
                 response.AddError("Name", "Name cannot be null or empty");
             }
 
             var hasNameInDatabase = _dataContext
                 .Abilities
-                .Any(x => x.Name == abilityCreateDto.Name);
+                .Any(x => x.Name == ability.Name);
             if (hasNameInDatabase)
             {
                 response.AddError("Name", "Name already exists");
@@ -100,7 +101,7 @@ namespace LearningStarter.Controllers
 
             var abilityToCreate = new Ability
             {
-                Name = abilityCreateDto.Name
+                Name = ability.Name
             };
 
             _dataContext.Add(abilityToCreate);
@@ -116,5 +117,73 @@ namespace LearningStarter.Controllers
 
             return Created("Ability created", response);
         }
+
+        [HttpPut("{id:int}")]
+        public IActionResult Edit([FromRoute] int id,
+            [FromBody] AbilityUpdateDto ability)
+        {
+            var response = new Response();
+
+            if (ability == null)
+            {
+                response.AddError("", "Cannot pass a null entity.");
+                return BadRequest(response);
+            }
+
+            ability.Name = ability.Name.Trim();
+            if (string.IsNullOrEmpty(ability.Name))
+            {
+                response.AddError("Name", "Name cannot be null or empty");
+            }
+
+            var hasNameInDatabase = _dataContext
+                .Abilities
+                .Any(x => x.Name.ToLower() == ability.Name.ToLower() && x.Id != id);
+            if (hasNameInDatabase)
+            {
+                response.AddError("Name", "Name already exists");
+            }
+
+            if (response.HasErrors)
+            {
+                return BadRequest(response);
+            }
+
+            var abilityToUpdate = _dataContext
+                .Abilities
+                .FirstOrDefault(x => x.Id == id);
+
+            abilityToUpdate.Name = ability.Name;
+            _dataContext.SaveChanges();
+
+            var abilityGet = new AbilityGetDto
+            {
+                Name = ability.Name
+            };
+
+            response.Data = abilityGet;
+
+            return Ok(response);
+        }
+
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            var response = new Response();
+
+            var ability = _dataContext.Abilities.FirstOrDefault(x => x.Id == id);
+
+            if (ability == null)
+            {
+                response.AddError("id", "Ability not found.");
+                return NotFound(response);
+            }
+
+            _dataContext.Abilities.Remove(ability);
+            _dataContext.SaveChanges();
+
+            return Ok(response);
+        }
+
     }
 }

@@ -9,16 +9,14 @@ namespace LearningStarter.Entities
 
         public string Name { get; set; }
 
-        //public List<PokemonSpecies> PokemonSpeciesList { get; set; }
+        public List<PokemonSpecies> PokemonSpecies { get; set; }
         
-        //public List<Pokemon> PokemonList { get; set; }
+        public List<Pokemon> Pokemon { get; set; }
 
     }
     
     public class AbilityCreateDto
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
     }
@@ -26,16 +24,20 @@ namespace LearningStarter.Entities
     public class AbilityGetDto
     {
         public int Id { get; set; }
-
         public string Name { get; set; }
 
     }
     
     public class AbilityUpdateDto
-    {
-        public int Id { get; set; }
-
+    { 
         public string Name { get; set; }
 
+    }
+    
+    public class AbilityOptionsDto
+    {
+        public string Text { get; set; }
+        public int Value { get; set; }
+        public int Key { get; set; }
     }
 }

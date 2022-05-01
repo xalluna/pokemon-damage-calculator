@@ -25,7 +25,7 @@ namespace LearningStarter.Controllers
             var response = new Response();
 
             var pokemonSpeciesToReturn = _dataContext
-                .PokemonSpeciesList
+                .PokemonSpecies
                 .Select(x => new PokemonSpeciesGetDto()
                 {
                     Id = x.Id,
@@ -37,12 +37,11 @@ namespace LearningStarter.Controllers
                     BaseSpecialDefense = x.BaseSpecialDefense,
                     BaseSpeed = x.BaseSpeed,
                     PrimaryTypeId = x.PrimaryTypeId,
-                    //SecondaryTypeId = x.SecondaryTypeId,
+                    SecondaryTypeId = x.SecondaryTypeId,
                     PrimaryAbilityId = x.PrimaryAbilityId,
-                    // SecondaryAbilityId = x.SecondaryAbilityId,
-                    // HiddenAbilityId = x.HiddenAbilityId,
-                    ExperienceCurveId = x.ExperienceCurveId,
-                    //MoveLearnSet = moveToDto(x.MoveLearnSet)
+                    SecondaryAbilityId = x.SecondaryAbilityId,
+                    HiddenAbilityId = x.HiddenAbilityId,
+                    ExperienceCurveId = x.ExperienceCurveId
                 })
                 .ToList();
 
@@ -63,7 +62,7 @@ namespace LearningStarter.Controllers
             }
 
             var pokemonSpeciesFromDatabase = _dataContext
-                .PokemonSpeciesList
+                .PokemonSpecies
                 .FirstOrDefault(x => x.Id == id);
 
             if (pokemonSpeciesFromDatabase == null)
@@ -83,125 +82,229 @@ namespace LearningStarter.Controllers
                 BaseSpecialDefense = pokemonSpeciesFromDatabase.BaseSpecialDefense,
                 BaseSpeed = pokemonSpeciesFromDatabase.BaseSpeed,
                 PrimaryTypeId = pokemonSpeciesFromDatabase.PrimaryTypeId,
-                //SecondaryTypeId = pokemonSpeciesFromDatabase.SecondaryTypeId,
+                SecondaryTypeId = pokemonSpeciesFromDatabase.SecondaryTypeId,
                 PrimaryAbilityId = pokemonSpeciesFromDatabase.PrimaryAbilityId,
-                // SecondaryAbilityId = pokemonSpeciesFromDatabase.SecondaryAbilityId,
-                // HiddenAbilityId = pokemonSpeciesFromDatabase.HiddenAbilityId,
-                ExperienceCurveId = pokemonSpeciesFromDatabase.ExperienceCurveId,
-                // MoveLearnSet = moveToDto(pokemonSpeciesFromDatabase.MoveLearnSet)
+                SecondaryAbilityId = pokemonSpeciesFromDatabase.SecondaryAbilityId,
+                HiddenAbilityId = pokemonSpeciesFromDatabase.HiddenAbilityId,
+                ExperienceCurveId = pokemonSpeciesFromDatabase.ExperienceCurveId
             };
 
             response.Data = pokemonSpeciesToReturn;
 
             return Ok(response);
         }
+        
+        [HttpGet("type/{id:int}")]
+
+        public IActionResult GetByType(int id)
+        {
+            var response = new Response();
+
+            var isValidType = _dataContext
+                .Types
+                .Any(x => x.Id == id);
+
+            if (!isValidType)
+            {
+                response.AddError("type id","Type Id not found");
+                return BadRequest(response);
+            }
+
+            var pokemonFromDatabase = _dataContext
+                .PokemonSpecies
+                .Where(x => x.PrimaryTypeId == id || x.SecondaryTypeId == id)
+                .ToList();
+            
+            if (!pokemonFromDatabase.Any())
+            {
+                response.AddError("Pokemon", "No pokemon species found");
+                return BadRequest(response);
+            }
+
+            var pokemonToGet = pokemonFromDatabase
+                .Select(x => new PokemonSpeciesGetDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    BaseHealth = x.BaseHealth,
+                    BaseAttack = x.BaseAttack,
+                    BaseDefense = x.BaseDefense,
+                    BaseSpecialAttack = x.BaseSpecialAttack,
+                    BaseSpecialDefense = x.BaseSpecialDefense,
+                    BaseSpeed = x.BaseSpeed,
+                    PrimaryTypeId = x.PrimaryTypeId,
+                    SecondaryTypeId = x.SecondaryTypeId,
+                    PrimaryAbilityId = x.PrimaryAbilityId,
+                    SecondaryAbilityId = x.SecondaryAbilityId,
+                    HiddenAbilityId = x.HiddenAbilityId,
+                    ExperienceCurveId = x.ExperienceCurveId
+                })
+                .ToList();
+            
+            response.Data = pokemonToGet;
+            
+            return Ok(response);
+        }
+        
+        [HttpGet("ability/{id:int}")]
+
+        public IActionResult GetByAbility(int id)
+        {
+            var response = new Response();
+
+            var isValidType = _dataContext
+                .Abilities
+                .Any(x => x.Id == id);
+
+            if (!isValidType)
+            {
+                response.AddError("ability","Ability not found");
+                return BadRequest(response);
+            }
+
+            var pokemonFromDatabase = _dataContext
+                .PokemonSpecies
+                .Where(x => x.PrimaryAbilityId == id || x.SecondaryAbilityId == id || x.HiddenAbilityId == id)
+                .ToList();
+            
+            if (!pokemonFromDatabase.Any())
+            {
+                response.AddError("Pokemon", "No pokemon species found");
+                return BadRequest(response);
+            }
+
+            var pokemonToGet = pokemonFromDatabase
+                .Select(x => new PokemonSpeciesGetDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    BaseHealth = x.BaseHealth,
+                    BaseAttack = x.BaseAttack,
+                    BaseDefense = x.BaseDefense,
+                    BaseSpecialAttack = x.BaseSpecialAttack,
+                    BaseSpecialDefense = x.BaseSpecialDefense,
+                    BaseSpeed = x.BaseSpeed,
+                    PrimaryTypeId = x.PrimaryTypeId,
+                    SecondaryTypeId = x.SecondaryTypeId,
+                    PrimaryAbilityId = x.PrimaryAbilityId,
+                    SecondaryAbilityId = x.SecondaryAbilityId,
+                    HiddenAbilityId = x.HiddenAbilityId,
+                    ExperienceCurveId = x.ExperienceCurveId
+                })
+                .ToList();
+            
+            response.Data = pokemonToGet;
+            
+            return Ok(response);
+        }
 
         [HttpPost]
         public IActionResult Create(
-            [FromBody] PokemonSpeciesCreateDto pokemonSpeciesCreateDto)
+            [FromBody] PokemonSpeciesCreateDto pokemon)
         {
             var response = new Response();
             
-            if(pokemonSpeciesCreateDto == null)
+            if(pokemon == null)
             {
                 response.AddError("","Cannot pass a null entity.");
                 return BadRequest(response);
             }
 
-            if (string.IsNullOrEmpty(pokemonSpeciesCreateDto.Name))
+            pokemon.Name = pokemon.Name.Trim();
+            if (string.IsNullOrEmpty(pokemon.Name))
             {
-                response.AddError("Name", "Name cannot be null or empty.");
+                response.AddError("Species", "Species cannot be null or empty.");
             }
 
             var hasNameInDatabase = _dataContext
-                .PokemonSpeciesList
-                .Any(x => x.Name == pokemonSpeciesCreateDto.Name);
+                .PokemonSpecies
+                .Any(x => x.Name == pokemon.Name);
             
             if (hasNameInDatabase)
             {
-                response.AddError("Name", "Name already exists.");
+                response.AddError("Species", "Species already exists.");
             }
 
-            if (pokemonSpeciesCreateDto.BaseHealth < 0 || pokemonSpeciesCreateDto.BaseHealth > 255)
+            if (pokemon.BaseHealth < 0 || pokemon.BaseHealth > 255)
             {
                 response.AddError("Base Health", "Base Stats cannot be negative or greater than 255");
             }
             
-            if (pokemonSpeciesCreateDto.BaseAttack < 0 || pokemonSpeciesCreateDto.BaseAttack > 255)
+            if (pokemon.BaseAttack < 0 || pokemon.BaseAttack > 255)
             {
                 response.AddError("BaseAttack", "Base Stats cannot be negative or greater than 255");
             }
             
-            if (pokemonSpeciesCreateDto.BaseDefense < 0 || pokemonSpeciesCreateDto.BaseDefense > 255)
+            if (pokemon.BaseDefense < 0 || pokemon.BaseDefense > 255)
             {
                 response.AddError("Base Defense", "Base Stats cannot be negative or greater than 255");
             }
             
-            if (pokemonSpeciesCreateDto.BaseSpecialAttack < 0 || pokemonSpeciesCreateDto.BaseSpecialAttack > 255)
+            if (pokemon.BaseSpecialAttack < 0 || pokemon.BaseSpecialAttack > 255)
             {
                 response.AddError("Base Special Attack", "Base Stats cannot be negative or greater than 255");
             }
             
-            if (pokemonSpeciesCreateDto.BaseSpecialDefense < 0 || pokemonSpeciesCreateDto.BaseSpecialDefense > 255)
+            if (pokemon.BaseSpecialDefense < 0 || pokemon.BaseSpecialDefense > 255)
             {
                 response.AddError("Base Special Defense", "Base Stats cannot be negative or greater than 255");
             }
             
-            if (pokemonSpeciesCreateDto.BaseSpeed < 0 || pokemonSpeciesCreateDto.BaseSpeed > 255)
+            if (pokemon.BaseSpeed < 0 || pokemon.BaseSpeed > 255)
             {
                 response.AddError("Base Speed", "Base Stats cannot be negative or greater than 255");
             }
             
             var isValidType = _dataContext
                 .Types
-                .Any(x => x.Id == pokemonSpeciesCreateDto.PrimaryTypeId);
+                .Any(x => x.Id == pokemon.PrimaryTypeId);
             
             if (!isValidType)
             {
                 response.AddError("Primary Type", "Primary Type is not valid.");
             }
             
-            // isValidType = _dataContext
-            //     .Types
-            //     .Any(x => x.Id == pokemonSpeciesCreateDto.SecondaryTypeId);
-            //
-            // if (!isValidType && pokemonSpeciesCreateDto.SecondaryTypeId != null)
-            // {
-            //     response.AddError("Secondary Type", "Secondary Type is not valid.");
-            // }
+            isValidType = _dataContext
+                .Types
+                .Any(x => x.Id == pokemon.SecondaryTypeId);
+            
+            if (!isValidType && pokemon.SecondaryTypeId != null)
+            {
+                response.AddError("Secondary Type", "Secondary Type is not valid.");
+            }
             
             var isValidAbility = _dataContext
                 .Abilities
-                .Any(x => x.Id == pokemonSpeciesCreateDto.PrimaryAbilityId);
+                .Any(x => x.Id == pokemon.PrimaryAbilityId);
 
             if (!isValidAbility)
             {
                response.AddError("Primary Ability", "Primary Ability is not valid."); 
             }
             
-            // isValidAbility = _dataContext
-            //     .Abilities
-            //     .Any(x => x.Id == pokemonSpeciesCreateDto.SecondaryAbilityId);
-            //
-            // if (!isValidAbility)
-            // {
-            //     response.AddError("Secondary Ability", "Secondary Ability is not valid."); 
-            // }
+            isValidAbility = _dataContext
+                .Abilities
+                .Any(x => x.Id == pokemon.SecondaryAbilityId);
             
-            // isValidAbility = _dataContext
-            //     .Abilities
-            //     .Any(x => x.Id == pokemonSpeciesCreateDto.HiddenAbilityId);
-            //
-            // if (!isValidAbility)
-            // {
-            //     response.AddError("Hidden Ability", "Hidden Ability is not valid."); 
-            // }
+            if (!isValidAbility && pokemon.SecondaryAbilityId != null)
+            {
+                response.AddError("Secondary Ability", "Secondary Ability is not valid."); 
+            }
+            
+            isValidAbility = _dataContext
+                .Abilities
+                .Any(x => x.Id == pokemon.HiddenAbilityId);
+            
+            if (!isValidAbility && pokemon.HiddenAbilityId != null)
+            {
+                response.AddError("Hidden Ability", "Hidden Ability is not valid."); 
+            }
 
-            var isValisExpeienceCurve = _dataContext
+            var isValidExperienceCurve = _dataContext
                 .ExperienceCurves
-                .Any(x => x.Id == pokemonSpeciesCreateDto.ExperienceCurveId);
+                .Any(x => x.Id == pokemon.ExperienceCurveId);
 
-            if (!isValisExpeienceCurve)
+            if (!isValidExperienceCurve)
             {
                 response.AddError("Experience Curve", "Experience Curve is not valid.");
             }
@@ -213,20 +316,19 @@ namespace LearningStarter.Controllers
             
             var pokemonSpeciesToCreate = new PokemonSpecies
             {
-                Name = pokemonSpeciesCreateDto.Name,
-                BaseHealth = pokemonSpeciesCreateDto.BaseHealth,
-                BaseAttack = pokemonSpeciesCreateDto.BaseAttack,
-                BaseDefense = pokemonSpeciesCreateDto.BaseDefense,
-                BaseSpecialAttack = pokemonSpeciesCreateDto.BaseSpecialAttack,
-                BaseSpecialDefense = pokemonSpeciesCreateDto.BaseSpecialDefense,
-                BaseSpeed = pokemonSpeciesCreateDto.BaseSpeed,
-                PrimaryTypeId = pokemonSpeciesCreateDto.PrimaryTypeId,
-                //SecondaryTypeId = pokemonSpeciesCreateDto.SecondaryTypeId,
-                PrimaryAbilityId = pokemonSpeciesCreateDto.PrimaryAbilityId,
-                // SecondaryAbilityId = pokemonSpeciesCreateDto.SecondaryAbilityId,
-                // HiddenAbilityId = pokemonSpeciesCreateDto.HiddenAbilityId,
-                ExperienceCurveId = pokemonSpeciesCreateDto.ExperienceCurveId,
-                // MoveLearnSet = dtoToMove(pokemonSpeciesCreateDto.MoveLearnSet)
+                Name = pokemon.Name,
+                BaseHealth = pokemon.BaseHealth,
+                BaseAttack = pokemon.BaseAttack,
+                BaseDefense = pokemon.BaseDefense,
+                BaseSpecialAttack = pokemon.BaseSpecialAttack,
+                BaseSpecialDefense = pokemon.BaseSpecialDefense,
+                BaseSpeed = pokemon.BaseSpeed,
+                PrimaryTypeId = pokemon.PrimaryTypeId,
+                SecondaryTypeId = pokemon.SecondaryTypeId,
+                PrimaryAbilityId = pokemon.PrimaryAbilityId,
+                SecondaryAbilityId = pokemon.SecondaryAbilityId,
+                HiddenAbilityId = pokemon.HiddenAbilityId,
+                ExperienceCurveId = pokemon.ExperienceCurveId
             };
 
             _dataContext.Add(pokemonSpeciesToCreate);
@@ -243,74 +345,194 @@ namespace LearningStarter.Controllers
                 BaseSpecialDefense = pokemonSpeciesToCreate.BaseSpecialDefense,
                 BaseSpeed = pokemonSpeciesToCreate.BaseSpeed,
                 PrimaryTypeId = pokemonSpeciesToCreate.PrimaryTypeId,
-                //SecondaryTypeId = pokemonSpeciesToCreate.SecondaryTypeId,
+                SecondaryTypeId = pokemonSpeciesToCreate.SecondaryTypeId,
                 PrimaryAbilityId = pokemonSpeciesToCreate.PrimaryAbilityId,
-                // SecondaryAbilityId = pokemonSpeciesToCreate.SecondaryAbilityId,
-                // HiddenAbilityId = pokemonSpeciesToCreate.HiddenAbilityId,
-                ExperienceCurveId = pokemonSpeciesToCreate.ExperienceCurveId,
-                // MoveLearnSet = moveToDto(pokemonSpeciesToCreate.MoveLearnSet)
+                SecondaryAbilityId = pokemonSpeciesToCreate.SecondaryAbilityId,
+                HiddenAbilityId = pokemonSpeciesToCreate.HiddenAbilityId,
+                ExperienceCurveId = pokemonSpeciesToCreate.ExperienceCurveId
             };
 
             response.Data = pokemonSpeciesToGet;
 
             return Created("Pokemon Species created", response);
-
         }
 
-        // public List<MoveGetDto> moveToDto(List<Move> moves)
-        // {
-        //     List<MoveGetDto> moveDtos = new List<MoveGetDto>();
-        //     
-        //     foreach (Move x in moves)
-        //     {
-        //         moveDtos.Add(new MoveGetDto
-        //         {
-        //             Id = x.Id,
-        //             Name = x.Name,
-        //             TypeId = x.TypeId,
-        //             MoveCategoryId = x.MoveCategoryId,
-        //             BasePower = x.BasePower,
-        //             PowerPoints = x.PowerPoints,
-        //             Accuracy = x.Accuracy,
-        //             SpeedPriority = x.SpeedPriority,
-        //             IsContactOnHit = x.IsContactOnHit,
-        //             IsSoundBased = x.IsSoundBased,
-        //             IsPunchBased = x.IsPunchBased,
-        //             IsAffectedByGravity = x.IsAffectedByGravity,
-        //             IsDefrostOnUse = x.IsDefrostOnUse,
-        //             IsBlockedByProtect = x.IsBlockedByProtect
-        //         });
-        //     }
-        //
-        //     return moveDtos;
-        // }
-        //
-        // public List<Move> dtoToMove(List<MoveGetDto> movesDtos)
-        // {
-        //     List<Move> moves = new List<Move>();
-        //     
-        //     foreach (MoveGetDto x in movesDtos)
-        //     {
-        //         moves.Add(new Move
-        //         {
-        //             Id = x.Id,
-        //             Name = x.Name,
-        //             TypeId = x.TypeId,
-        //             MoveCategoryId = x.MoveCategoryId,
-        //             BasePower = x.BasePower,
-        //             PowerPoints = x.PowerPoints,
-        //             Accuracy = x.Accuracy,
-        //             SpeedPriority = x.SpeedPriority,
-        //             IsContactOnHit = x.IsContactOnHit,
-        //             IsSoundBased = x.IsSoundBased,
-        //             IsPunchBased = x.IsPunchBased,
-        //             IsAffectedByGravity = x.IsAffectedByGravity,
-        //             IsDefrostOnUse = x.IsDefrostOnUse,
-        //             IsBlockedByProtect = x.IsBlockedByProtect
-        //         });
-        //     }
-        //
-        //     return moves;
-        // }
+        [HttpPut("{id:int}")]
+        public IActionResult Edit([FromRoute] int id,
+            [FromBody] PokemonSpeciesUpdateDto pokemon)
+        {
+            var response = new Response();
+            
+            if(pokemon == null)
+            {
+                response.AddError("","Cannot pass a null entity.");
+                return BadRequest(response);
+            }
+
+            pokemon.Name = pokemon.Name.Trim();
+            if (string.IsNullOrEmpty(pokemon.Name))
+            {
+                response.AddError("Species", "Species cannot be null or empty.");
+            }
+
+            var hasNameInDatabase = _dataContext
+                .PokemonSpecies
+                .Any(x => x.Name == pokemon.Name && x.Id != id);
+            
+            if (hasNameInDatabase)
+            {
+                response.AddError("Species", "Species already exists.");
+            }
+
+            if (pokemon.BaseHealth < 0 || pokemon.BaseHealth > 255)
+            {
+                response.AddError("Base Health", "Base Stats cannot be negative or greater than 255");
+            }
+            
+            if (pokemon.BaseAttack < 0 || pokemon.BaseAttack > 255)
+            {
+                response.AddError("BaseAttack", "Base Stats cannot be negative or greater than 255");
+            }
+            
+            if (pokemon.BaseDefense < 0 || pokemon.BaseDefense > 255)
+            {
+                response.AddError("Base Defense", "Base Stats cannot be negative or greater than 255");
+            }
+            
+            if (pokemon.BaseSpecialAttack < 0 || pokemon.BaseSpecialAttack > 255)
+            {
+                response.AddError("Base Special Attack", "Base Stats cannot be negative or greater than 255");
+            }
+            
+            if (pokemon.BaseSpecialDefense < 0 || pokemon.BaseSpecialDefense > 255)
+            {
+                response.AddError("Base Special Defense", "Base Stats cannot be negative or greater than 255");
+            }
+            
+            if (pokemon.BaseSpeed < 0 || pokemon.BaseSpeed > 255)
+            {
+                response.AddError("Base Speed", "Base Stats cannot be negative or greater than 255");
+            }
+            
+            var isValidType = _dataContext
+                .Types
+                .Any(x => x.Id == pokemon.PrimaryTypeId);
+            
+            if (!isValidType)
+            {
+                response.AddError("Primary Type", "Primary Type is not valid.");
+            }
+            
+            isValidType = _dataContext
+                .Types
+                .Any(x => x.Id == pokemon.SecondaryTypeId);
+            
+            if (!isValidType && pokemon.SecondaryTypeId != null)
+            {
+                response.AddError("Secondary Type", "Secondary Type is not valid.");
+            }
+            
+            var isValidAbility = _dataContext
+                .Abilities
+                .Any(x => x.Id == pokemon.PrimaryAbilityId);
+
+            if (!isValidAbility)
+            {
+               response.AddError("Primary Ability", "Primary Ability is not valid."); 
+            }
+            
+            isValidAbility = _dataContext
+                .Abilities
+                .Any(x => x.Id == pokemon.SecondaryAbilityId);
+            
+            if (!isValidAbility && pokemon.SecondaryAbilityId != null)
+            {
+                response.AddError("Secondary Ability", "Secondary Ability is not valid."); 
+            }
+            
+            isValidAbility = _dataContext
+                .Abilities
+                .Any(x => x.Id == pokemon.HiddenAbilityId);
+            
+            if (!isValidAbility && pokemon.HiddenAbilityId != null)
+            {
+                response.AddError("Hidden Ability", "Hidden Ability is not valid."); 
+            }
+
+            var isValidExperienceCurve = _dataContext
+                .ExperienceCurves
+                .Any(x => x.Id == pokemon.ExperienceCurveId);
+
+            if (!isValidExperienceCurve)
+            {
+                response.AddError("Experience Curve", "Experience Curve is not valid.");
+            }
+
+            if (response.HasErrors)
+            {
+                return BadRequest(response);
+            }
+
+            var pokemonToUpdate = _dataContext
+                .PokemonSpecies
+                .FirstOrDefault(x => x.Id == id);
+
+            pokemonToUpdate.Name = pokemon.Name;
+            pokemonToUpdate.BaseHealth = pokemon.BaseHealth;
+            pokemonToUpdate.BaseAttack = pokemon.BaseAttack;
+            pokemonToUpdate.BaseDefense = pokemon.BaseDefense;
+            pokemonToUpdate.BaseSpecialAttack = pokemon.BaseSpecialAttack;
+            pokemonToUpdate.BaseSpecialDefense = pokemon.BaseSpecialDefense;
+            pokemonToUpdate.BaseSpeed = pokemon.BaseSpeed;
+            pokemonToUpdate.PrimaryTypeId = pokemon.PrimaryTypeId;
+            pokemonToUpdate.SecondaryTypeId = pokemon.SecondaryTypeId;
+            pokemonToUpdate.PrimaryAbilityId = pokemon.PrimaryAbilityId;
+            pokemonToUpdate.SecondaryAbilityId = pokemon.SecondaryAbilityId;
+            pokemonToUpdate.HiddenAbilityId = pokemon.HiddenAbilityId;
+            pokemonToUpdate.ExperienceCurveId = pokemon.ExperienceCurveId;
+
+            _dataContext.SaveChanges();
+
+            var pokemonGet = new PokemonSpeciesGetDto
+            {
+                Id = id,
+                Name = pokemon.Name,
+                BaseHealth = pokemon.BaseHealth,
+                BaseAttack = pokemon.BaseAttack,
+                BaseDefense = pokemon.BaseDefense,
+                BaseSpecialAttack = pokemon.BaseSpecialAttack,
+                BaseSpecialDefense = pokemon.BaseSpecialDefense,
+                BaseSpeed = pokemon.BaseSpeed,
+                PrimaryTypeId = pokemon.PrimaryTypeId,
+                SecondaryTypeId = pokemon.SecondaryTypeId,
+                PrimaryAbilityId = pokemon.PrimaryAbilityId,
+                SecondaryAbilityId = pokemon.SecondaryAbilityId,
+                HiddenAbilityId = pokemon.HiddenAbilityId,
+                ExperienceCurveId = pokemon.ExperienceCurveId
+            };
+
+            response.Data = pokemonGet;
+
+            return Ok(response);
+        }
+        
+        [HttpDelete("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            var response = new Response();
+
+            var pokemon = _dataContext.PokemonSpecies.FirstOrDefault(x => x.Id == id);
+
+            if (pokemon == null)
+            {
+                response.AddError("id", "Pokemon species not found.");
+                return NotFound(response);
+            }
+
+            _dataContext.PokemonSpecies.Remove(pokemon);
+            _dataContext.SaveChanges();
+
+            return Ok(response);
+        }
     }
 }

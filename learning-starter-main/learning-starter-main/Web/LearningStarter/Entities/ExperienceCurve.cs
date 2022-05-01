@@ -8,14 +8,12 @@ namespace LearningStarter.Entities
 
         public string Name { get; set; }
 
-        // public List<PokemonSpecies> PokemonSpeciesList { get; set; }
+        public List<PokemonSpecies> PokemonSpecies { get; set; }
         
     }
     
     public class ExperienceCurveCreateDto
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
     }
@@ -25,14 +23,10 @@ namespace LearningStarter.Entities
         public int Id { get; set; }
 
         public string Name { get; set; }
-
     }
     
     public class ExperienceCurveUpdateDto
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
-
     }
 }

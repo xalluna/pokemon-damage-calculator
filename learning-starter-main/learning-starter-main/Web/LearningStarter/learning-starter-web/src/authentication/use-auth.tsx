@@ -138,5 +138,5 @@ export const mapUser = (user: any): UserDto => ({
   id: user.id,
   firstName: user.firstName,
   lastName: user.lastName,
-  userName: user.userName,
+  username: user.username,
 });

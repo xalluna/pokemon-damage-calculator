@@ -6,14 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LearningStarter.Controllers
 {
-    [ApiController]
-    [Route("api/experience-curves")]
-    
-    public class ExperienceCurvesController : ControllerBase
+    [ApiController] 
+    [Route("api/natures")]
+    public class NaturesController : ControllerBase
     {
         private DataContext _dataContext;
-
-        public ExperienceCurvesController(DataContext dataContext)
+        
+        public NaturesController(DataContext dataContext)
         {
             _dataContext = dataContext;
         }
@@ -23,17 +22,17 @@ namespace LearningStarter.Controllers
         {
             var response = new Response();
 
-            var experienceCurvesToReturn = _dataContext
-                .ExperienceCurves
-                .Select(x => new ExperienceCurveGetDto
+            var naturesToReturn = _dataContext
+                .Natures
+                .Select(x => new NatureGetDto
                 {
                     Id = x.Id,
                     Name = x.Name
                 })
                 .ToList();
 
-            response.Data = experienceCurvesToReturn;
-
+            response.Data = naturesToReturn;
+            
             return Ok(response);
         }
 
@@ -41,54 +40,55 @@ namespace LearningStarter.Controllers
         public IActionResult GetById(int id)
         {
             var response = new Response();
-            
+
             if (id <= 0)
             {
                 response.AddError("Id", "Id cannot be less than oe equal to zero.");
                 return BadRequest(response);
             }
 
-            var experienceCurveFromDatabase = _dataContext
-                .ExperienceCurves
+            var natureFromDatabase = _dataContext
+                .Natures
                 .FirstOrDefault(x => x.Id == id);
 
-            if (experienceCurveFromDatabase == null)
+            if (natureFromDatabase == null)
             {
-                response.AddError("Id", "Experience Curve not found");
+                response.AddError("Id", "Nature not found");
                 return NotFound(response);
             }
 
-            var experienceCurveToReturn = new ExperienceCurveGetDto
+            var natureToReturn = new NatureGetDto
             {
-                Id = experienceCurveFromDatabase.Id,
-                Name = experienceCurveFromDatabase.Name
+                Id = natureFromDatabase.Id,
+                Name = natureFromDatabase.Name
             };
 
-            response.Data = experienceCurveToReturn;
+            response.Data = natureToReturn;
 
             return Ok(response);
         }
-        
+
         [HttpPost]
         public IActionResult Create(
-            [FromBody] ExperienceCurveCreateDto experienceCurveCreateDto)
+            [FromBody] NatureCreateDto nature)
         {
             var response = new Response();
 
-            if (experienceCurveCreateDto == null)
+            if (nature == null)
             {
                 response.AddError("", "Cannot pass a null entity.");
                 return BadRequest(response);
             }
-            
-            if (string.IsNullOrEmpty(experienceCurveCreateDto.Name))
+
+            nature.Name = nature.Name.Trim();
+            if (string.IsNullOrEmpty(nature.Name))
             {
                 response.AddError("Name", "Name cannot be null or empty");
             }
 
             var hasNameInDatabase = _dataContext
-                .ExperienceCurves
-                .Any(x => x.Name == experienceCurveCreateDto.Name);
+                .Natures
+                .Any(x => x.Name == nature.Name);
             if (hasNameInDatabase)
             {
                 response.AddError("Name", "Name already exists");
@@ -99,46 +99,47 @@ namespace LearningStarter.Controllers
                 return BadRequest(response);
             }
 
-            var experienceCurveToCreate = new ExperienceCurve
+            var natureToCreate = new Nature
             {
-                Name = experienceCurveCreateDto.Name
+                Name = nature.Name
             };
 
-            _dataContext.Add(experienceCurveToCreate);
+            _dataContext.Add(natureToCreate);
             _dataContext.SaveChanges();
             
-            var experienceCurveToGet = new ExperienceCurveGetDto()
+            var natureToGet = new NatureGetDto
             {
-                Id = experienceCurveToCreate.Id,
-                Name = experienceCurveToCreate.Name
+                Id = natureToCreate.Id,
+                Name = natureToCreate.Name
             };
 
-            response.Data = experienceCurveToGet;
+            response.Data = natureToGet;
 
-            return Created("Experience Curve created", response);
+            return Created("Nature created", response);
         }
-        
+
         [HttpPut("{id:int}")]
         public IActionResult Edit([FromRoute] int id,
-            [FromBody] ExperienceCurveUpdateDto experienceCurve)
+            [FromBody] NatureUpdateDto nature)
         {
             var response = new Response();
 
-            if (experienceCurve == null)
+            if (nature == null)
             {
                 response.AddError("", "Cannot pass a null entity.");
                 return BadRequest(response);
             }
 
-            experienceCurve.Name = experienceCurve.Name.Trim();
-            if (string.IsNullOrEmpty(experienceCurve.Name))
+            nature.Name = nature.Name.Trim();
+            if (string.IsNullOrEmpty(nature.Name))
             {
                 response.AddError("Name", "Name cannot be null or empty");
             }
 
             var hasNameInDatabase = _dataContext
-                .ExperienceCurves
-                .Any(x => x.Name.ToLower() == experienceCurve.Name.ToLower() && x.Id != id);
+                .Natures
+                .Any(x => x.Name.ToLower() == nature.Name.ToLower() && x.Id != id);
+            
             if (hasNameInDatabase)
             {
                 response.AddError("Name", "Name already exists");
@@ -149,19 +150,19 @@ namespace LearningStarter.Controllers
                 return BadRequest(response);
             }
 
-            var experienceCurveToUpdate = _dataContext
-                .ExperienceCurves
+            var natureToUpdate = _dataContext
+                .Natures
                 .FirstOrDefault(x => x.Id == id);
 
-            experienceCurveToUpdate.Name = experienceCurve.Name;
+            natureToUpdate.Name = nature.Name;
             _dataContext.SaveChanges();
 
-            var experienceCurveGet = new ExperienceCurveGetDto
+            var natureGet = new NatureGetDto
             {
-                Name = experienceCurve.Name
+                Name = nature.Name
             };
 
-            response.Data = experienceCurveGet;
+            response.Data = natureGet;
 
             return Ok(response);
         }
@@ -171,15 +172,15 @@ namespace LearningStarter.Controllers
         {
             var response = new Response();
 
-            var experienceCurve = _dataContext.ExperienceCurves.FirstOrDefault(x => x.Id == id);
+            var nature = _dataContext.Natures.FirstOrDefault(x => x.Id == id);
 
-            if (experienceCurve == null)
+            if (nature == null)
             {
-                response.AddError("id", "Experience Curve not found.");
+                response.AddError("id", "Nature not found.");
                 return NotFound(response);
             }
 
-            _dataContext.ExperienceCurves.Remove(experienceCurve);
+            _dataContext.Natures.Remove(nature);
             _dataContext.SaveChanges();
 
             return Ok(response);

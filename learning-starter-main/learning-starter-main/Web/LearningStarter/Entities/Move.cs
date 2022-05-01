@@ -10,15 +10,11 @@ namespace LearningStarter.Entities
 
         public int TypeId { get; set; }
 
-        public Type Type { get; set; }
+        public PType PType { get; set; }
 
         public int MoveCategoryId { get; set; }
-        
-        public MoveCategory MoveCategory { get; set; }
 
-        public List<MoveCategory> MoveCategories { get; set; }
-
-        public int BasePower { get; set; }
+        public int? BasePower { get; set; }
 
         public int Accuracy { get; set; }
         
@@ -37,19 +33,19 @@ namespace LearningStarter.Entities
         public bool? IsDefrostOnUse { get; set; }
 
         public bool? IsBlockedByProtect { get; set; }
+        
+        public virtual List<Pokemon> Pokemon { get; set; }
     }
     
     public class MoveCreateDto
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public int TypeId { get; set; }
 
         public int MoveCategoryId { get; set; }
 
-        public int BasePower { get; set; }
+        public int? BasePower { get; set; }
 
         public int Accuracy { get; set; }
         
@@ -80,7 +76,7 @@ namespace LearningStarter.Entities
 
         public int MoveCategoryId { get; set; }
 
-        public int BasePower { get; set; }
+        public int? BasePower { get; set; }
 
         public int Accuracy { get; set; }
         
@@ -103,15 +99,13 @@ namespace LearningStarter.Entities
     
     public class MoveUpdateDto
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public int TypeId { get; set; }
 
         public int MoveCategoryId { get; set; }
 
-        public int BasePower { get; set; }
+        public int? BasePower { get; set; }
 
         public int Accuracy { get; set; }
         
@@ -130,5 +124,12 @@ namespace LearningStarter.Entities
         public bool? IsDefrostOnUse { get; set; }
 
         public bool? IsBlockedByProtect { get; set; }
+    }
+    
+    public class MoveOptionsDto
+    {
+        public string Text { get; set; }
+        public int Value { get; set; }
+        public int Key { get; set; }
     }
 }

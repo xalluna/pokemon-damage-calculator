@@ -1,0 +1,23 @@
+.buttons {
+  display: flex;
+  justify-content: center;
+  column-gap: 30px;
+}
+
+.new-content {
+  height: 900px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.submit-button {
+  display: flex;
+  justify-content: left;
+}
+
+.pokemon-create-page {
+  display: flex;
+  justify-content: center;
+}

@@ -2,3 +2,24 @@
   display: flex;
   justify-content: center;
 }
+.home-button {
+  height: 850px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+
+.modal-content {
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  column-gap: 30px;
+}

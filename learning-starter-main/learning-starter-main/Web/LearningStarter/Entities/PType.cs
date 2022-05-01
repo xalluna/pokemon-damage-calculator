@@ -2,22 +2,20 @@ using System.Collections.Generic;
 
 namespace LearningStarter.Entities
 {
-    public class Type
+    public class PType
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        // public List<PokemonSpecies> PokemonSpeciesList { get; set; }
-        //
-        // public List<Move> Moves { get; set; }
+        public List<PokemonSpecies> PokemonSpecies { get; set; }
+        
+        public List<Move> Moves { get; set; }
         
     }
     
     public class TypeCreateDto
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
     }
@@ -32,9 +30,6 @@ namespace LearningStarter.Entities
     
     public class TypeUpdateDto
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
-
     }
 }
