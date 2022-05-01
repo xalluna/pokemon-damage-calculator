@@ -7,6 +7,7 @@ import {
   Modal,
   Card,
   Image,
+  Icon,
 } from "semantic-ui-react";
 import React, { useEffect, useState } from "react";
 import { baseUrl } from "../../../constants/env-vars";
@@ -45,15 +46,18 @@ export const PokemonListingPage = () => {
   return (
     <div className="pokemon-page-container">
       <div>
-        <div className="pokemon-listinsg-page-create-button">
-          <Button size="large" color="teal" onClick={(open) => setOpen(true)}>
+        <div className="pokemon-listing-page-create-button">
+          <Button size="huge" color="teal" onClick={(open) => setOpen(true)}>
             Create
           </Button>
         </div>
         <Divider></Divider>
-        <Header textAlign="center">Pokemon</Header>
+
+        <Header textAlign="center" size="huge">
+          Pokemon
+        </Header>
         <Divider></Divider>
-        <div className="container">
+        <Card.Group itemsPerRow={6} centered>
           {pokemon ? (
             pokemon.map((pokemon) => {
               return (
@@ -61,7 +65,10 @@ export const PokemonListingPage = () => {
                   <Card>
                     <Image src={pikachu} />
                     <Card.Content>
-                      <Header>{pokemon.name}</Header>
+                      <span>
+                        <Header>{pokemon.name}</Header>
+                      </span>
+
                       <span>
                         <div>Pokemon:</div>
                         <div>{pokemon.pokemonSpecies}</div>
@@ -115,6 +122,22 @@ export const PokemonListingPage = () => {
                         Spe: [{pokemon.speedIv}] [{pokemon.speedEv}]
                       </div>
                     </Card.Content>
+                    <div>
+                      <Button.Group compact floated="right">
+                        <Button
+                          label="Edit"
+                          labelPosition="left"
+                          icon="edit outline"
+                          color="teal"
+                        ></Button>
+                        <Button
+                          label="Delete"
+                          labelPosition="left"
+                          icon="trash alternate outline"
+                          color="red"
+                        ></Button>
+                      </Button.Group>
+                    </div>
                   </Card>
                   <Divider />
                 </div>
@@ -123,7 +146,7 @@ export const PokemonListingPage = () => {
           ) : (
             <div>No Abilities</div>
           )}
-        </div>
+        </Card.Group>
       </div>
       <Modal
         onOpen={() => setOpen(true)}

@@ -955,24 +955,73 @@ namespace LearningStarter.Controllers
             return Ok(response);
         }
 
-        // [HttpGet("options")]
-        // public IActionResult GetOptions()
-        // {
-        //     var response = new Response();
-        //
-        //     var speciesOptions = new List<SpeciesOptionsDto>();
-        //
-        //     foreach (var pokemon in _dataContext.PokemonSpecies)
-        //     {
-        //         speciesOptions.Add(new SpeciesOptionsDto
-        //         {
-        //             Text = pokemon.Name,
-        //             Value = pokemon.Id,
-        //             Key = pokemon.Id
-        //         });
-        //     }
-        //     
-        //     return Ok(response);
-        // }
+        [HttpGet("options")]
+        public IActionResult GetOptions()
+        {
+            var response = new Response();
+        
+            var speciesOptions = _dataContext
+                .PokemonSpecies
+                .Select(x => new SpeciesOptionsDto
+                {
+                    Text = x.Name,
+                    Value = x.Id,
+                    Key = x.Id
+                })
+                .ToList();
+        
+            var abilityOptions = _dataContext
+                .Abilities
+                .Select(x => new AbilityOptionsDto
+                {
+                    Text = x.Name,
+                    Value = x.Id,
+                    Key = x.Id
+                })
+                .ToList();
+            
+            var moveOptions = _dataContext
+                .Moves
+                .Select(x => new MoveOptionsDto
+                {
+                    Text = x.Name,
+                    Value = x.Id,
+                    Key = x.Id
+                })
+                .ToList();
+            
+            var itemOptions = _dataContext
+                .Items
+                .Select(x => new ItemOptionsDto
+                {
+                    Text = x.Name,
+                    Value = x.Id,
+                    Key = x.Id
+                })
+                .ToList();
+            
+            var natureOptions = _dataContext
+                .Natures
+                .Select(x => new NatureOptionsDto
+                {
+                    Text = x.Name,
+                    Value = x.Id,
+                    Key = x.Id
+                })
+                .ToList();
+
+            var optionsToReturn = new PokemonOptionsDto
+            {
+                Abilities = abilityOptions,
+                Items = itemOptions,
+                Moves = moveOptions,
+                Natures = natureOptions,
+                Species = speciesOptions
+            };
+
+            response.Data = optionsToReturn;
+            
+            return Ok(response);
+        }
     }
 }

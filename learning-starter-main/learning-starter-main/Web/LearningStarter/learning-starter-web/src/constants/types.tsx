@@ -257,3 +257,11 @@ export type PokemonUpdateDto = {
   gender: number;
   isShiny: Nullable<boolean>;
 };
+
+export type PokemonOptionsDto = {
+  abilities: AbilityGetDto[];
+  items: ItemGetDto[];
+  moves: MoveGetDto[];
+  natures: NatureGetDto[];
+  species: PokemonSpeciesGetDto[];
+};
