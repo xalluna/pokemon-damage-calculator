@@ -272,4 +272,22 @@ namespace LearningStarter.Entities
         public List<MoveOptionsDto> Moves{ get; set; }
         public List<NatureOptionsDto> Natures{ get; set; }
     }
+
+    class PokemonBattleDto
+    {
+        public PokemonGetDto Pokemon { get; set; }
+        public PokemonSpeciesGetDto PokemonSpecies { get; set; }
+        // public AbilityGetDto Ability { get; set; }
+        // public ItemGetDto Item { get; set; }
+        public MoveGetDto MoveOne { get; set; }
+        public MoveGetDto? MoveTwo { get; set; }
+        public MoveGetDto? MoveThree { get; set; }
+        public MoveGetDto? MoveFour { get; set; }
+        // public NatureGetDto Nature { get; set; }
+    }
+
+    class PokemonBattleGroupDto
+    {
+        public List<PokemonBattleDto> Pokemon { get; set; }
+    }
 }
