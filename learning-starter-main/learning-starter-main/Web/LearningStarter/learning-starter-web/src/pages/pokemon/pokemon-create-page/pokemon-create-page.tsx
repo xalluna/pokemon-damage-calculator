@@ -3,14 +3,13 @@ import { Field, Form, Formik } from "formik";
 import {
   Input,
   Button,
-  Modal,
   Header,
   Card,
   Dropdown,
+  // Modal,
 } from "semantic-ui-react";
 import {
   PokemonGetDto,
-  PokemonFormDto,
   PokemonCreateDto,
   ApiResponse,
   PokemonOptionsDto,
@@ -49,12 +48,8 @@ const initialValues: PokemonCreateDto = {
   isShiny: false,
 };
 
-// const moveList: DropdownProps[] = () => {
-//   return ["Undefined"];
-// }, [];
-
 export const PokemonCreatePage = () => {
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [options, setOptions] = useState<PokemonOptionsDto>();
   const history = useHistory();
 
