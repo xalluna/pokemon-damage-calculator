@@ -14,10 +14,15 @@ import { baseUrl } from "../../../constants/env-vars";
 import { PokemonListDto, ApiResponse } from "../../../constants/types";
 import { PokemonCreatePage } from "../pokemon-create-page/pokemon-create-page";
 import pikachu from "../../../assets/pikachu.png";
+import { useHistory } from "react-router-dom";
+import { routes } from "../../../routes/config";
 
 export const PokemonListingPage = () => {
   const [pokemon, setPokemon] = useState<PokemonListDto[]>();
   const [open, setOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState();
+  const history = useHistory();
+
   const fetchPokemon = async () => {
     const response = await axios.get<ApiResponse<PokemonListDto[]>>(
       `${baseUrl}/api/pokemon/list`
@@ -29,6 +34,17 @@ export const PokemonListingPage = () => {
     } else {
       setPokemon(response.data.data);
     }
+  };
+
+  const deletePokemon = async (id: number) => {
+    const response = await axios.delete(`${baseUrl}/api/pokemon/${id}`);
+
+    if (response.data.hasErrors) {
+      response.data.errors.forEach((err) => console.log(err.message));
+    }
+
+    history.push(routes.home);
+    history.push(routes.pokemon.listing);
   };
 
   useEffect(() => {
@@ -116,17 +132,20 @@ export const PokemonListingPage = () => {
                     </Card.Content>
                     <div>
                       <Button.Group compact floated="right">
-                        <Button
-                          label="Edit"
-                          labelPosition="left"
-                          icon="edit outline"
-                          color="teal"
-                        ></Button>
+                        <a href={`/pokemon/${pokemon.id}`}>
+                          <Button
+                            label="Edit"
+                            labelPosition="left"
+                            icon="edit outline"
+                            color="teal"
+                          ></Button>
+                        </a>
                         <Button
                           label="Delete"
                           labelPosition="left"
                           icon="trash alternate outline"
                           color="red"
+                          onClick={() => deletePokemon(pokemon.id)}
                         ></Button>
                       </Button.Group>
                     </div>
