@@ -178,6 +178,10 @@ export const PokemonListingPage = () => {
                         <div>{pokemon.item}</div>
                       </span>
                       <span>
+                        <div>Nature:</div>
+                        <div>{pokemon.nature}</div>
+                      </span>
+                      <span>
                         <div>Gender:</div>
                         <div>{pokemon.gender}</div>
                       </span>
