@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Button, Dropdown, Header } from "semantic-ui-react";
+import { Button, ButtonGroup, Dropdown, Header } from "semantic-ui-react";
 import { baseUrl } from "../../constants/env-vars";
 import {
   ApiResponse,
@@ -14,7 +14,9 @@ export const DamageCalculatorPage = () => {
   const [pokemon, setPokemon] = useState<PokemonBattleGroup>();
   const [options, setOptions] = useState<PokemonOptionsDto>();
   const [currentPokemon1, setCurrentPokemon1] = useState<PokemonBattleDto>();
+  const [pokemon1Stats, setPokemon1Stats] = useState<number[]>();
   const [currentPokemon2, setCurrentPokemon2] = useState<PokemonBattleDto>();
+  const [pokemon2Stats, setPokemon2Stats] = useState<number[]>();
 
   const fetchPokemon = async () => {
     const response = await axios.get<ApiResponse<PokemonBattleGroup>>(
@@ -49,6 +51,44 @@ export const DamageCalculatorPage = () => {
       pokemon.pokemon.forEach((child) => {
         if (child.pokemon.id === id) {
           setCurrentPokemon1(child);
+          setPokemon1Stats([
+            calcHp(
+              child.pokemonSpecies.baseHealth,
+              child.pokemon.healthIv,
+              child.pokemon.healthEv,
+              child.pokemon.level
+            ),
+            calcStat(
+              child.pokemonSpecies.baseAttack,
+              child.pokemon.attackIv,
+              child.pokemon.attackIv,
+              child.pokemon.level
+            ),
+            calcStat(
+              child.pokemonSpecies.baseDefense,
+              child.pokemon.defenseIv,
+              child.pokemon.defenseEv,
+              child.pokemon.level
+            ),
+            calcStat(
+              child.pokemonSpecies.baseSpecialAttack,
+              child.pokemon.specialAttackIv,
+              child.pokemon.specialAttackEv,
+              child.pokemon.level
+            ),
+            calcStat(
+              child.pokemonSpecies.baseSpecialDefense,
+              child.pokemon.specialDefenseIv,
+              child.pokemon.specialDefenseEv,
+              child.pokemon.level
+            ),
+            calcStat(
+              child.pokemonSpecies.baseSpeed,
+              child.pokemon.speedIv,
+              child.pokemon.speedEv,
+              child.pokemon.level
+            ),
+          ]);
           return;
         }
       });
@@ -60,9 +100,62 @@ export const DamageCalculatorPage = () => {
       pokemon.pokemon.forEach((child) => {
         if (child.pokemon.id === id) {
           setCurrentPokemon2(child);
+          setPokemon2Stats([
+            calcHp(
+              child.pokemonSpecies.baseHealth,
+              child.pokemon.healthIv,
+              child.pokemon.healthEv,
+              child.pokemon.level
+            ),
+            calcStat(
+              child.pokemonSpecies.baseAttack,
+              child.pokemon.attackIv,
+              child.pokemon.attackIv,
+              child.pokemon.level
+            ),
+            calcStat(
+              child.pokemonSpecies.baseDefense,
+              child.pokemon.defenseIv,
+              child.pokemon.defenseEv,
+              child.pokemon.level
+            ),
+            calcStat(
+              child.pokemonSpecies.baseSpecialAttack,
+              child.pokemon.specialAttackIv,
+              child.pokemon.specialAttackEv,
+              child.pokemon.level
+            ),
+            calcStat(
+              child.pokemonSpecies.baseSpecialDefense,
+              child.pokemon.specialDefenseIv,
+              child.pokemon.specialDefenseEv,
+              child.pokemon.level
+            ),
+            calcStat(
+              child.pokemonSpecies.baseSpeed,
+              child.pokemon.speedIv,
+              child.pokemon.speedEv,
+              child.pokemon.level
+            ),
+          ]);
           return;
         }
       });
+    }
+  };
+
+  const calcHp = (statBase, statIv, statEv, level) => {
+    return ((2 * statBase + statIv + statEv / 4) * level) / 100 + level + 10;
+  };
+
+  const calcStat = (statBase, statIv, statEv, level) => {
+    return ((2 * statBase + statIv + statEv / 4) * level) / 100 + 5;
+  };
+
+  //returns 1.1 or .9
+  const getNatureMultiplier = (natureId) => {
+    var natureMultiplier = [1, 1, 1, 1, 1];
+    if (natureId) {
     }
   };
 
@@ -89,13 +182,34 @@ export const DamageCalculatorPage = () => {
                 }}
               />
               {currentPokemon1 && (
-                <Button>{currentPokemon1.pokemon.name}</Button>
+                <ButtonGroup
+                  buttons={[
+                    `${currentPokemon1.moveOne.name}`,
+                    `${currentPokemon1.moveTwo.name}`,
+                    `${currentPokemon1.moveThree.name}`,
+                    `${currentPokemon1.moveFour.name}`,
+                  ]}
+                  vertical
+                />
+                // <Button>{currentPokemon1.pokemon.name}</Button>
               )}
             </span>
 
             <span>
               {currentPokemon2 && (
-                <Button>{currentPokemon2.pokemon.name}</Button>
+                <>
+                  <ButtonGroup
+                    buttons={[
+                      `${currentPokemon2.moveOne.name}`,
+                      `${currentPokemon2.moveTwo.name}`,
+                      `${currentPokemon2.moveThree.name}`,
+                      `${currentPokemon2.moveFour.name}`,
+                    ]}
+                    vertical
+                  />
+                </>
+
+                // <Button>{currentPokemon2.pokemon.name}</Button>
               )}
               <Dropdown
                 className="pokemon-one"

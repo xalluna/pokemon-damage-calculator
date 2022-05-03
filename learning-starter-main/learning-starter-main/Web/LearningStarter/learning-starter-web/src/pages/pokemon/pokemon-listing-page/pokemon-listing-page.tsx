@@ -8,6 +8,7 @@ import {
   Image,
   Dropdown,
   Input,
+  Message,
 } from "semantic-ui-react";
 import React, { useEffect, useState } from "react";
 import { baseUrl } from "../../../constants/env-vars";
@@ -17,6 +18,7 @@ import {
   PokemonOptionsDto,
   PokemonGetDto,
   PokemonUpdateDto,
+  Error,
 } from "../../../constants/types";
 import { PokemonCreatePage } from "../pokemon-create-page/pokemon-create-page";
 import pikachu from "../../../assets/pikachu.png";
@@ -27,6 +29,7 @@ import { Field, Formik, Form } from "formik";
 export const PokemonListingPage = () => {
   const [pokemon, setPokemon] = useState<PokemonListDto[]>();
   const [options, setOptions] = useState<PokemonOptionsDto>();
+  const [errors, setErrors] = useState<Error[]>();
   const [open, setOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
@@ -39,9 +42,7 @@ export const PokemonListingPage = () => {
       `${baseUrl}/api/pokemon/list`
     );
     if (response.data.hasErrors) {
-      response.data.errors.forEach((err) => {
-        console.log(err);
-      });
+      setErrors(response.data.errors);
     } else {
       setPokemon(response.data.data);
     }
@@ -53,10 +54,7 @@ export const PokemonListingPage = () => {
     );
 
     if (response.data.hasErrors) {
-      response.data.errors.forEach((err) => {
-        console.log(err);
-        return;
-      });
+      setErrors(response.data.errors);
     }
 
     setOptions(response.data.data);
@@ -71,7 +69,7 @@ export const PokemonListingPage = () => {
     const response = await axios.delete(`${baseUrl}/api/pokemon/${deleteId}`);
 
     if (response.data.hasErrors) {
-      response.data.errors.forEach((err) => console.log(err.message));
+      setErrors(response.data.errors);
     }
 
     history.push(routes.home);
@@ -118,9 +116,7 @@ export const PokemonListingPage = () => {
     );
 
     if (response.data.hasErrors) {
-      response.data.errors.forEach((err) => {
-        console.log(err.message);
-      });
+      setErrors(response.data.errors);
     } else {
       history.push(routes.home);
       history.push(routes.pokemon.listing);
@@ -146,6 +142,13 @@ export const PokemonListingPage = () => {
           Pokemon
         </Header>
         <Divider></Divider>
+        {errors && (
+          <Message
+            error
+            header="There was some errors with your submission"
+            list={errors}
+          />
+        )}
         <Card.Group itemsPerRow={6} centered>
           {pokemon ? (
             pokemon.map((pokemon) => {
@@ -161,6 +164,10 @@ export const PokemonListingPage = () => {
                       <span>
                         <div>Pokemon:</div>
                         <div>{pokemon.pokemonSpecies}</div>
+                      </span>
+                      <span>
+                        <div>Level:</div>
+                        <div>{pokemon.level}</div>
                       </span>
                       <span>
                         <div>Ability:</div>
