@@ -715,6 +715,16 @@ namespace LearningStarter.Controllers
         public IActionResult GetOptions()
         {
             var response = new Response();
+            
+            var pokemonOptions = _dataContext
+                .Pokemon
+                .Select(x => new PokemonOptions
+                {
+                    Text = x.Name,
+                    Value = x.Id,
+                    Key = x.Id
+                })
+                .ToList();
         
             var speciesOptions = _dataContext
                 .PokemonSpecies
@@ -772,6 +782,7 @@ namespace LearningStarter.Controllers
                 Items = itemOptions,
                 Moves = moveOptions,
                 Natures = natureOptions,
+                Pokemon = pokemonOptions,
                 Species = speciesOptions
             };
 

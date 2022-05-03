@@ -263,9 +263,17 @@ namespace LearningStarter.Entities
         public string Gender { get; set; }
         public string IsShiny { get; set; }
     }
+
+    class PokemonOptions
+    {
+        public string Text { get; set; }
+        public int Value { get; set; }
+        public int Key { get; set; }
+    }
     
     class PokemonOptionsDto
     {
+        public List<PokemonOptions> Pokemon { get; set; }
         public List<SpeciesOptionsDto> Species{ get; set; }
         public List<AbilityOptionsDto> Abilities{ get; set; }
         public List<ItemOptionsDto> Items{ get; set; }
