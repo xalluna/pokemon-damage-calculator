@@ -8,6 +8,7 @@ import {
   Image,
   Dropdown,
   Input,
+  Message,
 } from "semantic-ui-react";
 import React, { useEffect, useState } from "react";
 import { baseUrl } from "../../../constants/env-vars";
@@ -17,16 +18,19 @@ import {
   PokemonOptionsDto,
   PokemonGetDto,
   PokemonUpdateDto,
+  Error,
 } from "../../../constants/types";
 import { PokemonCreatePage } from "../pokemon-create-page/pokemon-create-page";
 import pikachu from "../../../assets/pikachu.png";
 import { useHistory } from "react-router-dom";
 import { routes } from "../../../routes/config";
 import { Field, Formik, Form } from "formik";
+import "./pokemon-listing-page.css";
 
 export const PokemonListingPage = () => {
   const [pokemon, setPokemon] = useState<PokemonListDto[]>();
   const [options, setOptions] = useState<PokemonOptionsDto>();
+  const [errors, setErrors] = useState<Error[]>();
   const [open, setOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
@@ -39,9 +43,7 @@ export const PokemonListingPage = () => {
       `${baseUrl}/api/pokemon/list`
     );
     if (response.data.hasErrors) {
-      response.data.errors.forEach((err) => {
-        console.log(err);
-      });
+      setErrors(response.data.errors);
     } else {
       setPokemon(response.data.data);
     }
@@ -53,10 +55,7 @@ export const PokemonListingPage = () => {
     );
 
     if (response.data.hasErrors) {
-      response.data.errors.forEach((err) => {
-        console.log(err);
-        return;
-      });
+      setErrors(response.data.errors);
     }
 
     setOptions(response.data.data);
@@ -71,7 +70,7 @@ export const PokemonListingPage = () => {
     const response = await axios.delete(`${baseUrl}/api/pokemon/${deleteId}`);
 
     if (response.data.hasErrors) {
-      response.data.errors.forEach((err) => console.log(err.message));
+      setErrors(response.data.errors);
     }
 
     history.push(routes.home);
@@ -81,6 +80,118 @@ export const PokemonListingPage = () => {
   const initEditPokemon = (pokemon: PokemonGetDto) => {
     setPokemonEdit(pokemon);
     setOpenEdit(true);
+  };
+
+  const calcHp = (statBase, statIv, statEv, level) => {
+    return (
+      ((2 * statBase + statIv + statEv / 4.0) * level) / 100.0 + level + 10
+    );
+  };
+
+  const calcStat = (statBase, statIv, statEv, level) => {
+    return ((2 * statBase + statIv + statEv / 4.0) * level) / 100.0 + 5;
+  };
+
+  //returns 1.1 or .9
+  const getNatureMultiplier = (natureId) => {
+    var natureMultiplier = [1, 1, 1, 1, 1]; //[atk, def, spA, spD, spe]
+
+    if (
+      natureId === 2 ||
+      natureId === 7 ||
+      natureId === 9 ||
+      natureId === 20 ||
+      natureId === 24
+    ) {
+      return natureMultiplier;
+    }
+
+    if (
+      natureId === 1 ||
+      natureId === 4 ||
+      natureId === 14 ||
+      natureId === 18
+    ) {
+      natureMultiplier[0] = 1.1;
+    }
+
+    if (
+      natureId === 3 ||
+      natureId === 11 ||
+      natureId === 13 ||
+      natureId === 22
+    ) {
+      natureMultiplier[1] = 1.1;
+    }
+
+    if (
+      natureId === 15 ||
+      natureId === 16 ||
+      natureId === 19 ||
+      natureId === 21
+    ) {
+      natureMultiplier[2] = 1.1;
+    }
+
+    if (natureId === 5 || natureId === 6 || natureId === 8 || natureId === 23) {
+      natureMultiplier[3] = 1.1;
+    }
+
+    if (
+      natureId === 10 ||
+      natureId === 12 ||
+      natureId === 17 ||
+      natureId === 25
+    ) {
+      natureMultiplier[4] = 1.1;
+    }
+
+    if (
+      natureId === 3 ||
+      natureId === 5 ||
+      natureId === 16 ||
+      natureId === 25
+    ) {
+      natureMultiplier[0] = 0.9;
+    }
+
+    if (
+      natureId === 8 ||
+      natureId === 10 ||
+      natureId === 14 ||
+      natureId === 15
+    ) {
+      natureMultiplier[1] = 0.9;
+    }
+
+    if (
+      natureId === 1 ||
+      natureId === 6 ||
+      natureId === 11 ||
+      natureId === 12
+    ) {
+      natureMultiplier[2] = 0.9;
+    }
+
+    if (
+      natureId === 13 ||
+      natureId === 17 ||
+      natureId === 18 ||
+      natureId === 21
+    ) {
+      natureMultiplier[3] = 0.9;
+    }
+
+    if (
+      natureId === 4 ||
+      natureId === 19 ||
+      natureId === 22 ||
+      natureId === 23
+    ) {
+      natureMultiplier[4] = 0.9;
+    }
+
+    return natureMultiplier;
   };
 
   const onSubmit = async (formValues: PokemonGetDto) => {
@@ -118,9 +229,7 @@ export const PokemonListingPage = () => {
     );
 
     if (response.data.hasErrors) {
-      response.data.errors.forEach((err) => {
-        console.log(err.message);
-      });
+      setErrors(response.data.errors);
     } else {
       history.push(routes.home);
       history.push(routes.pokemon.listing);
@@ -146,11 +255,18 @@ export const PokemonListingPage = () => {
           Pokemon
         </Header>
         <Divider></Divider>
-        <Card.Group itemsPerRow={6} centered>
+        {errors && (
+          <Message
+            error
+            header="There was some errors with your submission"
+            list={errors}
+          />
+        )}
+        <Card.Group className="pokemon-card-group" itemsPerRow={6}>
           {pokemon ? (
             pokemon.map((pokemon) => {
               return (
-                <div className="item">
+                <div className="pokemon-card">
                   <Card>
                     <Image src={pikachu} />
                     <Card.Content>
@@ -158,17 +274,28 @@ export const PokemonListingPage = () => {
                         <Header>{pokemon.name}</Header>
                       </span>
 
-                      <span>
-                        <div>Pokemon:</div>
+                      <div>
+                        Pokemon:
                         <div>{pokemon.pokemonSpecies}</div>
-                      </span>
-                      <span>
-                        <div>Ability:</div>
+                      </div>
+
+                      <div>
+                        Level:
+                        <div>{pokemon.level}</div>
+                      </div>
+
+                      <div>
+                        Ability:
                         <div>{pokemon.ability}</div>
-                      </span>
+                      </div>
+
                       <span>
                         <div>Item:</div>
                         <div>{pokemon.item}</div>
+                      </span>
+                      <span>
+                        <div>Nature:</div>
+                        <div>{pokemon.nature}</div>
                       </span>
                       <span>
                         <div>Gender:</div>
@@ -191,24 +318,90 @@ export const PokemonListingPage = () => {
                       <Divider />
                       <Header>Stats</Header>
                       <div>
-                        Hp:[{pokemon.healthIv}] [{pokemon.healthEv}]
+                        Hp:
+                        {calcHp(
+                          pokemon.pokemon.pokemonSpecies.baseHealth,
+                          pokemon.pokemon.pokemon.healthIv,
+                          pokemon.pokemon.pokemon.healthEv,
+                          pokemon.pokemon.pokemon.level
+                        ).toFixed(0)}{" "}
+                        [{pokemon.healthIv}] [{pokemon.healthEv}]
                       </div>
                       <div>
-                        Atk: [{pokemon.attackIv}] [{pokemon.attackEv}]
+                        Atk:{" "}
+                        {(
+                          calcStat(
+                            pokemon.pokemon.pokemonSpecies.baseAttack,
+                            pokemon.pokemon.pokemon.attackIv,
+                            pokemon.pokemon.pokemon.attackEv,
+                            pokemon.pokemon.pokemon.level
+                          ) *
+                          getNatureMultiplier(
+                            pokemon.pokemon.pokemon.natureId
+                          )[0]
+                        ).toFixed(0)}{" "}
+                        [{pokemon.attackIv}] [{pokemon.attackEv}]
                       </div>
                       <div>
-                        Def: [{pokemon.defenseIv}] [{pokemon.defenseEv}]
+                        Def:{" "}
+                        {(
+                          calcStat(
+                            pokemon.pokemon.pokemonSpecies.baseDefense,
+                            pokemon.pokemon.pokemon.defenseIv,
+                            pokemon.pokemon.pokemon.defenseEv,
+                            pokemon.pokemon.pokemon.level
+                          ) *
+                          getNatureMultiplier(
+                            pokemon.pokemon.pokemon.natureId
+                          )[1]
+                        ).toFixed(0)}{" "}
+                        [{pokemon.defenseIv}] [{pokemon.defenseEv}]
                       </div>
                       <div>
-                        SpA: [{pokemon.specialAttackIv}] [
-                        {pokemon.specialAttackEv}]
+                        SpA:{" "}
+                        {(
+                          calcStat(
+                            pokemon.pokemon.pokemonSpecies.baseSpecialAttack,
+                            pokemon.pokemon.pokemon.specialAttackIv,
+                            pokemon.pokemon.pokemon.specialAttackEv,
+                            pokemon.pokemon.pokemon.level
+                          ) *
+                          getNatureMultiplier(
+                            pokemon.pokemon.pokemon.natureId
+                          )[2]
+                        ).toFixed(0)}{" "}
+                        [{pokemon.specialAttackIv}] [{pokemon.specialAttackEv}]
                       </div>
                       <div>
-                        SpD: [{pokemon.specialDefenseIv}] [
-                        {pokemon.specialDefenseEv}]
+                        SpD:{" "}
+                        {(
+                          calcStat(
+                            pokemon.pokemon.pokemonSpecies.baseSpecialDefense,
+                            pokemon.pokemon.pokemon.specialDefenseIv,
+                            pokemon.pokemon.pokemon.specialDefenseEv,
+                            pokemon.pokemon.pokemon.level
+                          ) *
+                          getNatureMultiplier(
+                            pokemon.pokemon.pokemon.natureId
+                          )[3]
+                        ).toFixed(0)}{" "}
+                        [{pokemon.specialDefenseIv}] [{pokemon.specialDefenseEv}
+                        ]
                       </div>
                       <div>
-                        Spe: [{pokemon.speedIv}] [{pokemon.speedEv}]
+                        Spe:{" "}
+                        {(
+                          calcStat(
+                            pokemon.pokemon.pokemonSpecies.baseSpeed,
+                            pokemon.pokemon.pokemon.speedIv,
+                            pokemon.pokemon.pokemon.speedEv,
+                            pokemon.pokemon.pokemon.level
+                          ) *
+                          getNatureMultiplier(
+                            pokemon.pokemon.pokemon.natureId
+                          )[4]
+                        ).toFixed(0)}{" "}
+                        [{pokemon.speedIv}] [{pokemon.speedEv}]
                       </div>
                     </Card.Content>
                     <div>
@@ -218,8 +411,10 @@ export const PokemonListingPage = () => {
                           labelPosition="left"
                           icon="edit outline"
                           color="teal"
-                          onClick={() => initEditPokemon(pokemon.pokemon)}
-                        ></Button>
+                          onClick={() =>
+                            initEditPokemon(pokemon.pokemon.pokemon)
+                          }
+                        />
 
                         <Button
                           label="Delete"
@@ -227,7 +422,7 @@ export const PokemonListingPage = () => {
                           icon="trash alternate outline"
                           color="red"
                           onClick={() => initDeletePokemon(pokemon.id)}
-                        ></Button>
+                        />
                       </Button.Group>
                     </div>
                   </Card>

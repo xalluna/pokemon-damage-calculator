@@ -9,6 +9,30 @@
   justify-content: center;
 }
 
+.pokemon-card-group {
+  display: flex;
+  justify-content: center;
+}
+
+.pokemon-card {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.card-label {
+  display: inline-flex;
+  padding-right: 1ch;
+}
+
+.inner {
+  padding-left: 1ch;
+}
+
+/* .label-title {
+  padding-right: 1ch;
+} */
 /* .item {
   display: flex;
   justify-content: center;

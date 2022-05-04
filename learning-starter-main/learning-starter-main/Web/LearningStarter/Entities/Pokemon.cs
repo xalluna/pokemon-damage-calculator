@@ -207,7 +207,7 @@ namespace LearningStarter.Entities
     public class PokemonListDto
     {
         public int Id { get; set; }
-        public PokemonGetDto Pokemon { get; set; }
+        public PokemonBattleDto Pokemon { get; set; }
         public string Name { get; set; }
         public string PokemonSpecies { get; set; }
         public int HealthEv {get; set; }
@@ -263,13 +263,39 @@ namespace LearningStarter.Entities
         public string Gender { get; set; }
         public string IsShiny { get; set; }
     }
-    
-    class PokemonOptionsDto
+
+    public class PokemonOptions
     {
+        public string Text { get; set; }
+        public int Value { get; set; }
+        public int Key { get; set; }
+    }
+    
+    public class PokemonOptionsDto
+    {
+        public List<PokemonOptions> Pokemon { get; set; }
         public List<SpeciesOptionsDto> Species{ get; set; }
         public List<AbilityOptionsDto> Abilities{ get; set; }
         public List<ItemOptionsDto> Items{ get; set; }
         public List<MoveOptionsDto> Moves{ get; set; }
         public List<NatureOptionsDto> Natures{ get; set; }
+    }
+
+    public class PokemonBattleDto
+    {
+        public PokemonGetDto Pokemon { get; set; }
+        public PokemonSpeciesGetDto PokemonSpecies { get; set; }
+        // public AbilityGetDto Ability { get; set; }
+        // public ItemGetDto Item { get; set; }
+        public MoveGetDto MoveOne { get; set; }
+        public MoveGetDto? MoveTwo { get; set; }
+        public MoveGetDto? MoveThree { get; set; }
+        public MoveGetDto? MoveFour { get; set; }
+        // public NatureGetDto Nature { get; set; }
+    }
+
+    public class PokemonBattleGroupDto
+    {
+        public List<PokemonBattleDto> Pokemon { get; set; }
     }
 }
