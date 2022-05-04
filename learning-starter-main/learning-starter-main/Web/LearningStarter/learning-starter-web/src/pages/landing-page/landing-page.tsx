@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Button, Modal } from "semantic-ui-react";
+import { Header, Button, Modal, Icon } from "semantic-ui-react";
 import "./landing-page.css";
 import { useState } from "react";
 
@@ -20,8 +20,9 @@ export const LandingPage = () => {
           closeIcon
           dimmer="blurring"
           trigger={
-            <Button color="red" size="massive">
-              DO NOT CLICK
+            <Button color="blue" size="massive" icon>
+              In development
+              <Icon name="sync" />
             </Button>
           }
         >
@@ -40,7 +41,7 @@ export const LandingPage = () => {
                   No
                 </Button>
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                  <Button color="teal" size="huge">
+                  <Button color="blue" size="huge">
                     Yes
                   </Button>
                 </a>

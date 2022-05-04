@@ -54,6 +54,14 @@ const DesktopNavigation = () => {
           to: routes.pokemon.listing,
         },
       },
+      {
+        text: "Damage Calculator",
+        icon: "calculator",
+        hide: false,
+        nav: {
+          to: routes.calc,
+        },
+      },
     ];
   }, []);
 

@@ -147,7 +147,7 @@ export type PokemonGetDto = {
 
 export type PokemonListDto = {
   id: number;
-  pokemon: PokemonGetDto;
+  pokemon: PokemonBattleDto;
   name: string;
   pokemonSpecies: string;
   healthEv: number;

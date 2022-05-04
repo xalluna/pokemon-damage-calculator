@@ -74,34 +74,290 @@ namespace LearningStarter.Controllers
                 .Select(x => new PokemonListDto
                 {
                     Id = x.Id,
-                    Pokemon = new PokemonGetDto
+                    Pokemon = new PokemonBattleDto
                     {
-                        Id = x.Id,
-                        Name = x.Name,
-                        PokemonSpeciesId = x.PokemonSpeciesId,
-                        HealthEv = x.HealthEv,
-                        AttackEv = x.AttackEv,
-                        DefenseEv = x.DefenseEv,
-                        SpecialAttackEv = x.SpecialAttackEv,
-                        SpecialDefenseEv = x.SpecialDefenseEv,
-                        SpeedEv = x.SpeedEv,
-                        HealthIv = x.HealthIv,
-                        AttackIv = x.AttackIv,
-                        DefenseIv = x.DefenseIv,
-                        SpecialAttackIv = x.SpecialAttackIv,
-                        SpecialDefenseIv = x.SpecialDefenseIv,
-                        SpeedIv = x.SpeedIv,
-                        AbilityId = x.AbilityId,
-                        ItemId = x.ItemId,
-                        MoveOneId = x.MoveOneId,
-                        MoveTwoId = x.MoveTwoId,
-                        MoveThreeId = x.MoveThreeId,
-                        MoveFourId = x.MoveFourId,
-                        Level = x.Level,
-                        Experience = x.Experience,
-                        NatureId = x.NatureId,
-                        Gender = x.Gender,
-                        IsShiny = x.IsShiny
+                        Pokemon = new PokemonGetDto
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            PokemonSpeciesId = x.PokemonSpeciesId,
+                            HealthEv = x.HealthEv,
+                            AttackEv = x.AttackEv,
+                            DefenseEv = x.DefenseEv,
+                            SpecialAttackEv = x.SpecialAttackEv,
+                            SpecialDefenseEv = x.SpecialDefenseEv,
+                            SpeedEv = x.SpeedEv,
+                            HealthIv = x.HealthIv,
+                            AttackIv = x.AttackIv,
+                            DefenseIv = x.DefenseIv,
+                            SpecialAttackIv = x.SpecialAttackIv,
+                            SpecialDefenseIv = x.SpecialDefenseIv,
+                            SpeedIv = x.SpeedIv,
+                            AbilityId = x.AbilityId,
+                            ItemId = x.ItemId,
+                            MoveOneId = x.MoveOneId,
+                            MoveTwoId = x.MoveTwoId,
+                            MoveThreeId = x.MoveThreeId,
+                            MoveFourId = x.MoveFourId,
+                            Level = x.Level,
+                            Experience = x.Experience,
+                            NatureId = x.NatureId,
+                            Gender = x.Gender,
+                            IsShiny = x.IsShiny
+                        },
+                        PokemonSpecies = new PokemonSpeciesGetDto
+                            {
+                                Id = x.PokemonSpecies.Id,
+                                Name = x.PokemonSpecies.Name,
+                                BaseHealth = x.PokemonSpecies.BaseHealth,
+                                BaseAttack = x.PokemonSpecies.BaseAttack,
+                                BaseDefense = x.PokemonSpecies.BaseDefense,
+                                BaseSpecialAttack = x.PokemonSpecies.BaseSpecialAttack,
+                                BaseSpecialDefense = x.PokemonSpecies.BaseSpecialDefense,
+                                BaseSpeed = x.PokemonSpecies.BaseSpeed,
+                                PrimaryTypeId = x.PokemonSpecies.PrimaryTypeId,
+                                SecondaryTypeId = x.PokemonSpecies.SecondaryTypeId,
+                                PrimaryAbilityId = x.PokemonSpecies.PrimaryAbilityId,
+                                SecondaryAbilityId = x.PokemonSpecies.SecondaryAbilityId,
+                                HiddenAbilityId = x.PokemonSpecies.HiddenAbilityId,
+                                ExperienceCurveId = x.PokemonSpecies.ExperienceCurveId
+                            },
+                        MoveOne = new MoveGetDto
+                        {
+                            Id = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .Id,
+                            Name = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .Name,
+                            TypeId = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .TypeId,
+                            MoveCategoryId = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .MoveCategoryId,
+                            BasePower = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .BasePower,
+                            PowerPoints = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .PowerPoints,
+                            Accuracy = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .Accuracy,
+                            SpeedPriority = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .SpeedPriority,
+                            IsContactOnHit = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .IsContactOnHit,
+                            IsSoundBased = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .IsSoundBased,
+                            IsPunchBased = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .IsPunchBased,
+                            IsAffectedByGravity = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .IsAffectedByGravity,
+                            IsDefrostOnUse = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .IsDefrostOnUse,
+                            IsBlockedByProtect = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveOneId)!
+                                .IsBlockedByProtect
+                        },
+                        MoveTwo = new MoveGetDto
+                        {
+                            Id = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .Id,
+                            Name = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .Name,
+                            TypeId = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .TypeId,
+                            MoveCategoryId = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .MoveCategoryId,
+                            BasePower = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .BasePower,
+                            PowerPoints = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .PowerPoints,
+                            Accuracy = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .Accuracy,
+                            SpeedPriority = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .SpeedPriority,
+                            IsContactOnHit = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .IsContactOnHit,
+                            IsSoundBased = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .IsSoundBased,
+                            IsPunchBased = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .IsPunchBased,
+                            IsAffectedByGravity = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .IsAffectedByGravity,
+                            IsDefrostOnUse = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .IsDefrostOnUse,
+                            IsBlockedByProtect = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveTwoId)!
+                                .IsBlockedByProtect
+                        },
+                        MoveThree = new MoveGetDto
+                        {
+                            Id = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .Id,
+                            Name = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .Name,
+                            TypeId = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .TypeId,
+                            MoveCategoryId = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .MoveCategoryId,
+                            BasePower = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .BasePower,
+                            PowerPoints = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .PowerPoints,
+                            Accuracy = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .Accuracy,
+                            SpeedPriority = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .SpeedPriority,
+                            IsContactOnHit = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .IsContactOnHit,
+                            IsSoundBased = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .IsSoundBased,
+                            IsPunchBased = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .IsPunchBased,
+                            IsAffectedByGravity = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .IsAffectedByGravity,
+                            IsDefrostOnUse = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .IsDefrostOnUse,
+                            IsBlockedByProtect = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveThreeId)!
+                                .IsBlockedByProtect
+                        },
+                        MoveFour = new MoveGetDto
+                        {
+                            Id = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .Id,
+                            Name = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .Name,
+                            TypeId = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .TypeId,
+                            MoveCategoryId = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .MoveCategoryId,
+                            BasePower = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .BasePower,
+                            PowerPoints = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .PowerPoints,
+                            Accuracy = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .Accuracy,
+                            SpeedPriority = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .SpeedPriority,
+                            IsContactOnHit = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .IsContactOnHit,
+                            IsSoundBased = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .IsSoundBased,
+                            IsPunchBased = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .IsPunchBased,
+                            IsAffectedByGravity = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .IsAffectedByGravity,
+                            IsDefrostOnUse = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .IsDefrostOnUse,
+                            IsBlockedByProtect = _dataContext
+                                .Moves
+                                .FirstOrDefault(y => y.Id == x.MoveFourId)!
+                                .IsBlockedByProtect
+                        }
                     },
                     Name = x.Name,
                     PokemonSpecies = x.PokemonSpecies.Name,

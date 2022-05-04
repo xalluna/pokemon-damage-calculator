@@ -1,4 +1,12 @@
 .calculator-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+.percents {
+  display: inline;
+  justify-content: center;
+}
+
+.ui button {
+  max-width: 100%;
 }
