@@ -199,6 +199,14 @@ namespace LearningStarter
 
                 dataContext.Abilities.Add(seededAbility);
                 dataContext.SaveChanges();
+                
+                seededAbility = new Ability
+                {
+                    Name = "Pressure"
+                };
+
+                dataContext.Abilities.Add(seededAbility);
+                dataContext.SaveChanges();
             }
 
             var numExperienceCureves = dataContext.ExperienceCurves.Count();
@@ -598,6 +606,46 @@ namespace LearningStarter
                 
                 seededPokemon = new PokemonSpecies
                 {
+                    Name = "Ivysaur",
+                    BaseHealth = 60,
+                    BaseAttack = 62,
+                    BaseDefense = 63,
+                    BaseSpecialAttack = 80,
+                    BaseSpecialDefense = 80,
+                    BaseSpeed = 60,
+                    PrimaryTypeId = 4,
+                    SecondaryTypeId = 12,
+                    PrimaryAbilityId = 1,
+                    SecondaryAbilityId = null,
+                    HiddenAbilityId = null,
+                    ExperienceCurveId = 3
+                };
+
+                dataContext.PokemonSpecies.Add(seededPokemon);
+                dataContext.SaveChanges();
+                
+                seededPokemon = new PokemonSpecies
+                {
+                    Name = "Venusaur",
+                    BaseHealth = 80,
+                    BaseAttack = 82,
+                    BaseDefense = 83,
+                    BaseSpecialAttack = 100,
+                    BaseSpecialDefense = 100,
+                    BaseSpeed = 80,
+                    PrimaryTypeId = 4,
+                    SecondaryTypeId = 12,
+                    PrimaryAbilityId = 1,
+                    SecondaryAbilityId = null,
+                    HiddenAbilityId = null,
+                    ExperienceCurveId = 3
+                };
+
+                dataContext.PokemonSpecies.Add(seededPokemon);
+                dataContext.SaveChanges();
+                
+                seededPokemon = new PokemonSpecies
+                {
                     Name = "Charmander",
                     BaseHealth = 39,
                     BaseAttack = 52,
@@ -607,6 +655,46 @@ namespace LearningStarter
                     BaseSpeed = 65,
                     PrimaryTypeId = 2,
                     SecondaryTypeId = null,
+                    PrimaryAbilityId = 3,
+                    SecondaryAbilityId = null,
+                    HiddenAbilityId = null,
+                    ExperienceCurveId = 3
+                };
+
+                dataContext.PokemonSpecies.Add(seededPokemon);
+                dataContext.SaveChanges();
+                
+                seededPokemon = new PokemonSpecies
+                {
+                    Name = "Charmeleon",
+                    BaseHealth = 58,
+                    BaseAttack = 64,
+                    BaseDefense = 58,
+                    BaseSpecialAttack = 80,
+                    BaseSpecialDefense = 65,
+                    BaseSpeed = 80,
+                    PrimaryTypeId = 2,
+                    SecondaryTypeId = null,
+                    PrimaryAbilityId = 3,
+                    SecondaryAbilityId = null,
+                    HiddenAbilityId = null,
+                    ExperienceCurveId = 3
+                };
+
+                dataContext.PokemonSpecies.Add(seededPokemon);
+                dataContext.SaveChanges();
+                
+                seededPokemon = new PokemonSpecies
+                {
+                    Name = "Charizard",
+                    BaseHealth = 78,
+                    BaseAttack = 84,
+                    BaseDefense = 78,
+                    BaseSpecialAttack = 109,
+                    BaseSpecialDefense = 85,
+                    BaseSpeed = 100,
+                    PrimaryTypeId = 2,
+                    SecondaryTypeId = 7,
                     PrimaryAbilityId = 3,
                     SecondaryAbilityId = null,
                     HiddenAbilityId = null,
@@ -635,7 +723,66 @@ namespace LearningStarter
 
                 dataContext.PokemonSpecies.Add(seededPokemon);
                 dataContext.SaveChanges();
+                
+                seededPokemon = new PokemonSpecies
+                {
+                    Name = "Wartortle",
+                    BaseHealth = 59,
+                    BaseAttack = 63,
+                    BaseDefense = 80,
+                    BaseSpecialAttack = 65,
+                    BaseSpecialDefense = 80,
+                    BaseSpeed = 58,
+                    PrimaryTypeId = 3,
+                    SecondaryTypeId = null,
+                    PrimaryAbilityId = 2,
+                    SecondaryAbilityId = null,
+                    HiddenAbilityId = null,
+                    ExperienceCurveId = 3
+                };
 
+                dataContext.PokemonSpecies.Add(seededPokemon);
+                dataContext.SaveChanges();
+
+                seededPokemon = new PokemonSpecies
+                {
+                    Name = "Blastoise",
+                    BaseHealth = 79,
+                    BaseAttack = 83,
+                    BaseDefense = 100,
+                    BaseSpecialAttack = 85,
+                    BaseSpecialDefense = 105,
+                    BaseSpeed = 78,
+                    PrimaryTypeId = 3,
+                    SecondaryTypeId = null,
+                    PrimaryAbilityId = 2,
+                    SecondaryAbilityId = null,
+                    HiddenAbilityId = null,
+                    ExperienceCurveId = 3
+                };
+
+                dataContext.PokemonSpecies.Add(seededPokemon);
+                dataContext.SaveChanges();
+                
+                seededPokemon = new PokemonSpecies
+                {
+                    Name = "Mewtwo",
+                    BaseHealth = 106,
+                    BaseAttack = 110,
+                    BaseDefense = 90,
+                    BaseSpecialAttack = 154,
+                    BaseSpecialDefense = 90,
+                    BaseSpeed = 130,
+                    PrimaryTypeId = 9,
+                    SecondaryTypeId = null,
+                    PrimaryAbilityId = 4,
+                    SecondaryAbilityId = null,
+                    HiddenAbilityId = null,
+                    ExperienceCurveId = 3
+                };
+
+                dataContext.PokemonSpecies.Add(seededPokemon);
+                dataContext.SaveChanges();
 
             }
             
@@ -883,7 +1030,7 @@ namespace LearningStarter
                 seededPokemon = new Pokemon
                 {
                     Name = "Charizard",
-                    PokemonSpeciesId = 2,
+                    PokemonSpeciesId = 4,
                     HealthEv = 45,
                     AttackEv = 45,
                     DefenseEv = 45,
@@ -914,8 +1061,8 @@ namespace LearningStarter
 
                 seededPokemon = new Pokemon
                 {
-                    Name = "Bubs",
-                    PokemonSpeciesId = 3,
+                    Name = "Tortle",
+                    PokemonSpeciesId = 7,
                     HealthEv = 45,
                     AttackEv = 45,
                     DefenseEv = 45,
@@ -938,6 +1085,70 @@ namespace LearningStarter
                     Experience = 0,
                     NatureId = 3,
                     Gender = 2,
+                    IsShiny = false
+                };
+
+                dataContext.Add(seededPokemon);
+                dataContext.SaveChanges();
+                    
+                seededPokemon = new Pokemon
+                {
+                    Name = "Pikachu",
+                    PokemonSpeciesId = 6,
+                    HealthEv = 4,
+                    AttackEv = 0,
+                    DefenseEv = 0,
+                    SpecialAttackEv = 252,
+                    SpecialDefenseEv = 0,
+                    SpeedEv = 252,
+                    HealthIv = 31,
+                    AttackIv = 0,
+                    DefenseIv = 31,
+                    SpecialAttackIv = 31,
+                    SpecialDefenseIv = 31,
+                    SpeedIv = 31,
+                    AbilityId = 3,
+                    ItemId = 3,
+                    MoveOneId = 1,
+                    MoveTwoId = 2,
+                    MoveThreeId = 3,
+                    MoveFourId = 7,
+                    Level = 50,
+                    Experience = 0,
+                    NatureId = 3,
+                    Gender = 2,
+                    IsShiny = false
+                };
+
+                dataContext.Add(seededPokemon);
+                dataContext.SaveChanges();
+                
+                seededPokemon = new Pokemon
+                {
+                    Name = "Mewtwo",
+                    PokemonSpeciesId = 10,
+                    HealthEv = 4,
+                    AttackEv = 0,
+                    DefenseEv = 0,
+                    SpecialAttackEv = 252,
+                    SpecialDefenseEv = 0,
+                    SpeedEv = 252,
+                    HealthIv = 31,
+                    AttackIv = 0,
+                    DefenseIv = 31,
+                    SpecialAttackIv = 31,
+                    SpecialDefenseIv = 31,
+                    SpeedIv = 31,
+                    AbilityId = 4,
+                    ItemId = 3,
+                    MoveOneId = 1,
+                    MoveTwoId = 2,
+                    MoveThreeId = 3,
+                    MoveFourId = 6,
+                    Level = 70,
+                    Experience = 0,
+                    NatureId = 3,
+                    Gender = 3,
                     IsShiny = false
                 };
 

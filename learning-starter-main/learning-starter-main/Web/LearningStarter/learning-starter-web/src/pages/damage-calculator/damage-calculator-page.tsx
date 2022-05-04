@@ -994,7 +994,7 @@ export const DamageCalculatorPage = () => {
       {pokemon && options && (
         <div>
           <Header textAlign="center" size="huge">
-            Damge Calculator
+            Damage Calculator
           </Header>
           <div className="calculator-container">
             <span>
