@@ -10,12 +10,14 @@ import { AbilityListingPage } from "../pages/abilities/ability-listing-page/abil
 import { PokemonListingPage } from "../pages/pokemon/pokemon-listing-page/pokemon-listing-page";
 import { PokemonCreatePage } from "../pages/pokemon/pokemon-create-page/pokemon-create-page";
 import { PokemonUpdatePage } from "../pages/pokemon/pokemon-update-page/pokemon-update-page";
+import { DamageCalculatorPage } from "../pages/damage-calculator/damage-calculator-page";
 
 //This is where you will declare all of your routes (the ones that show up in the search bar)
 export const routes = {
   root: `/`,
   home: `/home`,
   user: `/user`,
+  calc: "/calc",
   abilities: {
     create: "/abilities/create",
     listing: "/abilities",
@@ -67,6 +69,9 @@ export const Routes = () => {
           </Route>
           <Route path={routes.pokemon.update} exact>
             <PokemonUpdatePage />
+          </Route>
+          <Route path={routes.calc} exact>
+            <DamageCalculatorPage />
           </Route>
 
           {/* This should always come last.  

@@ -147,7 +147,7 @@ export type PokemonGetDto = {
 
 export type PokemonListDto = {
   id: number;
-  pokemon: PokemonGetDto;
+  pokemon: PokemonBattleDto;
   name: string;
   pokemonSpecies: string;
   healthEv: number;
@@ -264,5 +264,19 @@ export type PokemonOptionsDto = {
   items: ItemGetDto[];
   moves: MoveGetDto[];
   natures: NatureGetDto[];
+  pokemon: PokemonGetDto[];
   species: PokemonSpeciesGetDto[];
+};
+
+export type PokemonBattleDto = {
+  pokemon: PokemonGetDto;
+  pokemonSpecies: PokemonSpeciesGetDto;
+  moveOne: MoveGetDto;
+  moveTwo: MoveGetDto;
+  moveThree: MoveGetDto;
+  moveFour: MoveGetDto;
+};
+
+export type PokemonBattleGroup = {
+  pokemon: PokemonBattleDto[];
 };
