@@ -578,6 +578,146 @@ namespace LearningStarter
 
                 dataContext.Moves.Add(seededMove);
                 dataContext.SaveChanges();
+                
+                seededMove = new Move
+                {
+                    Name = "Flamethrower",
+                    Accuracy = 100,
+                    BasePower = 90,
+                    SpeedPriority = 1,
+                    MoveCategoryId = 2,
+                    PowerPoints = 15,
+                    TypeId = 2,
+                    IsContactOnHit = false,
+                    IsBlockedByProtect = true,
+                    IsPunchBased = false,
+                    IsSoundBased = false,
+                    IsAffectedByGravity = false,
+                    IsDefrostOnUse = false,
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
+                
+                seededMove = new Move
+                {
+                    Name = "Dragon Pulse",
+                    Accuracy = 100,
+                    BasePower = 85,
+                    SpeedPriority = 1,
+                    MoveCategoryId = 2,
+                    PowerPoints = 10,
+                    TypeId = 15,
+                    IsContactOnHit = false,
+                    IsBlockedByProtect = true,
+                    IsPunchBased = false,
+                    IsSoundBased = false,
+                    IsAffectedByGravity = false,
+                    IsDefrostOnUse = false,
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
+                
+                seededMove = new Move
+                {
+                    Name = "Air Slash",
+                    Accuracy = 95,
+                    BasePower = 75,
+                    SpeedPriority = 1,
+                    MoveCategoryId = 1,
+                    PowerPoints = 15,
+                    TypeId = 7,
+                    IsContactOnHit = false,
+                    IsBlockedByProtect = true,
+                    IsPunchBased = false,
+                    IsSoundBased = false,
+                    IsAffectedByGravity = false,
+                    IsDefrostOnUse = false,
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
+                
+                seededMove = new Move
+                {
+                    Name = "Psychic",
+                    Accuracy = 100,
+                    BasePower = 90,
+                    SpeedPriority = 1,
+                    MoveCategoryId = 2,
+                    PowerPoints = 35,
+                    TypeId = 9,
+                    IsContactOnHit = false,
+                    IsBlockedByProtect = true,
+                    IsPunchBased = false,
+                    IsSoundBased = false,
+                    IsAffectedByGravity = false,
+                    IsDefrostOnUse = false,
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
+                
+                seededMove = new Move
+                {
+                    Name = "Aura Shphere",
+                    Accuracy = 101,
+                    BasePower = 80,
+                    SpeedPriority = 1,
+                    MoveCategoryId = 2,
+                    PowerPoints = 20,
+                    TypeId = 8,
+                    IsContactOnHit = false,
+                    IsBlockedByProtect = true,
+                    IsPunchBased = false,
+                    IsSoundBased = false,
+                    IsAffectedByGravity = false,
+                    IsDefrostOnUse = false,
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
+                
+                seededMove = new Move
+                {
+                    Name = "Thunderbolt",
+                    Accuracy = 100,
+                    BasePower = 90,
+                    SpeedPriority = 1,
+                    MoveCategoryId = 2,
+                    PowerPoints = 15,
+                    TypeId = 5,
+                    IsContactOnHit = false,
+                    IsBlockedByProtect = true,
+                    IsPunchBased = false,
+                    IsSoundBased = false,
+                    IsAffectedByGravity = false,
+                    IsDefrostOnUse = false,
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
+                
+                seededMove = new Move
+                {
+                    Name = "Protect",
+                    Accuracy = 101,
+                    BasePower = 0,
+                    SpeedPriority = 8,
+                    MoveCategoryId = 3,
+                    PowerPoints = 10,
+                    TypeId = 1,
+                    IsContactOnHit = false,
+                    IsBlockedByProtect = false,
+                    IsPunchBased = false,
+                    IsSoundBased = false,
+                    IsAffectedByGravity = false,
+                    IsDefrostOnUse = false,
+                };
+
+                dataContext.Moves.Add(seededMove);
+                dataContext.SaveChanges();
             }
 
             var numPokemonSpecies = dataContext.PokemonSpecies.Count();
@@ -778,7 +918,7 @@ namespace LearningStarter
                     PrimaryAbilityId = 4,
                     SecondaryAbilityId = null,
                     HiddenAbilityId = null,
-                    ExperienceCurveId = 3
+                    ExperienceCurveId = 6
                 };
 
                 dataContext.PokemonSpecies.Add(seededPokemon);
@@ -1109,10 +1249,10 @@ namespace LearningStarter
                     SpeedIv = 31,
                     AbilityId = 3,
                     ItemId = 3,
-                    MoveOneId = 1,
-                    MoveTwoId = 2,
-                    MoveThreeId = 3,
-                    MoveFourId = 7,
+                    MoveOneId = 8,
+                    MoveTwoId = 9,
+                    MoveThreeId = 10,
+                    MoveFourId = 14,
                     Level = 50,
                     Experience = 0,
                     NatureId = 3,
@@ -1141,10 +1281,10 @@ namespace LearningStarter
                     SpeedIv = 31,
                     AbilityId = 4,
                     ItemId = 3,
-                    MoveOneId = 1,
-                    MoveTwoId = 2,
-                    MoveThreeId = 3,
-                    MoveFourId = 6,
+                    MoveOneId = 11,
+                    MoveTwoId = 12,
+                    MoveThreeId = 13,
+                    MoveFourId = 14,
                     Level = 70,
                     Experience = 0,
                     NatureId = 3,
